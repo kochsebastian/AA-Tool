@@ -4,8 +4,11 @@ package view;
 import java.awt.*;
 
 
+
 import java.awt.event.*;
 import java.io.File;
+
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import basis.Resources;
@@ -18,14 +21,20 @@ import control.Control;
  *
  */
 public class View implements ActionListener {
-   
-	
+
     private static View view = null;
     private JFrame hauptfenster = null;
     
     private JButton exportieren;
     private JButton importieren;
     private JButton erstellen;
+    private JButton speichern;
+    private JButton laden;
+    private JButton loeschen;
+    private JButton drucken;
+    private JButton pdf;
+    private JButton schliessen;
+  
     
     private JTextArea kundenbeschreibung;
     private JTextArea deckblattTextField;
@@ -65,6 +74,7 @@ public class View implements ActionListener {
     
     private static ViewModelConnector viewConnector;
     
+ 
     
     private View() {
         
@@ -88,12 +98,9 @@ public class View implements ActionListener {
         return view;
     }
     
-    /**
-     * 
-     */
-    public void show() {
-    	
-        // setze Nimbus look and feel fuer Anzeige (fuer besseres Design)
+    public void showEmpty() {
+
+    		// setze Nimbus look and feel fuer Anzeige (fuer besseres Design)
         try {            
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
         }
@@ -119,11 +126,11 @@ public class View implements ActionListener {
             @Override
             public void windowClosing(WindowEvent e) {
                 // zeige Dialog zum Abfragen, ob vor dem Beenden noch exportiert werden soll
-                int auswahl = JOptionPane.showConfirmDialog(hauptfenster, Resources.vorBeendenExport, Resources.aaTool, JOptionPane.YES_NO_OPTION);
+                int auswahl = JOptionPane.showConfirmDialog(hauptfenster, Resources.vorBeendenSpeichern, Resources.aaTool, JOptionPane.YES_NO_OPTION);
                 
                 if (auswahl == JOptionPane.YES_OPTION) {
                     System.out.println("jetzt erst noch exportieren...");
-                    File datei = showSpeichernDialog();
+                    File datei = showSpeichernUnterDialog();
                     if(datei != null) {
                         control.exportiere(datei);
                         System.out.println("Call: control.exportiere(datei);");
@@ -137,22 +144,143 @@ public class View implements ActionListener {
         });
         
         // Erzeugung der Buttons der Menueleiste
-        exportieren = new JButton(Resources.exportieren);
-        importieren = new JButton(Resources.importieren);
         erstellen = new JButton(Resources.erstellen);
+        laden = new JButton("Laden");
+        importieren = new JButton(Resources.importieren);
+       
         
-        // Buttons dem Listener zuordnen
-        exportieren.addActionListener(this);
+        
+        // Buttons dem Listener zuordnen 
         importieren.addActionListener(this);
         erstellen.addActionListener(this);
+        
+        laden.addActionListener(this);
+        
         
         // Menueleiste dem Frame hinzufuegen
         JPanel menueleiste = new JPanel(new FlowLayout(FlowLayout.LEFT));
         menueleiste.setBorder(BorderFactory.createLineBorder(Color.black));
         menueleiste.setMaximumSize(new Dimension(1000, 100));
-        menueleiste.add(exportieren);
-        menueleiste.add(importieren);
         menueleiste.add(erstellen);
+        menueleiste.add(laden);
+    
+        
+        menueleiste.add(importieren);  
+       
+        
+        
+        // Erzeugung der JPanels
+        JPanel titelblattJPanel = new JPanel();
+        
+        
+        // Inhalte des Deckblatts
+        JTextArea titelblattTextField = new JTextArea(" ", 44, 76);
+        titelblattJPanel.add(titelblattTextField);
+        
+        
+        // Erzeugung eines JTabbedPane-Objektes
+        JTabbedPane tabs = new JTabbedPane(JTabbedPane.LEFT, JTabbedPane.SCROLL_TAB_LAYOUT);
+ 
+        // Registerkarten diesem hinzugefuegen
+        tabs.addTab("                           ", titelblattJPanel);
+        
+        
+        // JTabbedPane dem Frame hinzufuegen        
+        JPanel hauptfensterJPanel= new JPanel();
+        hauptfensterJPanel.setLayout(new BoxLayout(hauptfensterJPanel, BoxLayout.Y_AXIS));
+        hauptfensterJPanel.add(menueleiste);
+        hauptfensterJPanel.add(tabs);
+        
+        hauptfenster.add(hauptfensterJPanel);
+        
+        // JFrame anzeigen
+        hauptfenster.setVisible(true);
+    }
+    /**
+     * 
+     */
+    public void showFull() {
+    	
+    	// setze Nimbus look and feel fuer Anzeige (fuer besseres Design)
+        try {            
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+        }
+        catch (Exception e) {
+            
+        }
+        
+        // Erzeugung eines neuen Framefensters
+        hauptfenster = new JFrame();
+        hauptfenster.setTitle(Resources.aaTool);
+        hauptfenster.setSize(1000, 800);
+        hauptfenster.setResizable(false);
+        // setze das Fenster in die Bildschirmmitte
+        try {
+            hauptfenster.setLocationRelativeTo(null);
+        }
+        catch(Exception e) {
+            
+        }
+        // Beim Betätigen des [x]-Buttons: Java-Programm beenden
+        hauptfenster.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        hauptfenster.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // zeige Dialog zum Abfragen, ob vor dem Beenden noch exportiert werden soll
+                int auswahl = JOptionPane.showConfirmDialog(hauptfenster, Resources.vorBeendenSpeichern, Resources.aaTool, JOptionPane.YES_NO_OPTION);
+                
+                if (auswahl == JOptionPane.YES_OPTION) {
+                    System.out.println("jetzt erst noch exportieren...");
+                    File datei = showSpeichernUnterDialog();
+                    if(datei != null) {
+                        control.exportiere(datei);
+                        System.out.println("Call: control.exportiere(datei);");
+                    }
+                    System.exit(0);
+                }            
+                else {
+                    System.exit(0);
+                }
+            }
+        });
+        
+        // Erzeugung der Buttons der Menueleiste
+        erstellen = new JButton(Resources.erstellen);
+        laden = new JButton("Laden");
+        speichern = new JButton("Speichern");
+        loeschen = new JButton("Löschen");
+        schliessen = new JButton("Schließen");
+        drucken = new JButton("Drucken");
+        exportieren = new JButton(Resources.exportieren);
+        importieren = new JButton(Resources.importieren);
+        pdf = new JButton("Pdf erstellen");
+        
+        
+        // Buttons dem Listener zuordnen
+        exportieren.addActionListener(this);
+        importieren.addActionListener(this);
+        erstellen.addActionListener(this);
+        speichern.addActionListener(this);
+        laden.addActionListener(this);
+        loeschen.addActionListener(this);
+        drucken.addActionListener(this);
+        pdf.addActionListener(this);
+        schliessen.addActionListener(this);
+        
+        // Menueleiste dem Frame hinzufuegen
+        JPanel menueleiste = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        menueleiste.setBorder(BorderFactory.createLineBorder(Color.black));
+        menueleiste.setMaximumSize(new Dimension(1000, 100));
+        menueleiste.add(erstellen);
+        menueleiste.add(laden);
+        menueleiste.add(speichern);
+        menueleiste.add(loeschen);
+        menueleiste.add(schliessen);
+        menueleiste.add(drucken);
+        menueleiste.add(exportieren);
+        menueleiste.add(importieren);  
+        menueleiste.add(pdf);
+        
         
         // Erzeugung der JPanels
         JPanel deckblattJPanel = new JPanel();
@@ -366,34 +494,51 @@ public class View implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         // Quelle der Aktion mit Buttons abgleichen
         if(ae.getSource() == this.exportieren){
-        		File datei = showSpeichernDialog();            
-            control.exportiere(datei);
+        		if(Control.getalreadySaved()) {
+        			File datei = showSpeichernUnterDialog();    
+        			control.exportiere(datei);  
+        		}else {
+        			control.exportiere();   
+        		}
         }
         
-        if(ae.getSource() == this.importieren){
+        if(ae.getSource() == this.importieren || ae.getSource() == this.laden){
             File datei = showOeffnenDialog();
-            control.importiere(datei);   
+            control.importiere(datei);  
+           
         }
         
-        if(ae.getSource() == this.erstellen) {
-        	// zeige Dialog zum Abfragen, ob vor dem Beenden noch exportiert werden soll
-            int auswahl = JOptionPane.showConfirmDialog(hauptfenster, Resources.vorBeendenExport, Resources.aaTool, JOptionPane.YES_NO_OPTION);
-            
-            if (auswahl == JOptionPane.YES_OPTION) {
-                System.out.println("jetzt erst noch exportieren...");
-                File datei = showSpeichernDialog();
-                if(datei != null) {
-                    control.exportiere(datei);
-                    System.out.println("Call: control.exportiere(datei);");
-                }
-                initialisiere();
-            }            
-            else {
+        if(ae.getSource() == this.erstellen) {   
             	 initialisiere();
-            }
-        	
-        	
         }
+        
+        if(ae.getSource() == this.schliessen) {
+        		showEmpty();
+        }
+
+        if(ae.getSource() == this.speichern){
+        	 
+        		if(!Control.getalreadySaved()) {
+        			File datei = showSpeichernUnterDialog();    
+        			control.exportiere(datei);  
+        		}else {
+        			control.exportiere();   
+        		}
+        		        
+            
+        }
+        
+        
+        if(ae.getSource() == this.loeschen){
+    			if(showLoeschenDialog()) {
+    		try {
+    			control.loeschen();   
+    		}catch(Exception e) {}
+    		showEmpty();}
+        
+    }
+        
+       
            
 
         if(ae.getSource() == this.fuegeFunktionenReiheHinzu){
@@ -447,7 +592,7 @@ public class View implements ActionListener {
         }
     }
     
-    private File showSpeichernDialog() {
+    private File showSpeichernUnterDialog() {
         // JFileChooser-Objekt erstellen
         JFileChooser selektor = new JFileChooser();
         // Dialog zum Oeffnen von Dateien anzeigen
@@ -458,6 +603,25 @@ public class View implements ActionListener {
         {
             // Ausgabe der ausgewaehlten Datei
             System.out.println("Die zu speichernde Datei ist: " +  selektor.getSelectedFile().getPath());
+            return selektor.getSelectedFile();
+        }
+        
+        return null;
+    }
+    
+    
+    
+    private File showExportierenDialog() {
+        // JFileChooser-Objekt erstellen
+        JFileChooser selektor = new JFileChooser();
+        // Dialog zum Oeffnen von Dateien anzeigen
+        int rueckgabeWert = selektor.showSaveDialog(hauptfenster);
+        
+        // Abfrage, ob auf "Speichern" geklickt wurde
+        if(rueckgabeWert == JFileChooser.APPROVE_OPTION)
+        {
+            // Ausgabe der ausgewaehlten Datei
+            System.out.println("Die zu exportierende Datei ist: " +  selektor.getSelectedFile().getPath());
             return selektor.getSelectedFile();
         }
         
@@ -482,13 +646,24 @@ public class View implements ActionListener {
         return null;
     }
     
+    private Boolean showLoeschenDialog() {
+    		int auswahl = JOptionPane.showConfirmDialog(hauptfenster, "Sicher?", Resources.aaTool, JOptionPane.YES_NO_OPTION);
+        
+        if (auswahl == JOptionPane.YES_OPTION) 
+            return true;       
+        else 
+        	 	return false;
+        
+    }
+    
     private void initialisiere() {
         // Jframe ausblenden und verschwinden lassen
         hauptfenster.setVisible(false);
         hauptfenster.dispose();
         
         // neu anzeigen
-        show();
+        
+        showFull();
     }
     
     public void fuegeFunktionHinzu() {

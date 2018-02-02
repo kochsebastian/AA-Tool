@@ -13,7 +13,7 @@ public class Resources {
     // enthaelt alle Zeichenketten, die zur Anzeige der GUI noetig sind zentral an einem Ort
     public static final String aaTool = "AA-Tool";
 
-    public static final String vorBeendenExport = "vor dem Beenden exportieren?";
+    public static final String vorBeendenSpeichern = "vor dem Beenden speichern?";
 
     public static final String exportieren = "Exportieren";
     public static final String importieren = "Importieren";
@@ -32,7 +32,7 @@ public class Resources {
     public static final String glossar = "Glossar";
     public static final String aufwandsabschaetzung = "Aufwandsabschätzung";
 
-    public static final String deckblattStandardInhalt = "Deckblatt\n======================\n\nDatum:\n\nAuftraggeber:\n\nErstellt von:";
+    public static final String deckblattStandardInhalt = "Deckblatt\n======================\n\nTitel:\n\nDatum:\n\nAuftraggeber:\n\nErstellt von:";
     public static final String zielbestimmungStandardInhalt = "Zielbestimmung\n======================\n\nMusskriterien:\n\nWunschkriterien:\n\nAbgrenzungskriterien:";
     public static final String produkteinsatzStandardInhalt = "Produkteinsatz\n======================\n\nAnwendungsbereiche:\n\nZielgruppen:\n\nBetriebsbedingungen:";
     public static final String produktumgebungStandardInhalt = "Produktumgebung\n======================\n\nSoftware:\n\nHardware:\n\nOrgware:";

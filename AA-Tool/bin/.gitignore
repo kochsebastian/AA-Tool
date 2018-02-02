@@ -1,6 +1,4 @@
 /basis/
-/control/
-/model/
+/pdfFramework/
 /view/
-/xmlFramework/
-/icon.png
+/control/
