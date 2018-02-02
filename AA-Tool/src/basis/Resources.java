@@ -15,8 +15,8 @@ public class Resources {
 
     public static final String vorBeendenSpeichern = "vor dem Beenden speichern?";
 
-    public static final String exportieren = "Exportieren";
-    public static final String importieren = "Importieren";
+    public static final String exportieren = "XML-Exportieren";
+    public static final String importieren = "XML-Importieren";
     public static final String erstellen = "Neues Projekt erstellen";
 
     public static final String deckblatt = "Deckblatt";

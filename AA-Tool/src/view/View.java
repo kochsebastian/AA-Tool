@@ -509,7 +509,7 @@ public class View implements ActionListener {
         }
         
         if(ae.getSource() == this.erstellen) {   
-            	 initialisiere();
+            	 showFull();
         }
         
         if(ae.getSource() == this.schliessen) {
@@ -656,15 +656,7 @@ public class View implements ActionListener {
         
     }
     
-    private void initialisiere() {
-        // Jframe ausblenden und verschwinden lassen
-        hauptfenster.setVisible(false);
-        hauptfenster.dispose();
-        
-        // neu anzeigen
-        
-        showFull();
-    }
+
     
     public void fuegeFunktionHinzu() {
         // alle Zeilen zur Tabelle hinzufuegen, die fuer eine Funktion gebraucht werden
