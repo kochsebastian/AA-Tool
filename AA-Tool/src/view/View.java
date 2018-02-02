@@ -113,9 +113,6 @@ public class View implements ActionListener {
         catch(Exception e) {
             
         }
-                
-        
- 
         // Beim Betätigen des [x]-Buttons: Java-Programm beenden
         hauptfenster.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         hauptfenster.addWindowListener(new WindowAdapter() {
@@ -378,8 +375,26 @@ public class View implements ActionListener {
             control.importiere(datei);   
         }
         
-        if(ae.getSource() == this.erstellen)
-            initialisiere();
+        if(ae.getSource() == this.erstellen) {
+        	// zeige Dialog zum Abfragen, ob vor dem Beenden noch exportiert werden soll
+            int auswahl = JOptionPane.showConfirmDialog(hauptfenster, Resources.vorBeendenExport, Resources.aaTool, JOptionPane.YES_NO_OPTION);
+            
+            if (auswahl == JOptionPane.YES_OPTION) {
+                System.out.println("jetzt erst noch exportieren...");
+                File datei = showSpeichernDialog();
+                if(datei != null) {
+                    control.exportiere(datei);
+                    System.out.println("Call: control.exportiere(datei);");
+                }
+                initialisiere();
+            }            
+            else {
+            	 initialisiere();
+            }
+        	
+        	
+        }
+           
 
         if(ae.getSource() == this.fuegeFunktionenReiheHinzu){
             fuegeFunktionHinzu();
