@@ -97,10 +97,9 @@ public class View implements ActionListener {
         
         return view;
     }
-    
-    public void showEmpty() {
-
-    		// setze Nimbus look and feel fuer Anzeige (fuer besseres Design)
+    public void show() {
+    		
+     // setze Nimbus look and feel fuer Anzeige (fuer besseres Design)
         try {            
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
         }
@@ -120,26 +119,19 @@ public class View implements ActionListener {
         catch(Exception e) {
             
         }
+        
+    }
+    public void showEmpty() {
+    		show();
+    		
         // Beim Betätigen des [x]-Buttons: Java-Programm beenden
         hauptfenster.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         hauptfenster.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                // zeige Dialog zum Abfragen, ob vor dem Beenden noch exportiert werden soll
-                int auswahl = JOptionPane.showConfirmDialog(hauptfenster, Resources.vorBeendenSpeichern, Resources.aaTool, JOptionPane.YES_NO_OPTION);
+               
+                    System.exit(0);
                 
-                if (auswahl == JOptionPane.YES_OPTION) {
-                    System.out.println("jetzt erst noch exportieren...");
-                    File datei = showSpeichernUnterDialog();
-                    if(datei != null) {
-                        control.exportiere(datei);
-                        System.out.println("Call: control.exportiere(datei);");
-                    }
-                    System.exit(0);
-                }            
-                else {
-                    System.exit(0);
-                }
             }
         });
         
@@ -200,27 +192,7 @@ public class View implements ActionListener {
      * 
      */
     public void showFull() {
-    	
-    	// setze Nimbus look and feel fuer Anzeige (fuer besseres Design)
-        try {            
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-        }
-        catch (Exception e) {
-            
-        }
-        
-        // Erzeugung eines neuen Framefensters
-        hauptfenster = new JFrame();
-        hauptfenster.setTitle(Resources.aaTool);
-        hauptfenster.setSize(1000, 800);
-        hauptfenster.setResizable(false);
-        // setze das Fenster in die Bildschirmmitte
-        try {
-            hauptfenster.setLocationRelativeTo(null);
-        }
-        catch(Exception e) {
-            
-        }
+    		show();
         // Beim Betätigen des [x]-Buttons: Java-Programm beenden
         hauptfenster.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         hauptfenster.addWindowListener(new WindowAdapter() {
@@ -490,6 +462,10 @@ public class View implements ActionListener {
         hauptfenster.setVisible(true);
     }
    
+ 
+    		
+ 
+    
     @Override
     public void actionPerformed(ActionEvent ae) {
         // Quelle der Aktion mit Buttons abgleichen
@@ -509,10 +485,14 @@ public class View implements ActionListener {
         }
         
         if(ae.getSource() == this.erstellen) {   
+        		 hauptfenster.setVisible(false);
+             hauptfenster.dispose();
             	 showFull();
         }
         
         if(ae.getSource() == this.schliessen) {
+        		hauptfenster.setVisible(false);
+            hauptfenster.dispose();
         		showEmpty();
         }
 
@@ -534,11 +514,13 @@ public class View implements ActionListener {
     		try {
     			control.loeschen();   
     		}catch(Exception e) {}
+    		hauptfenster.setVisible(false);
+        hauptfenster.dispose();
     		showEmpty();}
         
     }
         
-       
+    
            
 
         if(ae.getSource() == this.fuegeFunktionenReiheHinzu){

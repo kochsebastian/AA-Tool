@@ -44,7 +44,9 @@ public class Control {
         model.schreibeModelAusView(view);
         
         // schreibe xml
+        try {
         IOConnector.speichereXML(datei);
+        }catch(Exception e) {}
     }
     
     /**
@@ -58,7 +60,9 @@ public class Control {
         model.schreibeModelAusView(view);
         
         // schreibe xml
+        try {
         IOConnector.speichereXML(openFile);
+        }catch(Exception e) {}
     }
     
     /**
@@ -80,7 +84,9 @@ public class Control {
         model.schreibeModelAusView(view);
         
         // lese xml
+        try {
         IOConnector.leseXML(datei);
+    		}catch(Exception e) {}
         
         // lese Model in View ein
         view.getViewConnector().leseViewAusModel();
