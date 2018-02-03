@@ -5,6 +5,8 @@ package basis;
 
 
 
+import aufwandsabschaetzung.Aufwandsabschaetzung;
+import aufwandsabschaetzung.IAufwandsabschaetzung;
 import control.Control;
 import view.View;
 
@@ -22,8 +24,8 @@ public class Main {
 	
 		
         Control control = new Control();
-        
-        View view = View.getInstanz(control);
+        IAufwandsabschaetzung aufwandsabschaetzung = new Aufwandsabschaetzung();
+        View view = View.getInstanz(control, aufwandsabschaetzung);
         control.setView(view);
         
         view.showEmpty();

@@ -82,7 +82,7 @@ public class ViewModelConnector {
             return getGlossarInhalt();
         }
         if(name.matches("Aufwandsabschätzung")) {
-            return getAufwandsschaetzungInhalt();
+            return getAufwandsabschaetzungInhalt();
         }
         
         return null;
@@ -121,7 +121,7 @@ public class ViewModelConnector {
             setGlossarInhalt(inhalt);
         }
         if(name.matches("Aufwandsabschätzung")) {
-            setAufwandsschaetzungInhalt(inhalt);
+            setAufwandsabschaetzungInhalt(inhalt);
         }
     }
     
@@ -181,16 +181,7 @@ public class ViewModelConnector {
         view.getErgaenzungenTextField().setText(text[0][0]);
     }
     
-    private String[][] getAufwandsschaetzungInhalt() {
-    	String tmpString[][] = new String[1][1];
-        tmpString[0][0] = view.getAufwandsabschaetzungTextField().getText();
-        
-        return tmpString;
-    }
     
-    private void setAufwandsschaetzungInhalt(String[][] text) {
-        view.getAufwandsabschaetzungTextField().setText(text[0][0]);
-    }
     
     private String[][] getProduktfunktionenInhalt() {
                 
@@ -416,6 +407,17 @@ public class ViewModelConnector {
             }
         }
         return tmpString;
+    }
+    
+    private String[][] getAufwandsabschaetzungInhalt() {
+        String tmpString[][] = new String[1][1];
+        tmpString =view.getAufwandsabschaetzung().getInhalt();
+        
+        return tmpString;
+    }
+    
+    private void setAufwandsabschaetzungInhalt(String[][] text) {
+        view.getAufwandsabschaetzung().setInhalt(text);
     }
     
     

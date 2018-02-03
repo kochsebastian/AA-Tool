@@ -5,12 +5,15 @@ import java.awt.*;
 
 
 
+
 import java.awt.event.*;
 import java.io.File;
 
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
+import aufwandsabschaetzung.IAufwandsabschaetzung;
 import basis.Resources;
 
 import control.Control;
@@ -41,7 +44,7 @@ public class View implements ActionListener {
     private JTextArea zielbestimmungTextField;
     private JTextArea produkteinsatzTextField;
     private JTextArea ergaenzungenTextField;
-    private JTextArea aufwandsabschaetzungTextField;
+
    
     private JTable produktfunktionenJTable;
     private JTable produktdatenJTable;
@@ -74,6 +77,7 @@ public class View implements ActionListener {
     
     private static ViewModelConnector viewConnector;
     
+    static IAufwandsabschaetzung aufwandsabschaetzung;
  
     
     private View() {
@@ -85,16 +89,14 @@ public class View implements ActionListener {
      * @param _control
      * @return
      */
-    public static View getInstanz(Control _control) {
-       // aufwandsschaetzung = aufwandsschaetzung;
+    public static View getInstanz(Control _control, IAufwandsabschaetzung _aufwandsabschaetzung) {
+        aufwandsabschaetzung = _aufwandsabschaetzung;
         control = _control;
-        
         if (view == null) {
             view = new View();
             
             viewConnector = new ViewModelConnector(view);
-        }        
-        
+        }             
         return view;
     }
     public void show() {
@@ -265,7 +267,7 @@ public class View implements ActionListener {
         JPanel produktleistungenJPanel = new JPanel();
         JPanel qualitaetsanforderungenJPanel = new JPanel();
         JPanel glossarJPanel = new JPanel();
-        JPanel aufwandsabschaetzungJPanel = new JPanel();
+        
         
         // Inhalte des Deckblatts
         deckblattTextField = new JTextArea(Resources.deckblattStandardInhalt, 44, 76);
@@ -287,9 +289,7 @@ public class View implements ActionListener {
         ergaenzungenTextField = new JTextArea(Resources.ergaenzungenStandardInhalt, 44, 76);
         ergaenzungenJPanel.add(ergaenzungenTextField);
         
-        // Inhalte der Aufwandsabschatzung
-        aufwandsabschaetzungTextField = new JTextArea(Resources.aufwandsabschaetzungStandardInhalt, 44, 76);
-        aufwandsabschaetzungJPanel.add(aufwandsabschaetzungTextField);
+       
         
         // Inhalt der Prduktfunktionen erstellen
         produktfunktionenJTable = new JTable(0, 2);
@@ -448,7 +448,7 @@ public class View implements ActionListener {
         tabs.addTab(Resources.qualitaetsanforderungen, qualitaetsanforderungenJPanel);
         tabs.addTab(Resources.ergaenzungen, ergaenzungenJPanel);
         tabs.addTab(Resources.glossar, glossarJPanel);
-        tabs.addTab(Resources.aufwandsabschaetzung, aufwandsabschaetzungJPanel);
+        tabs.addTab(Resources.aufwandsabschaetzung, aufwandsabschaetzung.getJPanel());
         
         // JTabbedPane dem Frame hinzufuegen        
         JPanel hauptfensterJPanel= new JPanel();
@@ -800,13 +800,7 @@ public class View implements ActionListener {
         ergaenzungenTextField = textArea;
     }
     
-    public JTextArea getAufwandsabschaetzungTextField() {
-        return aufwandsabschaetzungTextField;
-    }
     
-    public void setAufwandsabschaetzungTextField(JTextArea textArea) {
-        aufwandsabschaetzungTextField = textArea;
-    }
    
     
     
@@ -849,6 +843,14 @@ public class View implements ActionListener {
     
     public void setGlossarJTable(JTable jTable) {
         glossarJTable = jTable;
+    }
+    
+    public IAufwandsabschaetzung getAufwandsabschaetzung() {
+        return aufwandsabschaetzung;
+    }
+    
+    public void setAufwandsabschaetzung(IAufwandsabschaetzung _aufwandsabschaetzung) {
+        aufwandsabschaetzung = _aufwandsabschaetzung;
     }
     
 

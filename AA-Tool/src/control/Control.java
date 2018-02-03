@@ -18,7 +18,7 @@ public class Control {
     
     View view;
     private static File openFile;
-    private static Boolean alreadySaved = false;
+    private static Boolean alreadySaved = false; // bei speichern gibt noch einen bug
     
     /**
      * 
