@@ -19,9 +19,9 @@ import javax.swing.JPanel;
  * @author SebastianKoch
  *
  */
-public class Aufwandsabschaetzung implements ActionListener, IAufwandsabschaetzung {
+public class Aufwandsabschaetzung implements ActionListener  {
 	private static Aufwandsabschaetzung instanz;
-	private IAufwandsabschaetzung instanzAufwandabschaetzung;
+	//private IAufwandsabschaetzung instanzAufwandabschaetzung;
 	
 	private Boolean aufwandabschaetzungErstellt = false;
 	private JPanel aufwandsabschaetzungJPanel;
@@ -66,37 +66,6 @@ public class Aufwandsabschaetzung implements ActionListener, IAufwandsabschaetzu
 		// TODO Auto-generated method stub
 		
 	}
-	@Override
-    public JPanel getJPanel() {
-        return aufwandsabschaetzungJPanel;
-    }
-
-    @Override
-    public void setJPanel(JPanel jPanel) {
-        aufwandsabschaetzungJPanel = jPanel;
-    }
-
-    @Override
-    public String[][] getInhalt() {
-        if(instanzAufwandabschaetzung != null)
-        {
-            return instanzAufwandabschaetzung.getInhalt();
-        }
-        
-        else
-        {
-            return null;
-        }
-    }
-
-    @Override
-    public void setInhalt(String[][] text) {
-        if(instanzAufwandabschaetzung != null)
-        {
-            instanzAufwandabschaetzung.setInhalt(text);
-        }
-   
-    }
 
     
     public Boolean getAufwandabschaetzungErstellt() {

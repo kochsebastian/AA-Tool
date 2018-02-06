@@ -1,7 +1,10 @@
-
 package view;
 
+
+
+
 import java.awt.*;
+
 
 
 
@@ -13,7 +16,7 @@ import java.io.File;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import aufwandsabschaetzung.IAufwandsabschaetzung;
+import aufwandsabschaetzung.Aufwandsabschaetzung;
 import basis.Resources;
 
 import control.Control;
@@ -44,13 +47,14 @@ public class View implements ActionListener {
     private JTextArea zielbestimmungTextField;
     private JTextArea produkteinsatzTextField;
     private JTextArea ergaenzungenTextField;
-
+    private JTextArea aufwandTextField;
    
     private JTable produktfunktionenJTable;
     private JTable produktdatenJTable;
     private JTable produktleistungenJTable;
     private JTable qualitaetsanforderungenJTable;
     private JTable glossarJTable;
+    private JTable aufwandJTable;
     
     
     private DefaultTableModel produktfunktionenJTableModel;
@@ -73,11 +77,17 @@ public class View implements ActionListener {
     private JButton fuegeGlossarReiheHinzu;
     private JButton loescheGlossarReihe;
     
+    private DefaultTableModel aufwandJTableModel;
+    private JButton fuegeAufwandReiheHinzu;
+    private JButton loescheAufwandReihe;
+    
     private static Control control;
     
     private static ViewModelConnector viewConnector;
     
-    static IAufwandsabschaetzung aufwandsabschaetzung;
+    public static Aufwandsabschaetzung a;
+
+
  
     
     private View() {
@@ -89,8 +99,8 @@ public class View implements ActionListener {
      * @param _control
      * @return
      */
-    public static View getInstanz(Control _control, IAufwandsabschaetzung _aufwandsabschaetzung) {
-        aufwandsabschaetzung = _aufwandsabschaetzung;
+    public static View getInstanz(Control _control) {
+     //   aufwandsabschaetzung = _aufwandsabschaetzung;
         control = _control;
         if (view == null) {
             view = new View();
@@ -99,6 +109,7 @@ public class View implements ActionListener {
         }             
         return view;
     }
+    
     public void show() {
     		
      // setze Nimbus look and feel fuer Anzeige (fuer besseres Design)
@@ -123,6 +134,8 @@ public class View implements ActionListener {
         }
         
     }
+    
+    
     public void showEmpty() {
     		show();
     		
@@ -147,7 +160,6 @@ public class View implements ActionListener {
         // Buttons dem Listener zuordnen 
         importieren.addActionListener(this);
         erstellen.addActionListener(this);
-        
         laden.addActionListener(this);
         
         
@@ -185,13 +197,17 @@ public class View implements ActionListener {
         hauptfensterJPanel.add(menueleiste);
         hauptfensterJPanel.add(tabs);
         
-        hauptfenster.add(hauptfensterJPanel);
+        hauptfenster.getContentPane().add(hauptfensterJPanel);
         
         // JFrame anzeigen
         hauptfenster.setVisible(true);
     }
+    
+    
+    
+    
     /**
-     * 
+     * @wbp.parser.entryPoint
      */
     public void showFull() {
     		show();
@@ -267,6 +283,7 @@ public class View implements ActionListener {
         JPanel produktleistungenJPanel = new JPanel();
         JPanel qualitaetsanforderungenJPanel = new JPanel();
         JPanel glossarJPanel = new JPanel();
+        JPanel aufwandsabschaetzungJPanel = new JPanel();
         
         
         // Inhalte des Deckblatts
@@ -288,8 +305,12 @@ public class View implements ActionListener {
         // Inhalte des Produkteinsatzes
         ergaenzungenTextField = new JTextArea(Resources.ergaenzungenStandardInhalt, 44, 76);
         ergaenzungenJPanel.add(ergaenzungenTextField);
+      /*  
+        // Inhalte des Produkteinsatzes
+        aufwandTextField = new JTextArea(Resources.aufwandsabschaetzungStandardInhalt, 44, 76);
+        aufwandJPanel.add(aufwandTextField);
         
-       
+       */
         
         // Inhalt der Prduktfunktionen erstellen
         produktfunktionenJTable = new JTable(0, 2);
@@ -432,6 +453,15 @@ public class View implements ActionListener {
         glossarJPanel.add(glossarPane);
         
         
+		
+	//	labelAufschaetzungsfunktion = new JLabel("Bevor Satrt -> Update");
+		
+      
+       
+		
+		
+		
+        
         // Erzeugung eines JTabbedPane-Objektes
         JTabbedPane tabs = new JTabbedPane(JTabbedPane.LEFT, JTabbedPane.SCROLL_TAB_LAYOUT);
  
@@ -448,7 +478,7 @@ public class View implements ActionListener {
         tabs.addTab(Resources.qualitaetsanforderungen, qualitaetsanforderungenJPanel);
         tabs.addTab(Resources.ergaenzungen, ergaenzungenJPanel);
         tabs.addTab(Resources.glossar, glossarJPanel);
-        tabs.addTab(Resources.aufwandsabschaetzung, aufwandsabschaetzung.getJPanel());
+        tabs.addTab(Resources.aufwandsabschaetzung, aufwandsabschaetzungJPanel);
         
         // JTabbedPane dem Frame hinzufuegen        
         JPanel hauptfensterJPanel= new JPanel();
@@ -456,7 +486,7 @@ public class View implements ActionListener {
         hauptfensterJPanel.add(menueleiste);
         hauptfensterJPanel.add(tabs);
         
-        hauptfenster.add(hauptfensterJPanel);
+        hauptfenster.getContentPane().add(hauptfensterJPanel);
         
         // JFrame anzeigen
         hauptfenster.setVisible(true);
@@ -470,16 +500,14 @@ public class View implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         // Quelle der Aktion mit Buttons abgleichen
         if(ae.getSource() == this.exportieren){
-        		if(Control.getalreadySaved()) {
+        		
         			File datei = showSpeichernUnterDialog();    
         			control.exportiere(datei);  
-        		}else {
-        			control.exportiere();   
-        		}
         }
         
         if(ae.getSource() == this.importieren || ae.getSource() == this.laden){
             File datei = showOeffnenDialog();
+            showFull();
             control.importiere(datei);  
            
         }
@@ -572,6 +600,11 @@ public class View implements ActionListener {
             loescheGlossar();
             glossarJTableModel.fireTableDataChanged();
         }
+        
+    /*    if(ae.getSource() == this.update){
+            
+        }*/
+        
     }
     
     private File showSpeichernUnterDialog() {
@@ -593,7 +626,7 @@ public class View implements ActionListener {
     
     
     
-    private File showExportierenDialog() {
+   /* private File showExportierenDialog() {
         // JFileChooser-Objekt erstellen
         JFileChooser selektor = new JFileChooser();
         // Dialog zum Oeffnen von Dateien anzeigen
@@ -608,7 +641,7 @@ public class View implements ActionListener {
         }
         
         return null;
-    }
+    }*/
     
     private File showOeffnenDialog() {
         // JFileChooser-Objekt erstellen
@@ -800,6 +833,13 @@ public class View implements ActionListener {
         ergaenzungenTextField = textArea;
     }
     
+    public JTextArea getAufwandTextField() {
+        return aufwandTextField;
+    }
+    
+    public void setAufwandTextField(JTextArea textArea) {
+        aufwandTextField = textArea;
+    }
     
    
     
@@ -845,13 +885,13 @@ public class View implements ActionListener {
         glossarJTable = jTable;
     }
     
-    public IAufwandsabschaetzung getAufwandsabschaetzung() {
+   /* public IAufwandsabschaetzung getAufwandsabschaetzung() {
         return aufwandsabschaetzung;
     }
     
     public void setAufwandsabschaetzung(IAufwandsabschaetzung _aufwandsabschaetzung) {
         aufwandsabschaetzung = _aufwandsabschaetzung;
-    }
+    }*/
     
 
 }

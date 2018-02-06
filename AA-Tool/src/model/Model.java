@@ -84,7 +84,7 @@ public class Model extends AModel {
         produktleistungen.addNext(qualitaetsanforderungen);
         qualitaetsanforderungen.addNext(ergaenzungen);
         ergaenzungen.addNext(glossar);
-        glossar.addNext(aufwandsschaetzung);
+      //  glossar.addNext(aufwandsschaetzung);
     }
     
 

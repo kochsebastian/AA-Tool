@@ -17,7 +17,7 @@ import xmlFramework.IOConnector;
 public class Control {
     
     View view;
-    private static File openFile;
+    private static File openFile = null;
     private static Boolean alreadySaved = false; // bei speichern gibt noch einen bug
     
     /**
@@ -46,7 +46,9 @@ public class Control {
         // schreibe xml
         try {
         IOConnector.speichereXML(datei);
-        }catch(Exception e) {}
+        }catch(Exception e) {
+        	alreadySaved = false;
+        }
     }
     
     /**
@@ -71,6 +73,7 @@ public class Control {
      */
     public void importiere(File datei) {
         // schreibe ein valides Model mit genug Platz in den Tabellen (jew. 1000 Zeilen)
+    	
         for (int i = 0; i < 1000; i++) {
             view.fuegeFunktionHinzu();
             view.fuegeDatumHinzu();       
