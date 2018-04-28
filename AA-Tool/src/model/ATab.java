@@ -9,7 +9,7 @@ import java.util.ArrayList;
  *
  */
 public abstract class ATab {
-    // Composite Design Pattern, jedoch hat jeder Reiter nur ein Blatt und ein Kompositum
+    
     private ArrayList <ATab> next;
     
     private String tabName;

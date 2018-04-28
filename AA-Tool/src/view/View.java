@@ -112,7 +112,7 @@ public class View implements ActionListener {
     
     public void show() {
     		
-     // setze Nimbus look and feel fuer Anzeige (fuer besseres Design)
+    	// setze Nimbus look and feel fuer Anzeige (fuer besseres Design)
         try {            
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
         }
@@ -456,12 +456,7 @@ public class View implements ActionListener {
 		
 	//	labelAufschaetzungsfunktion = new JLabel("Bevor Satrt -> Update");
 		
-      
-       
-		
-		
-		
-        
+     
         // Erzeugung eines JTabbedPane-Objektes
         JTabbedPane tabs = new JTabbedPane(JTabbedPane.LEFT, JTabbedPane.SCROLL_TAB_LAYOUT);
  
@@ -689,7 +684,7 @@ public class View implements ActionListener {
     public void loescheFunktion() {
         // alle Zeilen entfernen, die zu einer Funktion gehoeren
         try {
-            for(int i = 0; i < 12; i++) {
+            for(int i = 0; i < 4; i++) {
                 produktfunktionenJTableModel.removeRow(produktfunktionenJTableModel.getRowCount()-1);
             }
         }
@@ -755,7 +750,7 @@ public class View implements ActionListener {
     public void loescheQualitaetsanforderung() {
         // alle Zeilen entfernen, die zu einem Produktdatum gehoeren
     		try {
-            for(int i = 0; i < 3; i++) {
+            for(int i = 0; i < 2; i++) {
             	qualitaetsanforderungenJTableModel.removeRow(qualitaetsanforderungenJTableModel.getRowCount()-1);
             }
         }
