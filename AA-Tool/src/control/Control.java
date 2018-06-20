@@ -2,8 +2,9 @@
 
 package control;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
-
 
 import model.Model;
 import view.View;
@@ -14,7 +15,7 @@ import xmlFramework.IOConnector;
  * @author SebastianKoch
  *
  */
-public class Control {
+public class Control implements ActionListener, IController {
     
     View view;
     private static File openFile = null;
@@ -38,8 +39,8 @@ public class Control {
      */
     public void exportiere(File datei) {
         // schreibe Model aus View
-    		openFile = datei;
-    		alreadySaved = true;
+    	openFile = datei;
+    	alreadySaved = true;
         Model model = Model.getInstanz();
         model.schreibeModelAusView(view);
         
@@ -76,9 +77,7 @@ public class Control {
     	
         for (int i = 0; i < 1000; i++) {
             view.fuegeFunktionHinzu();
-            view.fuegeDatumHinzu();       
-            view.fuegeLeistungHinzu();
-            view.fuegeQualitaetsanforderungHinzu();
+            view.fuegeDatumHinzu();      
             view.fuegeGlossarHinzu();
         }    
         alreadySaved = true;
@@ -108,4 +107,16 @@ public class Control {
         alreadySaved = false;
         openFile = null;
     }
+
+	@Override
+	public void processViewAction(ActionEvent action) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 }

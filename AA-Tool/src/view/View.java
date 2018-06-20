@@ -11,12 +11,13 @@ import java.awt.*;
 
 import java.awt.event.*;
 import java.io.File;
-
+import java.util.Observable;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import aufwandsabschaetzung.Aufwandsabschaetzung;
+import aufwandsabschaetzung.AAufwandsabschaetzungModel;
+import aufwandsabschaetzung.IAufwandsabschaetzung;
 import basis.Resources;
 
 import control.Control;
@@ -26,9 +27,10 @@ import control.Control;
  * @author SebastianKoch
  *
  */
-public class View implements ActionListener {
+public class View implements ActionListener, IView {
 
     private static View view = null;
+    private static IAufwandsabschaetzung aufwandsabschaetzung;
     private JFrame hauptfenster = null;
     
     private JButton exportieren;
@@ -37,8 +39,8 @@ public class View implements ActionListener {
     private JButton speichern;
     private JButton laden;
     private JButton loeschen;
-    private JButton drucken;
-    private JButton pdf;
+
+
     private JButton schliessen;
   
     
@@ -65,13 +67,7 @@ public class View implements ActionListener {
     private JButton fuegeDatenReiheHinzu;
     private JButton loescheDatenReihe;
     
-    private DefaultTableModel produktleistungenJTableModel;
-    private JButton fuegeLeistungenReiheHinzu;
-    private JButton loescheLeistungenReihe;
-    
-    private DefaultTableModel qualitaetsanforderungenJTableModel;
-    private JButton fuegeQualitaetsanforderungenReiheHinzu;
-    private JButton loescheQualitaetsanforderungenReihe;
+ 
     
     private DefaultTableModel glossarJTableModel;
     private JButton fuegeGlossarReiheHinzu;
@@ -83,9 +79,9 @@ public class View implements ActionListener {
     
     private static Control control;
     
-    private static ViewModelConnector viewConnector;
+    private static ModelViewConnector viewConnector;
     
-    public static Aufwandsabschaetzung a;
+    public static AAufwandsabschaetzungModel a;
 
 
  
@@ -99,13 +95,13 @@ public class View implements ActionListener {
      * @param _control
      * @return
      */
-    public static View getInstanz(Control _control) {
-     //   aufwandsabschaetzung = _aufwandsabschaetzung;
+    public static View getInstanz(Control _control, IAufwandsabschaetzung _aufwandsabschaetzung) {
+        aufwandsabschaetzung = _aufwandsabschaetzung;
         control = _control;
         if (view == null) {
             view = new View();
             
-            viewConnector = new ViewModelConnector(view);
+            viewConnector = new ModelViewConnector(view);
         }             
         return view;
     }
@@ -240,10 +236,10 @@ public class View implements ActionListener {
         speichern = new JButton("Speichern");
         loeschen = new JButton("Löschen");
         schliessen = new JButton("Schließen");
-        drucken = new JButton("Drucken");
+
         exportieren = new JButton(Resources.exportieren);
         importieren = new JButton(Resources.importieren);
-        pdf = new JButton("Pdf erstellen");
+
         
         
         // Buttons dem Listener zuordnen
@@ -253,8 +249,7 @@ public class View implements ActionListener {
         speichern.addActionListener(this);
         laden.addActionListener(this);
         loeschen.addActionListener(this);
-        drucken.addActionListener(this);
-        pdf.addActionListener(this);
+
         schliessen.addActionListener(this);
         
         // Menueleiste dem Frame hinzufuegen
@@ -266,10 +261,10 @@ public class View implements ActionListener {
         menueleiste.add(speichern);
         menueleiste.add(loeschen);
         menueleiste.add(schliessen);
-        menueleiste.add(drucken);
+        
         menueleiste.add(exportieren);
         menueleiste.add(importieren);  
-        menueleiste.add(pdf);
+        
         
         
         // Erzeugung der JPanels
@@ -280,8 +275,7 @@ public class View implements ActionListener {
         JPanel ergaenzungenJPanel = new JPanel();
         JPanel produktfunktionenJPanel = new JPanel();
         JPanel produktdatenJPanel = new JPanel();
-        JPanel produktleistungenJPanel = new JPanel();
-        JPanel qualitaetsanforderungenJPanel = new JPanel();
+        
         JPanel glossarJPanel = new JPanel();
         JPanel aufwandsabschaetzungJPanel = new JPanel();
         
@@ -368,63 +362,6 @@ public class View implements ActionListener {
         JScrollPane datenPane = new JScrollPane(produktdatenJTable);
         produktdatenJPanel.add(datenPane);
         
-        
-        
-        // Inhalt der Prduktleistungen erstellen
-        produktleistungenJTable = new JTable(0, 2);
-        produktleistungenJTableModel = (DefaultTableModel) produktleistungenJTable.getModel();
-        produktleistungenJTable.getColumnModel().getColumn(0).setHeaderValue(Resources.bezeichnung);
-        produktleistungenJTable.getColumnModel().getColumn(1).setHeaderValue(Resources.wert);
-        fuegeLeistungHinzu();
-        
-        // neue Buttons fuer die Tabelle
-        fuegeLeistungenReiheHinzu = new JButton(Resources.fuegeProduktleistungHinzu);
-        loescheLeistungenReihe = new JButton(Resources.loescheProduktleistung);
-        
-        // eigenes JPanel fuer die Buttons
-        JPanel produktleistungenButtons = new JPanel(new FlowLayout());
-        produktleistungenButtons.setMaximumSize(new Dimension(1000, 100));
-        produktleistungenButtons.add(fuegeLeistungenReiheHinzu);
-        produktleistungenButtons.add(loescheLeistungenReihe);
-        
-        // Buttons dem Listener zuordnen
-        fuegeLeistungenReiheHinzu.addActionListener(this);
-        loescheLeistungenReihe.addActionListener(this);
-        
-        produktleistungenJPanel.setLayout(new BoxLayout(produktleistungenJPanel, BoxLayout.Y_AXIS));
-        produktleistungenJPanel.add(produktleistungenButtons);
-        
-        JScrollPane leistungPane = new JScrollPane(produktleistungenJTable);
-        produktleistungenJPanel.add(leistungPane);
-        
-        
-        // Inhalt der Qualitaetsanforderungen erstellen
-        qualitaetsanforderungenJTable = new JTable(0, 2);
-        qualitaetsanforderungenJTableModel = (DefaultTableModel) qualitaetsanforderungenJTable.getModel();
-        qualitaetsanforderungenJTable.getColumnModel().getColumn(0).setHeaderValue(Resources.bezeichnung);
-        qualitaetsanforderungenJTable.getColumnModel().getColumn(1).setHeaderValue(Resources.wert);
-        fuegeQualitaetsanforderungHinzu();
-        
-        // neue Buttons fuer die Tabelle
-        fuegeQualitaetsanforderungenReiheHinzu = new JButton(Resources.fuegeQualitaetsanforderungHinzu);
-        loescheQualitaetsanforderungenReihe = new JButton(Resources.loescheQualitaetsanforderung);
-        
-        // eigenes JPanel fuer die Buttons
-        JPanel qualitaetsanforderungenButtons = new JPanel(new FlowLayout());
-        qualitaetsanforderungenButtons.setMaximumSize(new Dimension(1000, 100));
-        qualitaetsanforderungenButtons.add(fuegeQualitaetsanforderungenReiheHinzu);
-        qualitaetsanforderungenButtons.add(loescheQualitaetsanforderungenReihe);
-        
-        // Buttons dem Listener zuordnen
-        fuegeQualitaetsanforderungenReiheHinzu.addActionListener(this);
-        loescheQualitaetsanforderungenReihe.addActionListener(this);
-        
-        qualitaetsanforderungenJPanel.setLayout(new BoxLayout(qualitaetsanforderungenJPanel, BoxLayout.Y_AXIS));
-        qualitaetsanforderungenJPanel.add(qualitaetsanforderungenButtons);
-        
-        JScrollPane qualitaetsanforderungenPane = new JScrollPane(qualitaetsanforderungenJTable);
-        qualitaetsanforderungenJPanel.add(qualitaetsanforderungenPane);
-        
         // Inhalt des Glossars erstellen
         glossarJTable = new JTable(0, 2);
         glossarJTableModel = (DefaultTableModel) glossarJTable.getModel();
@@ -454,7 +391,7 @@ public class View implements ActionListener {
         
         
 		
-	//	labelAufschaetzungsfunktion = new JLabel("Bevor Satrt -> Update");
+		JLabel labelAufschaetzungsfunktion = new JLabel("Bevor Satrt -> Update");
 		
      
         // Erzeugung eines JTabbedPane-Objektes
@@ -468,9 +405,7 @@ public class View implements ActionListener {
         
         tabs.addTab(Resources.produktfunktionen, produktfunktionenJPanel);
         tabs.addTab(Resources.produktdaten, produktdatenJPanel);
-        tabs.addTab(Resources.produktleistungen, produktleistungenJPanel);
-        
-        tabs.addTab(Resources.qualitaetsanforderungen, qualitaetsanforderungenJPanel);
+      
         tabs.addTab(Resources.ergaenzungen, ergaenzungenJPanel);
         tabs.addTab(Resources.glossar, glossarJPanel);
         tabs.addTab(Resources.aufwandsabschaetzung, aufwandsabschaetzungJPanel);
@@ -566,25 +501,8 @@ public class View implements ActionListener {
             produktdatenJTableModel.fireTableDataChanged();
         }
         
-        if(ae.getSource() == this.fuegeLeistungenReiheHinzu){
-            fuegeLeistungHinzu();
-            produktleistungenJTableModel.fireTableDataChanged();
-        }
-        
-        if(ae.getSource() == this.loescheLeistungenReihe){
-            loescheLeistung();
-            produktleistungenJTableModel.fireTableDataChanged();
-        }
-        
-        if(ae.getSource() == this.fuegeQualitaetsanforderungenReiheHinzu){
-            fuegeQualitaetsanforderungHinzu();
-            qualitaetsanforderungenJTableModel.fireTableDataChanged();
-        }
-        
-        if(ae.getSource() == this.loescheQualitaetsanforderungenReihe){
-            loescheQualitaetsanforderung();
-            qualitaetsanforderungenJTableModel.fireTableDataChanged();
-        }
+   
+      
         
         if(ae.getSource() == this.fuegeGlossarReiheHinzu){
             fuegeGlossarHinzu();
@@ -621,7 +539,7 @@ public class View implements ActionListener {
     
     
     
-   /* private File showExportierenDialog() {
+    private File showExportierenDialog() {
         // JFileChooser-Objekt erstellen
         JFileChooser selektor = new JFileChooser();
         // Dialog zum Oeffnen von Dateien anzeigen
@@ -636,7 +554,7 @@ public class View implements ActionListener {
         }
         
         return null;
-    }*/
+    }
     
     private File showOeffnenDialog() {
         // JFileChooser-Objekt erstellen
@@ -670,7 +588,6 @@ public class View implements ActionListener {
     
     public void fuegeFunktionHinzu() {
         // alle Zeilen zur Tabelle hinzufuegen, die fuer eine Funktion gebraucht werden
-    	
         Object[] tmp1 = {"/LF/", ""}; 
         produktfunktionenJTableModel.addRow(tmp1);
         Object[] tmp2 = {"   Funktion", ""};            
@@ -716,48 +633,9 @@ public class View implements ActionListener {
         }
     }
     
-    public void fuegeLeistungHinzu() {
-    	// alle Zeilen zur Tabelle hinzufuegen, die fuer ein Produktdatum gebraucht werden
-    		
-    		Object[] tmp1 = {"/LE/", ""};
-        produktleistungenJTableModel.addRow(tmp1);
-        Object[] tmp2 = {"   Name", ""};
-        produktleistungenJTableModel.addRow(tmp2);
-        Object[] tmp3 = {"   Beschreibung", ""};
-        produktleistungenJTableModel.addRow(tmp3);
-    }
+   
     
-    public void loescheLeistung() {
-        // alle Zeilen entfernen, die zu einem Produktdatum gehoeren
-    		try {
-            for(int i = 0; i < 3; i++) {
-                produktleistungenJTableModel.removeRow(produktleistungenJTableModel.getRowCount()-1);
-            }
-        }
-        catch(Exception e) {
-
-        }
-    }
-    
-    public void fuegeQualitaetsanforderungHinzu() {
-    	// alle Zeilen zur Tabelle hinzufuegen, die fuer ein Produktdatum gebraucht werden
-    		Object[] tmp1 = {"/Q /", ""};
-        qualitaetsanforderungenJTableModel.addRow(tmp1);
-        Object[] tmp2 = {"   Name", ""};
-        qualitaetsanforderungenJTableModel.addRow(tmp2);
-    }
-    
-    public void loescheQualitaetsanforderung() {
-        // alle Zeilen entfernen, die zu einem Produktdatum gehoeren
-    		try {
-            for(int i = 0; i < 2; i++) {
-            	qualitaetsanforderungenJTableModel.removeRow(qualitaetsanforderungenJTableModel.getRowCount()-1);
-            }
-        }
-        catch(Exception e) {
-
-        }
-    }
+  
     
     public void fuegeGlossarHinzu() {
     	// alle Zeilen zur Tabelle hinzufuegen, die fuer ein Produktdatum gebraucht werden
@@ -780,11 +658,11 @@ public class View implements ActionListener {
         }
     }
     
-    public ViewModelConnector getViewConnector() {
+    public ModelViewConnector getViewConnector() {
         return viewConnector;
     }
     
-    public void setViewConnector(ViewModelConnector _viewConnector) {
+    public void setViewConnector(ModelViewConnector _viewConnector) {
         viewConnector = _viewConnector;
     }
     
@@ -856,21 +734,7 @@ public class View implements ActionListener {
         produktdatenJTable = jTable;
     }
     
-    public JTable getProduktleistungenJTable() {
-        return produktleistungenJTable;
-    }
-    
-    public void setProduktleistungenJTable(JTable jTable) {
-        produktleistungenJTable = jTable;
-    }
-    
-    public JTable getQualitaetsanforderungenJTable() {
-        return qualitaetsanforderungenJTable;
-    }
-    
-    public void setQualitaetsanforderungenJTable(JTable jTable) {
-        qualitaetsanforderungenJTable = jTable;
-    }
+   
     
     public JTable getGlossarJTable() {
         return glossarJTable;
@@ -879,6 +743,24 @@ public class View implements ActionListener {
     public void setGlossarJTable(JTable jTable) {
         glossarJTable = jTable;
     }
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void displayView(ActionListener actionListener) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void closeWindow() {
+		// TODO Auto-generated method stub
+		
+	}
     
    /* public IAufwandsabschaetzung getAufwandsabschaetzung() {
         return aufwandsabschaetzung;

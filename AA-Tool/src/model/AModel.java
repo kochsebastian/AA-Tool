@@ -1,4 +1,3 @@
-
 package model;
 
 /**
@@ -6,15 +5,14 @@ package model;
  * @author SebastianKoch
  *
  */
-public abstract class AModel {
+public abstract class AModel  {
     ATab deckblatt;
     ATab zielbestimmung;
     ATab produkteinsatz;
     ATab kundenbeschreibung;
     ATab produktfunktionen;
     ATab produktdaten;
-    ATab produktleistungen;
-    ATab qualitaetsanforderungen;
+    
     ATab ergaenzungen;
     ATab glossar;
     ATab aufwandsschaetzung;

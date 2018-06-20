@@ -3,6 +3,7 @@ package xmlFramework;
 
 import java.io.File;
 
+
 import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -12,12 +13,11 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import model.ATab;
-import model.Model;
-import model.Tab;
-import model.Inhalt;
+
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
+
+import model.*;
 
 /**
  * 

@@ -4,7 +4,7 @@ package basis;
 
 
 
-import aufwandsabschaetzung.Aufwandsabschaetzung;
+import aufwandsabschaetzung.AAufwandsabschaetzungModel;
 import control.Control;
 import view.View;
 

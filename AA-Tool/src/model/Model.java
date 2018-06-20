@@ -1,6 +1,7 @@
-
-
 package model;
+
+
+
 
 import java.util.ArrayList;
 import basis.Resources;
@@ -24,8 +25,7 @@ public class Model extends AModel {
         produkteinsatz = new Tab(Resources.produkteinsatz);
         produktfunktionen = new Tab(Resources.produktfunktionen);
         produktdaten = new Tab(Resources.produktdaten);
-        produktleistungen = new Tab(Resources.produktleistungen);
-        qualitaetsanforderungen = new Tab(Resources.qualitaetsanforderungen);
+        
         ergaenzungen = new Tab(Resources.ergaenzungen);
         glossar = new Tab(Resources.glossar);
         aufwandsschaetzung = new Tab(Resources.aufwandsabschaetzung);
@@ -54,14 +54,7 @@ public class Model extends AModel {
         ATab produktdatenInhalt = new Inhalt(Resources.produktdaten);
         produktdaten.addNext(produktdatenInhalt);
         
-        // Inhalte der Produktleistungen erstellen
-        ATab produktleistungenInhalt = new Inhalt(Resources.produktleistungen);
-        produktleistungen.addNext(produktleistungenInhalt);
-        
-        // Inhalte der Qualitaetsanforderungen erstellen
-        ATab qualitaetsanforderungenInhalt = new Inhalt(Resources.qualitaetsanforderungen);
-        qualitaetsanforderungen.addNext(qualitaetsanforderungenInhalt);
-        
+
         // Inhalte der Ergaenzungen erstellen
         ATab ergaenzungenInhalt = new Inhalt(Resources.ergaenzungen);
         ergaenzungen.addNext(ergaenzungenInhalt);
@@ -80,9 +73,7 @@ public class Model extends AModel {
         zielbestimmung.addNext(produkteinsatz);
         produkteinsatz.addNext(produktfunktionen);
         produktfunktionen.addNext(produktdaten);
-        produktdaten.addNext(produktleistungen);
-        produktleistungen.addNext(qualitaetsanforderungen);
-        qualitaetsanforderungen.addNext(ergaenzungen);
+        produktdaten.addNext(ergaenzungen);
         ergaenzungen.addNext(glossar);
       //  glossar.addNext(aufwandsschaetzung);
     }
@@ -127,4 +118,7 @@ public class Model extends AModel {
             }
         }
     }
+    
+    
+    
 }
