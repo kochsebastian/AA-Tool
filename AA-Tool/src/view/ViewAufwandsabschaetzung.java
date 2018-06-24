@@ -213,7 +213,7 @@ public class ViewAufwandsabschaetzung extends JPanel {
     }
     
     public static void addProdukt(){
-    		for(int i = 0; i < IOConnector.getsLFBuffer().size() - 1; i++){        	
+    		for(int i = 0; i < IOConnector.getsLFBuffer().size() ; i++){        	
         	//test = view.getProduktfunktionenJTable().getTableHeader().getToolTipText();
         	
         	dtmLF.addRow(new Object[]{IOConnector.getsLFBuffer().get(i), new Boolean(false), new Boolean(false), new Boolean(false)});

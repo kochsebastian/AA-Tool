@@ -625,12 +625,12 @@ public class View implements ActionListener {
     }
     
     public Boolean showLoeschenDialog() {
-    		int auswahl = JOptionPane.showConfirmDialog(hauptfenster, "Sicher?", Resources.aaTool, JOptionPane.YES_NO_OPTION);
+    	int auswahl = JOptionPane.showConfirmDialog(hauptfenster, "Sicher?", Resources.aaTool, JOptionPane.YES_NO_OPTION);
         
         if (auswahl == JOptionPane.YES_OPTION) 
             return true;       
         else 
-        	 	return false;
+        	return false;
         
     }
     

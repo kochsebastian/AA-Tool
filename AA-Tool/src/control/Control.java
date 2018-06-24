@@ -45,8 +45,8 @@ public class Control implements ActionListener{
      */
     public void exportiere(File datei) {
         // schreibe Model aus View
-    		openFile = datei;
-    		alreadySaved = true;
+    	openFile = datei;
+    	alreadySaved = true;
         Model model = Model.getInstanz();
         model.schreibeModelAusView(view);
         
@@ -58,21 +58,7 @@ public class Control implements ActionListener{
         }
     }
     
-    /**
-     * 
-     * 
-     */
-    public void exportiere() {
-        // schreibe Model aus View
-		alreadySaved = true;
-    	Model model = Model.getInstanz();
-        model.schreibeModelAusView(view);
-        
-        // schreibe xml
-        try {
-        	IOConnector.speichereXML(openFile);
-        }catch(Exception e) {}
-    }
+
     
     /**
      * 
@@ -125,12 +111,10 @@ public class Control implements ActionListener{
         	view.displayView2(this);
         }
         if (action.getActionCommand().equalsIgnoreCase(Resources.exportieren)){
-        	if(!Control.getalreadySaved()) {
-        		File datei = view.showSpeichernUnterDialog();   
-        		exportiere(datei);  
-        	}else {
-        		exportiere();   
-        	}
+        	
+        	File datei = view.showSpeichernUnterDialog();   
+       		exportiere(datei);  
+        	
         }
         if (action.getActionCommand().equalsIgnoreCase(Resources.importieren) || 
         		action.getActionCommand().equalsIgnoreCase("Laden")){
@@ -139,16 +123,16 @@ public class Control implements ActionListener{
         	importiere(datei);  
         }
         
-        if (action.getActionCommand().equalsIgnoreCase("Schliessen")){
+        if (action.getActionCommand().equalsIgnoreCase("Schließen")){
         	view.closeWindow();
         	view.displayView(this);
         }
-        if (action.getActionCommand().equalsIgnoreCase("Schliessen")){
+        if (action.getActionCommand().equalsIgnoreCase("Speichern")){
         	if(!Control.getalreadySaved()) {
     			File datei = view.showSpeichernUnterDialog();    
     			exportiere(datei);  
     		}else {
-    			exportiere();   
+    			exportiere(openFile);   
     		}
         }
         if (action.getActionCommand().equalsIgnoreCase("Löschen")){
@@ -163,7 +147,14 @@ public class Control implements ActionListener{
         
         
         if (action.getActionCommand().equalsIgnoreCase("Weiter Komplexität")){
-        	exportiere();
+        	if(!Control.getalreadySaved()) {
+    			File datei = view.showSpeichernUnterDialog();    
+    			exportiere(datei);  
+    		}else {
+    			exportiere(openFile);   
+    		}
+        	IOConnector.resetLFBuffer();
+        	IOConnector.resetLDBuffer();
 			importiere(openFile);
 			ViewAufwandsabschaetzung.addProdukt();	
         }

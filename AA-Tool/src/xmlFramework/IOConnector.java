@@ -37,14 +37,19 @@ public class IOConnector {
 	}
 
 	public static void addLFBuffer(String e) {
-		IOConnector.LFBuffer.add(e);
+		LFBuffer.add(e);
 	}
-	
+	public static void resetLFBuffer() {
+		LFBuffer.clear();
+	}
 	public static ArrayList<String> getsLDBuffer() {
 		return LDBuffer;
 	}
 
 	public static void addLDBuffer(String e) {
-		IOConnector.LDBuffer.add(e);
+		LDBuffer.add(e);
+	}
+	public static void resetLDBuffer() {
+		LDBuffer.clear();
 	}
 }
