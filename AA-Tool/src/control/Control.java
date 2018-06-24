@@ -6,8 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+import basis.Resources;
 import model.Model;
 import view.View;
+import view.ViewAufwandsabschaetzung;
 import xmlFramework.IOConnector;
 
 /**
@@ -15,11 +17,14 @@ import xmlFramework.IOConnector;
  * @author SebastianKoch
  *
  */
-public class Control implements ActionListener, IController {
+public class Control implements ActionListener{
     
     View view;
+    
     private static File openFile = null;
     private static Boolean alreadySaved = false; // bei speichern gibt noch einen bug
+
+    
     
     /**
      * 
@@ -27,10 +32,11 @@ public class Control implements ActionListener, IController {
      */
     public void setView(View view) {
         this.view = view;
+        view.displayView(this);
     }
     
     public static Boolean getalreadySaved() {
-    		return alreadySaved;
+    	return alreadySaved;
     }
     
     /**
@@ -39,8 +45,8 @@ public class Control implements ActionListener, IController {
      */
     public void exportiere(File datei) {
         // schreibe Model aus View
-    	openFile = datei;
-    	alreadySaved = true;
+    		openFile = datei;
+    		alreadySaved = true;
         Model model = Model.getInstanz();
         model.schreibeModelAusView(view);
         
@@ -59,12 +65,12 @@ public class Control implements ActionListener, IController {
     public void exportiere() {
         // schreibe Model aus View
 		alreadySaved = true;
-    		Model model = Model.getInstanz();
+    	Model model = Model.getInstanz();
         model.schreibeModelAusView(view);
         
         // schreibe xml
         try {
-        IOConnector.speichereXML(openFile);
+        	IOConnector.speichereXML(openFile);
         }catch(Exception e) {}
     }
     
@@ -77,7 +83,9 @@ public class Control implements ActionListener, IController {
     	
         for (int i = 0; i < 1000; i++) {
             view.fuegeFunktionHinzu();
-            view.fuegeDatumHinzu();      
+            view.fuegeDatumHinzu();       
+            view.fuegeLeistungHinzu();
+            view.fuegeQualitaetsanforderungHinzu();
             view.fuegeGlossarHinzu();
         }    
         alreadySaved = true;
@@ -107,16 +115,116 @@ public class Control implements ActionListener, IController {
         alreadySaved = false;
         openFile = null;
     }
+    
+    
+    public void processViewAction(ActionEvent action)
+    {
+        System.out.println("ACTION: " + action.getActionCommand().toString());
+        if (action.getActionCommand().equalsIgnoreCase(Resources.erstellen)){
+        	view.closeWindow();
+        	view.displayView2(this);
+        }
+        if (action.getActionCommand().equalsIgnoreCase(Resources.exportieren)){
+        	if(!Control.getalreadySaved()) {
+        		File datei = view.showSpeichernUnterDialog();   
+        		exportiere(datei);  
+        	}else {
+        		exportiere();   
+        	}
+        }
+        if (action.getActionCommand().equalsIgnoreCase(Resources.importieren) || 
+        		action.getActionCommand().equalsIgnoreCase("Laden")){
+        	File datei = view.showOeffnenDialog();
+        	view.displayView2(this);
+        	importiere(datei);  
+        }
+        
+        if (action.getActionCommand().equalsIgnoreCase("Schliessen")){
+        	view.closeWindow();
+        	view.displayView(this);
+        }
+        if (action.getActionCommand().equalsIgnoreCase("Schliessen")){
+        	if(!Control.getalreadySaved()) {
+    			File datei = view.showSpeichernUnterDialog();    
+    			exportiere(datei);  
+    		}else {
+    			exportiere();   
+    		}
+        }
+        if (action.getActionCommand().equalsIgnoreCase("Löschen")){
+        	if(view.showLoeschenDialog()) {
+        		try {
+        			loeschen();   
+        		}catch(Exception e) {}
+        		view.closeWindow();
+            	view.displayView(this);
+        	}
+        }
+        
+        
+        if (action.getActionCommand().equalsIgnoreCase("Weiter Komplexität")){
+        	exportiere();
+			importiere(openFile);
+			ViewAufwandsabschaetzung.addProdukt();	
+        }
+        
+        //////////
 
-	@Override
-	public void processViewAction(ActionEvent action) {
-		// TODO Auto-generated method stub
-		
-	}
+        if (action.getActionCommand().equalsIgnoreCase(Resources.fuegeProduktdatumHinzu)){
+            view.fuegeFunktionHinzu();
+            
+        }
+        
+        if (action.getActionCommand().equalsIgnoreCase(Resources.loescheProduktfunktion)){
+        	view.loescheFunktion();
+        	
+        }
+        
+        if (action.getActionCommand().equalsIgnoreCase(Resources.fuegeProduktdatumHinzu)){
+        	view.fuegeDatumHinzu();
+       
+        }
+        
+        if (action.getActionCommand().equalsIgnoreCase(Resources.loescheProduktdatum)){
+        	view.loescheDatum();
+           
+        }
+        
+        if (action.getActionCommand().equalsIgnoreCase(Resources.fuegeProduktleistungHinzu)){
+        	view.fuegeLeistungHinzu();
+            
+        }
+        
+        if (action.getActionCommand().equalsIgnoreCase(Resources.loescheProduktleistung)){
+        	view.loescheLeistung();
+          
+        }
+        
+        if (action.getActionCommand().equalsIgnoreCase(Resources.fuegeQualitaetsanforderungHinzu)){
+        	view.fuegeQualitaetsanforderungHinzu();
+           
+        }
+        
+        if (action.getActionCommand().equalsIgnoreCase(Resources.loescheQualitaetsanforderung)){
+        	view.loescheQualitaetsanforderung();
+           
+        }
+        
+        if (action.getActionCommand().equalsIgnoreCase(Resources.fuegeGlossarHinzu)){
+        	view.fuegeGlossarHinzu();
+           
+        }
+        
+        if (action.getActionCommand().equalsIgnoreCase(Resources.loescheGlossar)){
+        	view.loescheGlossar();
+          
+        }
+        
+    }
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void actionPerformed(ActionEvent arg0)
+    {
+        processViewAction(arg0);
+    }
 }

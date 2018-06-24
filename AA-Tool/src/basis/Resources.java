@@ -52,6 +52,11 @@ public class Resources {
     public static final String fuegeQualitaetsanforderungHinzu = "füge Qualitätsanforderung hinzu";
     public static final String loescheQualitaetsanforderung = "lösche Qualitätsanforderung";
 
+
+    public static final String fuegeGlossarHinzu = "füge Glossar hinzu";
+    public static final String loescheGlossar = "lösche Glossar";
+
+    
     public static final String bezeichnung = "Bezeichnung";
     public static final String wert = "Wert";
 

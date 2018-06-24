@@ -3,20 +3,20 @@ package xmlFramework;
 
 import java.io.File;
 
-
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-
+import model.ATab;
+import model.Inhalt;
+import model.Model;
+import model.Tab;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-
-import model.*;
 
 /**
  * 
@@ -25,12 +25,15 @@ import model.*;
  */
 public class XMLParser {
 	
+   
 	/**
 	 * kommt aus dem Internet
 	 * @param zieldatei
 	 */
     protected static void parseXML(File zieldatei) {
         try{
+            Boolean LFAuslesen = false, LDAuslesen = false; //////////////////////////////////////////////////
+            
             int i = 0;
             DocumentBuilderFactory xmlFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder xmlBuilder = xmlFactory.newDocumentBuilder();
@@ -64,9 +67,29 @@ public class XMLParser {
                                             NodeList ebeneDreiNodes = ebeneZweiNode.getChildNodes();
                                             for(int countDrei = 0; countDrei < ebeneDreiNodes.getLength(); countDrei++) {
                                                 Node ebeneDreiNode = ebeneDreiNodes.item(countDrei);
+                         
                                                 if(ebeneDreiNode.hasAttributes()) {
                                                     NamedNodeMap nodeMap = ebeneDreiNode.getAttributes(); //immer 3 elemente enthalten (inhalt, spalte, zeile)
                                                     Node inhalt = nodeMap.item(0);
+                                                    if(LFAuslesen==true) {//////////////////////////////////////////////////
+                                                    	LFAuslesen = false;//////////////////////////////////////////////////
+                                                    	 IOConnector.addLFBuffer(inhalt.getNodeValue());//////////////////////////////////////////////////
+                                                    }//////////////////////////////////////////////////
+                               
+                                                    if(inhalt.getNodeValue().equals("/LF/")) {//////////////////////////////////////////////////
+                                                    	// hier fuer aufwandsabschaetzung//////////////////////////////////////////////////
+                                                    	LFAuslesen = true;//////////////////////////////////////////////////
+                                                    }//////////////////////////////////////////////////
+                                                    if(LDAuslesen==true) {//////////////////////////////////////////////////
+                                                    	LDAuslesen = false;//////////////////////////////////////////////////
+                                                    	 IOConnector.addLDBuffer(inhalt.getNodeValue());//////////////////////////////////////////////////
+                                                    }//////////////////////////////////////////////////
+                               
+                                                    if(inhalt.getNodeValue().equals("/LD/")) {//////////////////////////////////////////////////
+                                                    	// hier fuer aufwandsabschaetzung//////////////////////////////////////////////////
+                                                    	LDAuslesen = true;//////////////////////////////////////////////////
+                                                    }//////////////////////////////////////////////////
+                                                    
                                                     Node spalte = nodeMap.item(1);
                                                     Node zeile = nodeMap.item(2);
                                                     if(temp[Integer.parseInt(spalte.getNodeValue())][Integer.parseInt(zeile.getNodeValue())] != null) {

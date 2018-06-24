@@ -14,35 +14,13 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import testTable.bis;
-
 
 /**
  * @author SebastianKoch
  *
- *for (i : length(LF)) {
-	x = 0;
-	
-	for(bis j = 2) {
-		
-		if(xy[i][j] == true) {
-			x = j+1;
-			break;
-			
-		}
-		
-	}
-	switch(x)
-	case 0 -> EO.add(LF[i][j])
-	case 1 -> EI.add(LF[i][j])
-	case 2 -> EQ.add(LF[i][j])
-	
-	
-}
- *
  */
-public abstract class AufwandsabschaetzungModel   {
-	/*private static AufwandsabschaetzungModel instanz;
+public class Aufwandsabschaetzung implements ActionListener  {
+	private static Aufwandsabschaetzung instanz;
 	//private IAufwandsabschaetzung instanzAufwandabschaetzung;
 	
 	private Boolean aufwandabschaetzungErstellt = false;
@@ -52,8 +30,11 @@ public abstract class AufwandsabschaetzungModel   {
 	private final JButton starteBerechnung;
 	private final JLabel labelAufschaetzungsfunktion;
 	private final Choice listeVorhandenerAufwandsschaetzfunktionen;
-	   
-	public AufwandsabschaetzungModel() {
+	    
+	/**
+	 * 
+	 */
+	public Aufwandsabschaetzung() {
 		aufwandsabschaetzungJPanel = new JPanel();
         
         aufwandsabschaetzungJPanel.setLayout(new BorderLayout());
@@ -94,5 +75,5 @@ public abstract class AufwandsabschaetzungModel   {
     public void setAufwandabschaetzungErstellt(Boolean _aufwandabschaetzungErstellt) {
         aufwandabschaetzungErstellt = _aufwandabschaetzungErstellt;
     }
-*/
+
 }

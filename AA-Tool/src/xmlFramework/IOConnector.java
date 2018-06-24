@@ -2,6 +2,7 @@
 package xmlFramework;
 
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * 
@@ -10,6 +11,10 @@ import java.io.File;
  */
 public class IOConnector {
 	
+	private static ArrayList<String> LFBuffer = new ArrayList<String>();
+	private static ArrayList<String> LDBuffer = new ArrayList<String>();
+
+
 	/**
 	 * 
 	 * @param zieldatei
@@ -25,4 +30,21 @@ public class IOConnector {
     public static void leseXML(File zieldatei) {
         XMLParser.parseXML(zieldatei);
     }
+    
+	
+	public static ArrayList<String> getsLFBuffer() {
+		return LFBuffer;
+	}
+
+	public static void addLFBuffer(String e) {
+		IOConnector.LFBuffer.add(e);
+	}
+	
+	public static ArrayList<String> getsLDBuffer() {
+		return LDBuffer;
+	}
+
+	public static void addLDBuffer(String e) {
+		IOConnector.LDBuffer.add(e);
+	}
 }
