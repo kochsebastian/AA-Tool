@@ -12,6 +12,7 @@ import java.nio.file.Files;
 
 import javax.swing.JTextArea;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -28,6 +29,7 @@ public class TestExport {
 	SimControl control;
 	View view;
 	ActionEvent ae ;
+	File f;
 	int i = 0;
 	/**
 	 * @throws java.lang.Exception
@@ -57,10 +59,18 @@ public class TestExport {
 	public final void test() {
 		ae = new ActionEvent(view, i, Resources.exportieren);
 		control.actionPerformed(ae);
-		File f = new File("test" + File.separator + "testxml.xml");
+		 f = new File("test" + File.separator + "testxml.xml");
 		assertTrue(f.exists() && !f.isDirectory());
 		
 		
+		
+	}
+	
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@After
+	public void cleanUp() throws Exception {
 		try {
 			Files.deleteIfExists(f.toPath());
 		} catch (IOException e) {

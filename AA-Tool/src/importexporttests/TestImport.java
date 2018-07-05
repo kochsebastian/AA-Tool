@@ -6,9 +6,12 @@ package importexporttests;
 import static org.junit.Assert.*;
 
 import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.nio.file.Files;
 
 import javax.swing.JTextArea;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -64,5 +67,7 @@ public class TestImport {
 		System.out.println("");
 		Assert.assertEquals(testArea.getText(), view.getDeckblattTextField().getText());
 	}
+	
+	
 
 }
