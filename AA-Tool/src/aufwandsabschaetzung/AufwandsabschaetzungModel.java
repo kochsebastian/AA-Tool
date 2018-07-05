@@ -1,48 +1,33 @@
 /**
- * 
+ *
  */
 package aufwandsabschaetzung;
 
-import java.awt.BorderLayout;
-import java.awt.Choice;
-import java.awt.ComponentOrientation;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-import testTable.bis;
-
-
 /**
  * @author SebastianKoch
- *
- *for (i : length(LF)) {
-	x = 0;
-	
-	for(bis j = 2) {
-		
-		if(xy[i][j] == true) {
-			x = j+1;
-			break;
-			
-		}
-		
-	}
-	switch(x)
-	case 0 -> EO.add(LF[i][j])
-	case 1 -> EI.add(LF[i][j])
-	case 2 -> EQ.add(LF[i][j])
-	
-	
-}
- *
+ * <p>
+ * for (i : length(LF)) {
+ * x = 0;
+ * <p>
+ * for(bis j = 2) {
+ * <p>
+ * if(xy[i][j] == true) {
+ * x = j+1;
+ * break;
+ * <p>
+ * }
+ * <p>
+ * }
+ * switch(x)
+ * case 0 -> EO.add(LF[i][j])
+ * case 1 -> EI.add(LF[i][j])
+ * case 2 -> EQ.add(LF[i][j])
+ * <p>
+ * <p>
+ * }
  */
-public abstract class AufwandsabschaetzungModel   {
-	/*private static AufwandsabschaetzungModel instanz;
+public abstract class AufwandsabschaetzungModel {
+    /*private static AufwandsabschaetzungModel instanz;
 	//private IAufwandsabschaetzung instanzAufwandabschaetzung;
 	
 	private Boolean aufwandabschaetzungErstellt = false;

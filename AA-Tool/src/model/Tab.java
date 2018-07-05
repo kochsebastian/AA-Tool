@@ -1,11 +1,8 @@
 package model;
 
 
-
 /**
- * 
  * @author SebastianKoch
- *
  */
 public class Tab extends ATab {
 

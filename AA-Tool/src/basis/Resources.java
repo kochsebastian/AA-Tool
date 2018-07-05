@@ -4,6 +4,8 @@
  */
 package basis;
 
+import javax.swing.Icon;
+
 /**
  * @author SebastianKoch
  */
@@ -26,7 +28,6 @@ public class Resources {
     public static final String produktumgebung = "Produktumgebung";
     public static final String produktfunktionen = "Produktfunktionen";
     public static final String produktdaten = "Produktdaten";
-    public static final String produktleistungen = "Produktleistungen";
     public static final String qualitaetsanforderungen = "Qualitätsanforderungen";
     public static final String ergaenzungen = "Ergänzungen";
     public static final String glossar = "Glossar";
@@ -46,8 +47,6 @@ public class Resources {
     public static final String fuegeProduktdatumHinzu = "füge Produktdatum hinzu";
     public static final String loescheProduktdatum = "lösche Produktdatum";
 
-    public static final String fuegeProduktleistungHinzu = "füge Produktleistung hinzu";
-    public static final String loescheProduktleistung = "lösche Produktleistung";
 
     public static final String fuegeQualitaetsanforderungHinzu = "füge Qualitätsanforderung hinzu";
     public static final String loescheQualitaetsanforderung = "lösche Qualitätsanforderung";
@@ -56,9 +55,17 @@ public class Resources {
     public static final String fuegeGlossarHinzu = "füge Glossar hinzu";
     public static final String loescheGlossar = "lösche Glossar";
 
-    
+
     public static final String bezeichnung = "Bezeichnung";
     public static final String wert = "Wert";
+
+	public static final String laden = "Laden";
+
+	public static  final String loeschen = "Löschen";
+	public static final String speichern = "Speichern";
+	public static final String schliessen = "Schließen";
+
+	public static final String fuegeSimHinzu = "fuegeSimHinzu";
 
 
 }
