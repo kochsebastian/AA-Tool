@@ -4,12 +4,12 @@
 package control;
 
 import java.awt.event.ActionEvent;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import org.junit.Rule;
 
 import basis.Resources;
 import model.Model;

@@ -3,16 +3,16 @@
  */
 package importexporttests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
 import java.awt.event.ActionEvent;
 
 import javax.swing.JTextArea;
 
 import org.junit.Assert;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import basis.Resources;
 import control.SimControl;
@@ -22,7 +22,7 @@ import view.View;
  * @author SebastianKoch
  *
  */
-class ImportJUNIT {
+public class TestImport {
 	SimControl control;
 	View view;
 	ActionEvent ae ;
@@ -31,15 +31,15 @@ class ImportJUNIT {
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
 	}
 
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@BeforeEach
-	void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		control = new SimControl();
         view = View.getInstanz(control);
         control.setView(view);
@@ -57,11 +57,8 @@ class ImportJUNIT {
 		control.actionPerformed(ae);
 	}
 
-	/**
-	 * Test method for {@link xmlFramework.XMLParser#parseXML(java.io.File)}.
-	 */
 	@Test
-	final void testParseXML() {
+	public final void test() {
 		ae = new ActionEvent(view, i, Resources.importieren);
 		control.actionPerformed(ae);
 		System.out.println("");
