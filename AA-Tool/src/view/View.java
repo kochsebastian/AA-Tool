@@ -2,8 +2,9 @@ package view;
 
 
 import basis.Resources;
+
 import control.Control;
-import control.IController;
+import control.IControl;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -19,10 +20,10 @@ import javax.swing.table.DefaultTableModel;
 /**
  * @author SebastianKoch
  */
-public class View {
+public class View implements IView { 
 
     private static View view = null;
-    private static IController control;
+    private static IControl control;
     private static ModelViewConnector viewConnector;
     
     private JFrame hauptfenster = null;
@@ -54,7 +55,7 @@ public class View {
      * @param _control
      * @return
      */
-    public static View getInstanz(IController _control) {
+    public static View getInstanz(IControl _control) {
         //   aufwandsabschaetzung = _aufwandsabschaetzung;
     	
     	control = _control;
@@ -127,7 +128,7 @@ public class View {
 
 
         // Inhalte des Deckblatts
-        JTextArea titelblattTextField = new JTextArea(" ", 44, 76);
+        JTextArea titelblattTextField = new JTextArea(Resources.readme, 44, 76);
         titelblattJPanel.add(titelblattTextField);
 
 
@@ -177,10 +178,10 @@ public class View {
 
         // Erzeugung der Buttons der Menueleiste
         erstellen = new JButton(Resources.erstellen);
-        laden = new JButton("Laden");
-        speichern = new JButton("Speichern");
-        loeschen = new JButton("Löschen");
-        schliessen = new JButton("Schließen");
+        laden = new JButton(Resources.laden);
+        speichern = new JButton(Resources.speichern);
+        loeschen = new JButton(Resources.loeschen);
+        schliessen = new JButton(Resources.schliessen);
         exportieren = new JButton(Resources.exportieren);
         importieren = new JButton(Resources.importieren);
 
@@ -395,6 +396,9 @@ public class View {
     
     public void fuegeSimHinzu() {
         // fuegt in jedem Tab eine Simulierte tabelle hinzu
+        viewFunktion.fuegeSimHinzu();
+        viewDatum.fuegeSimHinzu();
+        viewGlossar.fuegeSimHinzu();
         viewFunktion.fuegeSimHinzu();
         viewDatum.fuegeSimHinzu();
         viewGlossar.fuegeSimHinzu();

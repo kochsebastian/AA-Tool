@@ -22,7 +22,6 @@ public class Model extends AModel {
         produkteinsatz = new Tab(Resources.produkteinsatz);
         produktfunktionen = new Tab(Resources.produktfunktionen);
         produktdaten = new Tab(Resources.produktdaten);
-       // qualitaetsanforderungen = new Tab(Resources.qualitaetsanforderungen);
         ergaenzungen = new Tab(Resources.ergaenzungen);
         glossar = new Tab(Resources.glossar);
         aufwandsschaetzung = new Tab(Resources.aufwandsabschaetzung);
@@ -51,10 +50,6 @@ public class Model extends AModel {
         ATab produktdatenInhalt = new Inhalt(Resources.produktdaten);
         produktdaten.addNext(produktdatenInhalt);
 
-        // Inhalte der Qualitaetsanforderungen erstellen
-     /*   ATab qualitaetsanfInhalt = new Inhalt(Resources.qualitaetsanforderungen);
-        qualitaetsanforderungen.addNext(qualitaetsanfInhalt);*/
-
         // Inhalte der Ergaenzungen erstellen
         ATab ergaenzungenInhalt = new Inhalt(Resources.ergaenzungen);
         ergaenzungen.addNext(ergaenzungenInhalt);
@@ -67,14 +62,13 @@ public class Model extends AModel {
         ATab aufwandsschaetzungInhalt = new Inhalt(Resources.aufwandsabschaetzung);
         aufwandsschaetzung.addNext(aufwandsschaetzungInhalt);
 
-        // Tab einhaengen
+        // Tabs verketten
         deckblatt.addNext(kundenbeschreibung);
         kundenbeschreibung.addNext(zielbestimmung);
         zielbestimmung.addNext(produkteinsatz);
         produkteinsatz.addNext(produktfunktionen);
         produktfunktionen.addNext(produktdaten);
         produktdaten.addNext(ergaenzungen);
-        //qualitaetsanforderungen.addNext(ergaenzungen);
         ergaenzungen.addNext(glossar);
         //  glossar.addNext(aufwandsschaetzung);
     }
@@ -96,7 +90,10 @@ public class Model extends AModel {
         this.deckblatt = deckblatt;
     }
 
-    // die gesamte GUI auslesen und alle Daten daraus in das Model schreiben
+    /**
+     *  die gesamte GUI auslesen und alle Daten daraus in das Model schreiben
+     * @param view
+     */
     public void schreibeModelAusView(View view) {
         ATab aktuellerTab = getRoot();
 

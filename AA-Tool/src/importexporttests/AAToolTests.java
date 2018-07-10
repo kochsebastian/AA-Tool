@@ -5,7 +5,9 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ TestImport.class })
-public class ImportExportTests {
+@SuiteClasses({ TestImportExport.class,
+				TestAufwandsabschaetzung.class,
+				TestSelbstoptimierung.class})
+public class AAToolTests {
 
 }

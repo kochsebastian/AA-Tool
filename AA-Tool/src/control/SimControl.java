@@ -21,7 +21,7 @@ import xmlFramework.IOConnector;
  * @author SebastianKoch
  *
  */
-public class SimControl implements IController {
+public class SimControl implements IControl {
 
 	private static File openFile = null;
     private static Boolean alreadySaved = false; // bei speichern gibt noch einen bug

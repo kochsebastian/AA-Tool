@@ -7,6 +7,9 @@ import java.util.ArrayList;
 
 
 /**
+ * Diese Klasse stellt die Verbindungsebene zwischen View und Model dar.
+ * Hier finden sich sowohl Funktionalitaeten die die View auf das Model zugreifen lassen koennen
+ * als auch andersherum
  * @author SebastianKoch
  */
 public class ModelViewConnector {
@@ -16,12 +19,14 @@ public class ModelViewConnector {
     static IViewModule viewGlossar;
     View view;
 
-    ModelViewConnector(View _view) {
+    public ModelViewConnector(View _view) {
         view = _view;
     }
 
 
-    // schreibe alle Daten aus dem Model in die Textfelder/Tabellen/Elemente des GUI
+    /**
+     *  schreibe alle Daten aus dem Model in die Textfelder/Tabellen/Elemente des GUI
+     */
     public void leseViewAusModel() {
         Model model = Model.getInstanz();
 
@@ -48,7 +53,11 @@ public class ModelViewConnector {
         }
     }
 
-    // gib je nach Tabnamen den passenden Inhalt davon aus dem GUI zurueck
+    /**
+     *  gib je nach Tabnamen den passenden Inhalt davon aus dem GUI zurueck
+     * @param name
+     * @return
+     */
     public String[][] getInhalt(String name) {
         if (name.matches("Deckblatt")) {
             return getDeckblattInhalt();
@@ -81,7 +90,11 @@ public class ModelViewConnector {
         return null;
     }
 
-    // setze je nach Tabnamen den passenden Inhalt des GUI
+    /**
+     *  setze je nach Tabnamen den passenden Inhalt des GUI
+     * @param name
+     * @param inhalt
+     */
     public void setInhalt(String name, String[][] inhalt) {
         if (name.matches("Deckblatt")) {
             setDeckblattInhalt(inhalt);
@@ -112,18 +125,29 @@ public class ModelViewConnector {
         }
     }
 
-    // jeweilige angepasste Implementierung des Rueckgebens und Setzens des Inhaltes aus dem/in das GUI
+    /**
+     *  jeweilige angepasste Implementierung des Rueckgebens und Setzens des Inhaltes aus dem/in das GUI
+     * @return
+     */
     private String[][] getDeckblattInhalt() {
         String tmpString[][] = new String[1][1];
         tmpString[0][0] = view.getDeckblattTextField().getText();
 
         return tmpString;
     }
-
+    
+    /**
+     * getter/setter
+     * @param text
+     */
     private void setDeckblattInhalt(String[][] text) {
         view.getDeckblattTextField().setText(text[0][0]);
     }
 
+    /**
+     * getter/setter
+     * 
+     */
     private String[][] getZielbestimmungInhalt() {
         String tmpString[][] = new String[1][1];
         tmpString[0][0] = view.getZielbestimmungTextField().getText();
@@ -131,10 +155,18 @@ public class ModelViewConnector {
         return tmpString;
     }
 
+    /**
+     * getter/setter
+     * @param text
+     */
     private void setZielbestimmungInhalt(String[][] text) {
         view.getZielbestimmungTextField().setText(text[0][0]);
     }
 
+    /**
+     * getter/setter
+     * 
+     */
     private String[][] getProdukteinsatzInhalt() {
         String tmpString[][] = new String[1][1];
         tmpString[0][0] = view.getProdukteinsatzTextField().getText();
@@ -142,10 +174,18 @@ public class ModelViewConnector {
         return tmpString;
     }
 
+    /**
+     * getter/setter
+     * @param text
+     */
     private void setProdukteinsatzInhalt(String[][] text) {
         view.getProdukteinsatzTextField().setText(text[0][0]);
     }
 
+    /**
+     * getter/setter
+     * 
+     */
     private String[][] getKundenbeschreibungInhalt() {
         String tmpString[][] = new String[1][1];
         tmpString[0][0] = view.getKundenbeschreibung().getText();
@@ -153,10 +193,18 @@ public class ModelViewConnector {
         return tmpString;
     }
 
+    /**
+     * getter/setter
+     * @param text
+     */
     private void setKundenbeschreibungInhalt(String[][] text) {
         view.getKundenbeschreibung().setText(text[0][0]);
     }
 
+    /**
+     * getter/setter
+     * 
+     */
     private String[][] getErgaenzungenInhalt() {
         String tmpString[][] = new String[1][1];
         tmpString[0][0] = view.getErgaenzungenTextField().getText();
@@ -164,11 +212,19 @@ public class ModelViewConnector {
         return tmpString;
     }
 
+    /**
+     * getter/setter
+     * @param text
+     */
     private void setErgaenzungenInhalt(String[][] text) {
         view.getErgaenzungenTextField().setText(text[0][0]);
     }
 
 
+    /**
+     * getter/setter
+     * 
+     */
     private String[][] getProduktfunktionenInhalt() {
 
         DefaultTableModel tableModel = (DefaultTableModel) viewFunktion.getJTable().getModel();

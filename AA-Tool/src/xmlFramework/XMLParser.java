@@ -24,8 +24,8 @@ public class XMLParser {
 
 
     /**
-     * kommt aus dem Internet
-     *
+     * liest XML datei in View
+     * 
      * @param zieldatei
      */
     protected static void parseXML(File zieldatei) {
@@ -109,7 +109,7 @@ public class XMLParser {
                 }
             }
         } catch (ParserConfigurationException | SAXException | IOException error) {
-            error.printStackTrace();
+        //    error.printStackTrace();
         }
     }
 }

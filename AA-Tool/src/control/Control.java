@@ -13,7 +13,7 @@ import java.io.File;
 /**
  * @author SebastianKoch
  */
-public class Control implements IController {
+public class Control implements IControl {
 
     private static File openFile = null;
     private static Boolean alreadySaved = false; // bei speichern gibt noch einen bug

@@ -26,27 +26,48 @@ public class IOConnector {
         XMLParser.parseXML(zieldatei);
     }
 
-
+    /**
+     * 
+     * @return LFBuffer
+     */
     public static ArrayList<String> getsLFBuffer() {
         return LFBuffer;
     }
 
+    /**
+     * 
+     * @param e
+     */
     public static void addLFBuffer(String e) {
         LFBuffer.add(e);
     }
 
+    /**
+     * 
+     */
     public static void resetLFBuffer() {
         LFBuffer.clear();
     }
 
+    /**
+     * 
+     * @return
+     */
     public static ArrayList<String> getsLDBuffer() {
         return LDBuffer;
     }
 
+    /**
+     * 
+     * @param e
+     */
     public static void addLDBuffer(String e) {
         LDBuffer.add(e);
     }
 
+    /**
+     * 
+     */
     public static void resetLDBuffer() {
         LDBuffer.clear();
     }

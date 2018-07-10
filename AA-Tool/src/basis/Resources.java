@@ -66,6 +66,21 @@ public class Resources {
 	public static final String schliessen = "Schließen";
 
 	public static final String fuegeSimHinzu = "fuegeSimHinzu";
+	
+	public static final String readme = "AA-Tool-Readme (Bei erstverwendung bitte Lesen)\n======================\n "
+			+ "Funktionserklärung:\n  Neues Projekt anlegen: öffnet ein neues Fenster, "
+			+ "mit einer neuen Anforderungsanalyse\n "
+			+ " Laden: Lässt Sie ein vorhandenes Projekt laden (Filetyp ist \"name\".xml\n"
+			+ "  XML-Importieren: Lässt Sie ein vom AA-Tool erstelltes XML-Dokument importieren\n"
+			+ "  XML-Exportieren: Lässt Sie ein XML-Dokument erstellen, dass alle Inhalte der Anforderungsanalyse enthält\n"
+			+ "  Schliessen: Schließt das aktuelle Projekt\n"
+			+ "  Speichern: Speichert Ihr aktuelles Projekt, wurde bereits eine Datei erstellt, oder geladen wird die aktuelle "
+			+ "Datei überschrieben\n"
+			+ "  Löschen: Löscht Ihre aktuelle Anforderungsanalyse (befindet sich eine verknüpfte Datei auf ihrem Spiecher "
+			+ "wird diese ebenfalls gelöscht\n\n"
+			+ "Gehen Sie bitte nicht davon aus dass das Programm automatisch speichert \n"
+			+ "Nur in Ausnahmefällen wird gefragt ob Sie Sicher sind mit dem susgewählten Punkt fortgefahren werden sollen \n"
+			+ "Bitte bestätigen sie alle Tabelleneintraege mit Enter/Return sonst kann es zu Speicherproblemen kommen";
 
 
 }

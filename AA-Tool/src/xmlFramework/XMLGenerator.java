@@ -24,8 +24,9 @@ import java.util.ArrayList;
 public class XMLGenerator {
 
     /**
-     * kommt aus dem Internet
-     *
+     * erstellt XML:
+     *	erstellt Datei
+     *	iteriert durch model und schreibt XML
      * @param zieldatei
      */
     protected static void generiereXML(File zieldatei) {
@@ -96,9 +97,11 @@ public class XMLGenerator {
             StreamResult result = new StreamResult(zieldatei);
             transformer.transform(source, result);
 
-        } catch (ParserConfigurationException pce) {
+        } 
+        catch (ParserConfigurationException pce) {
             pce.printStackTrace();
-        } catch (TransformerException tfe) {
+        } 
+        catch (TransformerException tfe) {
             tfe.printStackTrace();
         }
     }

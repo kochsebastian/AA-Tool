@@ -67,11 +67,11 @@ public class ViewProduktfunktion extends AViewTableModule implements IViewModule
 		LFcount += 10;
         Object[] tmp1 = {"/LF/", LFnummer};
         this.produktfunktionenJTableModel.addRow(tmp1);
-        Object[] tmp2 = {"   Funktion", ""};
+        Object[] tmp2 = {"   Funktion", "Testfunktion"};
         this.produktfunktionenJTableModel.addRow(tmp2);
-        Object[] tmp3 = {"   Beschreibung", ""};
+        Object[] tmp3 = {"   Beschreibung", "lalalla"};
         this.produktfunktionenJTableModel.addRow(tmp3);
-        Object[] tmp4 = {"   Akteur", ""};
+        Object[] tmp4 = {"   Akteur", "Max Mustermensch"};
         this.produktfunktionenJTableModel.addRow(tmp4);
         this.produktfunktionenJTableModel.fireTableDataChanged();
 	}

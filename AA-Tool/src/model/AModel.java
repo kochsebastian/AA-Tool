@@ -10,7 +10,6 @@ public abstract class AModel {
     ATab kundenbeschreibung;
     ATab produktfunktionen;
     ATab produktdaten;
-    //ATab qualitaetsanforderungen;
     ATab ergaenzungen;
     ATab glossar;
     ATab aufwandsschaetzung;

@@ -2,10 +2,8 @@ package view;
 
 import javax.swing.*;
 
-public interface IViewModule {
+public interface IViewModule extends UserSimulation {
     public void fuegeHinzu();
-    
-    public void fuegeSimHinzu();
 
     public void loesche();
 
