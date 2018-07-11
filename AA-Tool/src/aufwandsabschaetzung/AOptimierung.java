@@ -36,9 +36,9 @@ protected float i;
     }
     
     // gibt die Parameter der Optimierungsdatei neben dem Executable zurück
-    public static String[] getOpimierungsDatei() {
+    public static int[] getOpimierungsDatei() {
         int anzahlEInflussfaktoren = 0;
-        String[] einflussfaktor;
+        int[] einflussfaktor;
         
         File optimierungsDatei = new File("optimierung.txt");
        
@@ -49,16 +49,16 @@ protected float i;
 
             Scanner scanner = new Scanner(optimierungsDatei);
 
-            while (scanner.hasNext()) {
-                scanner.next();
+            while (scanner.hasNextInt()) {
+                scanner.nextInt();
                 anzahlEInflussfaktoren++;
             }
-            einflussfaktor = new String[anzahlEInflussfaktoren];
+            einflussfaktor = new int[anzahlEInflussfaktoren];
 
             scanner.close();
             scanner = new Scanner(optimierungsDatei);
             for(int i = 0; i < anzahlEInflussfaktoren; i++) {
-            	einflussfaktor[i] = scanner.next();
+            	einflussfaktor[i] = scanner.nextInt();
             }
 
             scanner.close();

@@ -90,6 +90,11 @@ public class Resources {
 		public static final String einflussDatenbestand = "Datenbestandskonvertierung (0-5)";
 		public static final String einflussAnpassbarkeit = "Anpassbarkeit (0-5)";
 		
+		public static final String[] alleEinflussfaktoren = {"Verflechtung mit anderen Anwendungssystemen",
+				"Dezentrale Daten, dezentrale Vertiefungen","Transaktionsrate", " ",
+				"Rechenoperationen","Kontrollverfahren","Ausnahmeregelung","Logik","Wiederverwendbarkeit",
+				"Datenbestandskonvertierung","Anpassbarkeit"};
+		
 		public static final String berechneFunctionpoints = "Functionpoints berechnen";
 		public static final String[] uebersicht = new String[]{"Kategorie", "Anzahl", "Komplexitaet", "Gewichtung", "Summe"};
 		public static final String einfach = "Einfach";

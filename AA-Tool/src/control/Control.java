@@ -149,9 +149,6 @@ public class Control implements IControl {
             importiere(openFile);
             ViewAufwandsabschaetzung.addProdukt();
         } else if (action.getActionCommand().equalsIgnoreCase("Functionpoints berechnen")) {
-        	/*if (ViewAufwandsabschaetzung.tabelleVollstaendig()) {
-        		functionpointsBerechnen();        		
-        	} */
         	ViewAufwandsabschaetzung.calculateFunctionPoint();
         }
         else if (action.getActionCommand().equalsIgnoreCase(Resources.fuegeProduktfunktionHinzu)) {
@@ -184,8 +181,13 @@ public class Control implements IControl {
         	AOptimierung.setOpimierungsDatei(ViewAufwandsabschaetzung.getTableEinflussfaktoren());
         }
         else if(action.getActionCommand().equalsIgnoreCase("Lade optimierte Einflussfaktoren einer letzten Aufwandsabschaetzung")) {
-        	String[] einflussfaktoren = AOptimierung.getOpimierungsDatei();
+        	int[] einflussfaktoren = AOptimierung.getOpimierungsDatei();
         	ViewAufwandsabschaetzung.setTableEinflussfaktoren(einflussfaktoren);
+        }
+        else if(action.getActionCommand().equalsIgnoreCase("Optimieren")) {
+        	if(ViewAufwandsabschaetzung.getZielErgebnis() != 0) {
+        		ViewAufwandsabschaetzung.optimieren(ViewAufwandsabschaetzung.getZielErgebnis(), ViewAufwandsabschaetzung.getE1(), ViewAufwandsabschaetzung.getEinflussfaktor());
+        	}
         }
 
     }

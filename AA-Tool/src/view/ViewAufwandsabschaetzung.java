@@ -48,7 +48,7 @@ public class ViewAufwandsabschaetzung extends JPanel {
     private static JButton resetSelbstoptimierung;
     private static JTextArea zielFunctionPoints;
     private static JTextArea zielEinflussfaktor;
-
+    
     public ViewAufwandsabschaetzung(ActionListener actionListener) {
         super();
         
@@ -188,13 +188,15 @@ public class ViewAufwandsabschaetzung extends JPanel {
         JTextArea ErklaerungOptimierung = new JTextArea("Sie haben die Mögichkeit das "
         		+ "Ergebnis der Aufwandsabschaetzung \n"
         		+ "zu optimieren, dazu waehlen Sie bitte einen "
-        		+ "bestehenden Einflussfaktor und das gewünschte Endergebnis");
+        		+ "bestehenden Einflussfaktor und das gewünschte Endergebnis\n"
+        		+ "Der gewünschte Wert kann nicht garantiert werden, unter Umständen sind mehrere"
+        		+ "Iterationen mit unterschiedlichen \n Einflussfaktoren notwendig");
         add(ErklaerungOptimierung);
         JPanel optimierungsPanel = new JPanel();
         
        
        
-        zielEinflussfaktor = new JTextArea("Einflussfaktor");
+        zielEinflussfaktor = new JTextArea("Einflussfaktor (Name ausgeschrieben)");
         optimierungsPanel.add(zielEinflussfaktor);
         zielFunctionPoints = new JTextArea("gewuenschtes Function-Point Ergebnis");
         optimierungsPanel.add(zielFunctionPoints);
@@ -362,10 +364,10 @@ public class ViewAufwandsabschaetzung extends JPanel {
     
     public static int getSumEinflussfak() {
     	int sum=0;
-    	for(int i = 0; i < 10; i++) {
+    	for(int i = 0; i < tableEinflussfaktoren.getRowCount(); i++) {
     		if(i == 3)
     			continue;
-    		sum = (int) tableEinflussfaktoren.getValueAt(i, 1);
+    		sum += (int) tableEinflussfaktoren.getValueAt(i, 1);
     	}
     	return sum;
     }
@@ -373,12 +375,12 @@ public class ViewAufwandsabschaetzung extends JPanel {
     public static void calculateFunctionPoint() {
     	tableUebersichtFunctionpoints.setValueAt(getSumEinflussfak(), 0, 2); 
     	anzahlEintragen();
-    	double a = (double)getSumEinflussfak()/(double)100 + (double)0.7;
-    	tableUebersichtFunctionpoints.setValueAt(a, 1, 2); 
-    	tableUebersichtFunctionpoints.setValueAt(
-    			(int) tableUebersichtFunctionpoints.getValueAt(0, 2)* (int) tableUebersicht.getValueAt(15, 4)
-    			,2,2
-    			); 
+    	double E3 = Math.round(((double)getSumEinflussfak()/(double)100 + (double)0.7) *100d)/100d;
+    	double E1 = (int) tableUebersicht.getValueAt(15, 4);
+    	tableUebersichtFunctionpoints.setValueAt(E3,1,2); 
+    	double ergebnis = Math.round(E3* E1*100d)/100d;
+    	tableUebersichtFunctionpoints.setValueAt(ergebnis,2,2); 
+    	
     	
     }
     
@@ -435,6 +437,7 @@ public class ViewAufwandsabschaetzung extends JPanel {
 	    for(int i = 0; i<=14;i++) {
 	    	summe += (int) tableUebersicht.getValueAt(i, 4);
 	    }
+	    
 	    tableUebersicht.setValueAt(summe, 15, 4);
 	    
 	    EI.resetCount();
@@ -515,26 +518,57 @@ public class ViewAufwandsabschaetzung extends JPanel {
 	}
 
 
-	public static JTable getTableEinflussfaktoren1() {
-		return ViewAufwandsabschaetzung.tableEinflussfaktoren;
-	}
-
-
-	public static void setTableEinflussfaktoren(String[] s) {
+	public static void setTableEinflussfaktoren(int[] faktor) {
 		
 		for(int i = 0; i< tableEinflussfaktoren.getRowCount();i++) {
 			if(i == 3) {
 				continue;
 			}
-			ViewAufwandsabschaetzung.tableEinflussfaktoren.setValueAt(s[i], i, 1);
+			ViewAufwandsabschaetzung.tableEinflussfaktoren.setValueAt(faktor[i], i, 1);
 		}
 			
-			
-		
-			
 	}
-
+	
+	public static double getZielErgebnis() {
+		double zielErgebnis;
+		String tmp = zielFunctionPoints.getText();
+		try {
+			zielErgebnis = Double.parseDouble(tmp);
+		}catch(NumberFormatException nfe) {
+			zielErgebnis = 0;
+		}
+		return zielErgebnis;
+	}
+	public static String getEinflussfaktor() {
+		
+		return zielEinflussfaktor.getText();
+		
+	}
     
+	public static void optimieren(double zielErgebnis, int E1, String einflussfaktor) {
+		double newEinflusssumme = ((zielErgebnis / E1) -0.7 )* 100 ;
+		double oldEinflusssumme = getSumEinflussfak();
+		double diff = newEinflusssumme - oldEinflusssumme;
+		int diff_int = (int) Math.round(diff);
+		for(int i = 0; i< tableEinflussfaktoren.getRowCount();i++) {
+			if(i == 3)
+				continue;
+			if(Resources.alleEinflussfaktoren[i].equals(einflussfaktor)){
+				tableEinflussfaktoren.setValueAt((int)tableEinflussfaktoren.getValueAt(i,1) + diff_int,i, 1);
+				if((int)tableEinflussfaktoren.getValueAt(i, 1)<0) {
+					tableEinflussfaktoren.setValueAt(0, i, 1);
+				}
+			}
+		}
+		countfunktionen();
+		countdaten();
+		calculateFunctionPoint();
+	}
+	
+	public static int getE1() {
+		return (int) tableUebersicht.getValueAt( 15, 4);
+	}
+	
     
 }  
  
