@@ -243,6 +243,8 @@ public class View implements IView {
         //Inhalt der Aufwandsabschaetzung
         ViewAufwandsabschaetzung aPanel = new ViewAufwandsabschaetzung(actionListener);
         aufwandsabschaetzungJPanel.add(aPanel);
+        JScrollPane aufwandsabschaetzungScrollPane = new JScrollPane(aufwandsabschaetzungJPanel,   ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
 
         // Inhalt der Prduktfunktionen erstellen
         viewFunktion = new ViewProduktfunktion(actionListener, produktfunktionenJPanel);
@@ -271,7 +273,7 @@ public class View implements IView {
      //   tabs.addTab(Resources.qualitaetsanforderungen, qualitaetsanforderungenJPanel);
         tabs.addTab(Resources.ergaenzungen, ergaenzungenJPanel);
         tabs.addTab(Resources.glossar, glossarJPanel);
-        tabs.addTab(Resources.aufwandsabschaetzung, aufwandsabschaetzungJPanel);
+        tabs.addTab(Resources.aufwandsabschaetzung, aufwandsabschaetzungScrollPane);
 
         // JTabbedPane dem Frame hinzufuegen        
         JPanel hauptfensterJPanel = new JPanel();

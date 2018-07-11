@@ -67,6 +67,45 @@ public class Resources {
 
 	public static final String fuegeSimHinzu = "fuegeSimHinzu";
 	
+	//Aufwandsabschätzung
+		public static final String ladeDaten = "Lade Daten";
+		
+		public static final String[] zuordnungProduktfunktionen = new String[]{"LF", "EI", "EO", "EQ"};
+		public static final String[] zuordnungProduktdaten = new String[]{"LD", "ELF", "ILF"};
+		public static final String[] komplexitaetLF = new String[]{"LF", "FTR", "DET"};
+		public static final String[] komplexitaetLD = new String[]{"LD", "RET", "DET"};
+		
+		public static final String[] einfluss = new String[]{};
+		
+		public static final String[] einflussfaktoren = new String[]{"Einflussfaktoren", ""};
+		public static final String einflussfaktorenVerflechtung = "Verflechtung mit anderen Anwendungssystemen (0-5)";
+		public static final String einflussfaktorenDezentral = "Dezentrale Daten, dezentrale Vertiefungen (0-5)";
+		public static final String einflussfaktorenTransaktionsrate = "Transaktionsrate (0-5)";
+		public static final String einflussfaktorenVerarbeitungslogistik = "Verarbeitungslogistik";
+		public static final String einflussRechenoperationen = "  a) Rechenoperationen (0-10)";
+		public static final String einflussKontrollverfahren = "  b) Kontrollverfahren (0-5)";
+		public static final String einflussAusnahmeregelung = "  c) Ausnahmeregelung (0-10)";
+		public static final String einflussLogik = "  d) Logik (0-5)";
+		public static final String einflussWiederverwendbarkeit = "Wiederverwendbarkeit (0-5)";
+		public static final String einflussDatenbestand = "Datenbestandskonvertierung (0-5)";
+		public static final String einflussAnpassbarkeit = "Anpassbarkeit (0-5)";
+		
+		public static final String berechneFunctionpoints = "Functionpoints berechnen";
+		public static final String[] uebersicht = new String[]{"Kategorie", "Anzahl", "Komplexitaet", "Gewichtung", "Summe"};
+		public static final String einfach = "Einfach";
+		public static final String mittel = "Mittel";
+		public static final String komplex = "Komplex";
+		public static final String[] summe = new String[]{"Summe", "", "", "E1", ""};
+		public static final String eingabe = "Eingabe (EI)";
+		public static final String ausgabe = "Ausgabe (EO)";
+		public static final String abfrage = "Abfrage (EQ)";
+		public static final String datenbestaende = "Datenbestaende";
+		public static final String referenzdaten = "Referenzdaten";
+		
+		public static final String[] summeEinflussfaktoren = new String[]{"Einflussfaktoren Summe", "= E2", ""};
+		public static final String[] faktorEinflussbewertung = new String[]{"Faktor Einflussbewertung", "E3 = E2 / 100 + 0,7", ""};
+		public static final String[] bewertungFunctionpoints = new String[]{"Bewertung Functionpoints", "E1 * E3", ""};
+	
 	public static final String readme = "AA-Tool-Readme (Bei erstverwendung bitte Lesen)\n======================\n "
 			+ "Funktionserklärung:\n  Neues Projekt anlegen: öffnet ein neues Fenster, "
 			+ "mit einer neuen Anforderungsanalyse\n "

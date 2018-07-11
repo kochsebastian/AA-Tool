@@ -5,20 +5,26 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import javax.swing.JTable;
+
 public abstract class AOptimierung {
 
 protected float i;
     
     // Optimierungsparameter als Datei neben das Executable schreiben
-    protected void setOpimierungsDatei(String[] paramater) {
+    public static void setOpimierungsDatei(JTable tableEinflussfaktoren) {
         File optimierungsDatei = new File("optimierung.txt");
 
         try{
             optimierungsDatei.createNewFile();
             FileWriter writer = new FileWriter(optimierungsDatei);
 
-            for (int i = 0; i < paramater.length; i++) {
-                writer.write(paramater[i]+" ");
+            for (int i = 0; i < tableEinflussfaktoren.getRowCount(); i++) {
+            	if(i == 3) {
+            		writer.write("0 ");
+            		continue;
+            	}
+                writer.write(tableEinflussfaktoren.getValueAt(i, 1)+" ");
             }
 
             writer.close();
@@ -30,9 +36,9 @@ protected float i;
     }
     
     // gibt die Parameter der Optimierungsdatei neben dem Executable zurück
-    protected String[] getOpimierungsDatei() {
-        int anzahlParamater = 0;
-        String[] paramater;
+    public static String[] getOpimierungsDatei() {
+        int anzahlEInflussfaktoren = 0;
+        String[] einflussfaktor;
         
         File optimierungsDatei = new File("optimierung.txt");
        
@@ -45,27 +51,21 @@ protected float i;
 
             while (scanner.hasNext()) {
                 scanner.next();
-                anzahlParamater++;
+                anzahlEInflussfaktoren++;
             }
-            paramater = new String[anzahlParamater];
+            einflussfaktor = new String[anzahlEInflussfaktoren];
 
             scanner.close();
             scanner = new Scanner(optimierungsDatei);
-            for(int i = 0; i < anzahlParamater; i++) {
-                  paramater[i] = scanner.next();
+            for(int i = 0; i < anzahlEInflussfaktoren; i++) {
+            	einflussfaktor[i] = scanner.next();
             }
 
             scanner.close();
-            return paramater;
+            return einflussfaktor;
         }
         catch(IOException e) {
             return null;
         }
     }  
-    
-    // casted eine Float Zhl zu einer Integer Zahl und rundet dabei 
-    protected int rundenKonvertierenInt(float p_zahl) {
-        return (int)((p_zahl)+0.5);
-    }
-
 }

@@ -10,6 +10,8 @@ import xmlFramework.IOConnector;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
+import aufwandsabschaetzung.AOptimierung;
+
 /**
  * @author SebastianKoch
  */
@@ -95,6 +97,10 @@ public class Control implements IControl {
         alreadySaved = false;
         openFile = null;
     }
+    
+    public void functionpointsBerechnen() {
+    	
+    }
 
 
     public void processViewAction(ActionEvent action) {
@@ -131,7 +137,7 @@ public class Control implements IControl {
                 view.closeWindow();
                 view.displayEmpty(this);
             }
-        } else if (action.getActionCommand().equalsIgnoreCase("Weiter Komplexität")) {
+        } else if (action.getActionCommand().equalsIgnoreCase("Lade Daten")) {
             if (!Control.getalreadySaved()) {
                 File datei = view.showSpeichernUnterDialog();
                 exportiere(datei);
@@ -142,10 +148,20 @@ public class Control implements IControl {
             IOConnector.resetLDBuffer();
             importiere(openFile);
             ViewAufwandsabschaetzung.addProdukt();
-        } else if (action.getActionCommand().equalsIgnoreCase(Resources.fuegeProduktfunktionHinzu)) {
-            view.fuegeFunktionHinzu();
-        	
-        } else if (action.getActionCommand().equalsIgnoreCase(Resources.loescheProduktfunktion)) {
+        } else if (action.getActionCommand().equalsIgnoreCase("Functionpoints berechnen")) {
+        	/*if (ViewAufwandsabschaetzung.tabelleVollstaendig()) {
+        		functionpointsBerechnen();        		
+        	} */
+        	ViewAufwandsabschaetzung.calculateFunctionPoint();
+        }
+        else if (action.getActionCommand().equalsIgnoreCase(Resources.fuegeProduktfunktionHinzu)) {
+        		view.fuegeFunktionHinzu();
+        }
+        else if (action.getActionCommand().equalsIgnoreCase("uebernehmen")) {
+            ViewAufwandsabschaetzung.countfunktionen();
+            ViewAufwandsabschaetzung.countdaten();
+        }  
+        else if (action.getActionCommand().equalsIgnoreCase(Resources.loescheProduktfunktion)) {
             view.loescheFunktion();
 
         } else if (action.getActionCommand().equalsIgnoreCase(Resources.fuegeProduktdatumHinzu)) {
@@ -163,6 +179,13 @@ public class Control implements IControl {
         }
         else if(action.getActionCommand().equalsIgnoreCase(Resources.fuegeSimHinzu)) {
         	view.fuegeSimHinzu();
+        }
+        else if(action.getActionCommand().equalsIgnoreCase("Speicher Slebstoptimierung")) {
+        	AOptimierung.setOpimierungsDatei(ViewAufwandsabschaetzung.getTableEinflussfaktoren());
+        }
+        else if(action.getActionCommand().equalsIgnoreCase("Lade optimierte Einflussfaktoren einer letzten Aufwandsabschaetzung")) {
+        	String[] einflussfaktoren = AOptimierung.getOpimierungsDatei();
+        	ViewAufwandsabschaetzung.setTableEinflussfaktoren(einflussfaktoren);
         }
 
     }

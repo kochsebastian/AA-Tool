@@ -10,6 +10,7 @@ public class IOConnector {
 
     private static ArrayList<String> LFBuffer = new ArrayList<String>();
     private static ArrayList<String> LDBuffer = new ArrayList<String>();
+    private static ArrayList<Integer> FunctionpointsBuffer = new ArrayList<Integer>();
 
 
     /**
@@ -70,5 +71,9 @@ public class IOConnector {
      */
     public static void resetLDBuffer() {
         LDBuffer.clear();
+    }
+    
+    public static ArrayList<Integer> getsFunctionpointsBuffer() {
+    	return FunctionpointsBuffer;
     }
 }
