@@ -1,31 +1,33 @@
 /**
  * 
  */
-package model;
+package platzhalter;
 
 /**
  * @author SebastianKoch
  *
  */
-public class ILF extends AELFILF {
+public class EQ extends AEx{
 	private static int countlow=0;
 	private static int countaverage=0;
 	private static int counthigh=0;
-	private static int gewichtunglow=7;
-	private static int gewichtungaverage=10;
-	private static int gewichtunghigh=15;
-	
-	public ILF(int ret, int det) {
-		super(ret, det);
+	private static int gewichtunglow=3;
+	private static int gewichtungaverage=4;
+	private static int gewichtunghigh=6;
+	/**
+	 * 
+	 */
+	public EQ(int ftr, int det) {
+		super(ftr,det);
 		if(getKomplexitaet().equals("low"))
 			countlow++;
 		else if(getKomplexitaet().equals("average"))
 			countaverage++;
 		else
 			counthigh ++;
+		
 	}
 	
-
 	public static int getGewichtunglow() {
 		return gewichtunglow;
 	}
@@ -35,7 +37,6 @@ public class ILF extends AELFILF {
 	public static int getGewichtungHigh() {
 		return gewichtunghigh;
 	}
-	
 	/**
 	 * @return the countlow
 	 */
@@ -57,16 +58,10 @@ public class ILF extends AELFILF {
 		return counthigh;
 	}
 	
-	
 	public static void resetCount() {
-		ILF.countlow = 0;
-		ILF.countaverage = 0;
-		ILF.counthigh = 0;
+		EQ.countlow = 0;
+		EQ.countaverage = 0;
+		EQ.counthigh = 0;
 	}
-
-
-
-
-	
 
 }

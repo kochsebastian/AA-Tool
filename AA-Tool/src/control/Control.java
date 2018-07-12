@@ -4,13 +4,13 @@ import basis.Resources;
 import model.Model;
 import view.UserSimulation;
 import view.View;
-import view.ViewAufwandsabschaetzung;
 import xmlFramework.IOConnector;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
 
 import aufwandsabschaetzung.AOptimierung;
+import aufwandsabschaetzung.ViewAufwandsabschaetzung;
 
 /**
  * @author SebastianKoch

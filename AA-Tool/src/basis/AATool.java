@@ -7,7 +7,7 @@ import view.View;
 /**
  * @author SebastianKoch
  */
-public class Main {
+public class AATool {
 
 
     /**

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package model;
+package platzhalter;
 
 /**
  * @author SebastianKoch

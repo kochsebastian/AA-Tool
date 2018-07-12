@@ -1,7 +1,7 @@
 /**
  * 
  */
-package importexporttests;
+package tests;
 
 import static org.junit.Assert.*;
 
@@ -13,7 +13,7 @@ import org.junit.Test;
  * @author SebastianKoch
  *
  */
-public class TestSelbstoptimierung {
+public class TestAufwandsabschaetzung {
 
 	/**
 	 * @throws java.lang.Exception

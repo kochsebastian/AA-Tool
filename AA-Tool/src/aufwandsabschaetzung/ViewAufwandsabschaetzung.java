@@ -1,4 +1,4 @@
-package view;
+package aufwandsabschaetzung;
 
 
 
@@ -13,17 +13,17 @@ import javax.swing.table.DefaultTableModel;
 
 
 import basis.Resources;
-import model.EI;
-import model.ELF;
-import model.EO;
-import model.EQ;
-import model.ILF;
+import platzhalter.EI;
+import platzhalter.ELF;
+import platzhalter.EO;
+import platzhalter.EQ;
+import platzhalter.ILF;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class ViewAufwandsabschaetzung extends JPanel {
+public class ViewAufwandsabschaetzung extends JPanel implements IAufwandsabschaetzung{
 
     private static JTable tableProduktfunktionen;
     private static JTable tableProduktdaten;
