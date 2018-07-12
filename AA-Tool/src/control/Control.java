@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 
 import aufwandsabschaetzung.AOptimierung;
-import aufwandsabschaetzung.ViewAufwandsabschaetzung;
+import aufwandsabschaetzung.ViewFunctionPoint;
 
 /**
  * @author SebastianKoch
@@ -110,7 +110,7 @@ public class Control implements IControl {
             view.displayFull(this);
         } else if (action.getActionCommand().equalsIgnoreCase(Resources.exportieren)) {
 
-            File datei = view.showSpeichernUnterDialog();
+            File datei = view.showExportierenDialog();
             exportiere(datei);
 
         } else if (action.getActionCommand().equalsIgnoreCase(Resources.importieren) ||
@@ -147,16 +147,16 @@ public class Control implements IControl {
             IOConnector.resetLFBuffer();
             IOConnector.resetLDBuffer();
             importiere(openFile);
-            ViewAufwandsabschaetzung.addProdukt();
+            ViewFunctionPoint.addProdukt();
         } else if (action.getActionCommand().equalsIgnoreCase("Functionpoints berechnen")) {
-        	ViewAufwandsabschaetzung.calculateFunctionPoint();
+        	ViewFunctionPoint.calculateFunctionPoint();
         }
         else if (action.getActionCommand().equalsIgnoreCase(Resources.fuegeProduktfunktionHinzu)) {
         		view.fuegeFunktionHinzu();
         }
         else if (action.getActionCommand().equalsIgnoreCase("uebernehmen")) {
-            ViewAufwandsabschaetzung.countfunktionen();
-            ViewAufwandsabschaetzung.countdaten();
+            ViewFunctionPoint.countfunktionen();
+            ViewFunctionPoint.countdaten();
         }  
         else if (action.getActionCommand().equalsIgnoreCase(Resources.loescheProduktfunktion)) {
             view.loescheFunktion();
@@ -177,16 +177,16 @@ public class Control implements IControl {
         else if(action.getActionCommand().equalsIgnoreCase(Resources.fuegeSimHinzu)) {
         	view.fuegeSimHinzu();
         }
-        else if(action.getActionCommand().equalsIgnoreCase("Speicher Slebstoptimierung")) {
-        	AOptimierung.setOpimierungsDatei(ViewAufwandsabschaetzung.getTableEinflussfaktoren());
+        else if(action.getActionCommand().equalsIgnoreCase(Resources.speicherOptimierung)) {
+        	AOptimierung.setOpimierungsDatei(ViewFunctionPoint.getTableEinflussfaktoren());
         }
         else if(action.getActionCommand().equalsIgnoreCase("Lade optimierte Einflussfaktoren einer letzten Aufwandsabschaetzung")) {
         	int[] einflussfaktoren = AOptimierung.getOpimierungsDatei();
-        	ViewAufwandsabschaetzung.setTableEinflussfaktoren(einflussfaktoren);
+        	ViewFunctionPoint.setTableEinflussfaktoren(einflussfaktoren);
         }
         else if(action.getActionCommand().equalsIgnoreCase("Optimieren")) {
-        	if(ViewAufwandsabschaetzung.getZielErgebnis() != 0) {
-        		ViewAufwandsabschaetzung.optimieren(ViewAufwandsabschaetzung.getZielErgebnis(), ViewAufwandsabschaetzung.getE1(), ViewAufwandsabschaetzung.getEinflussfaktor());
+        	if(ViewFunctionPoint.getZielErgebnis() != 0) {
+        		ViewFunctionPoint.optimieren(ViewFunctionPoint.getZielErgebnis(), ViewFunctionPoint.getE1(), ViewFunctionPoint.getEinflussfaktor());
         	}
         }
 

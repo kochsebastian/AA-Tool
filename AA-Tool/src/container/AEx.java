@@ -1,7 +1,7 @@
 /**
  * 
  */
-package platzhalter;
+package container;
 
 /**
  * @author SebastianKoch

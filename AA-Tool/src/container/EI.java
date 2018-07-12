@@ -1,23 +1,24 @@
 /**
  * 
  */
-package platzhalter;
+package container;
 
 /**
  * @author SebastianKoch
  *
  */
-public class EQ extends AEx{
+public class EI extends AEx{
 	private static int countlow=0;
 	private static int countaverage=0;
 	private static int counthigh=0;
 	private static int gewichtunglow=3;
 	private static int gewichtungaverage=4;
 	private static int gewichtunghigh=6;
+	
 	/**
 	 * 
 	 */
-	public EQ(int ftr, int det) {
+	public EI(int ftr, int det) {
 		super(ftr,det);
 		if(getKomplexitaet().equals("low"))
 			countlow++;
@@ -27,7 +28,6 @@ public class EQ extends AEx{
 			counthigh ++;
 		
 	}
-	
 	public static int getGewichtunglow() {
 		return gewichtunglow;
 	}
@@ -37,6 +37,7 @@ public class EQ extends AEx{
 	public static int getGewichtungHigh() {
 		return gewichtunghigh;
 	}
+	
 	/**
 	 * @return the countlow
 	 */
@@ -58,10 +59,14 @@ public class EQ extends AEx{
 		return counthigh;
 	}
 	
+	
 	public static void resetCount() {
-		EQ.countlow = 0;
-		EQ.countaverage = 0;
-		EQ.counthigh = 0;
+		EI.countlow = 0;
+		EI.countaverage = 0;
+		EI.counthigh = 0;
 	}
-
+	
+	
+	
+	
 }

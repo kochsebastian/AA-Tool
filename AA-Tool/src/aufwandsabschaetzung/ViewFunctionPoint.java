@@ -1,7 +1,5 @@
 package aufwandsabschaetzung;
 
-
-
 /*
  * TableSelectionDemo.java requires no other files.
  */
@@ -11,19 +9,18 @@ import xmlFramework.IOConnector;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-
 import basis.Resources;
-import platzhalter.EI;
-import platzhalter.ELF;
-import platzhalter.EO;
-import platzhalter.EQ;
-import platzhalter.ILF;
+import container.EI;
+import container.ELF;
+import container.EO;
+import container.EQ;
+import container.ILF;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class ViewAufwandsabschaetzung extends JPanel implements IAufwandsabschaetzung{
+public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungView{
 
     private static JTable tableProduktfunktionen;
     private static JTable tableProduktdaten;
@@ -49,7 +46,7 @@ public class ViewAufwandsabschaetzung extends JPanel implements IAufwandsabschae
     private static JTextArea zielFunctionPoints;
     private static JTextArea zielEinflussfaktor;
     
-    public ViewAufwandsabschaetzung(ActionListener actionListener) {
+    public ViewFunctionPoint(ActionListener actionListener) {
         super();
         
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -191,11 +188,10 @@ public class ViewAufwandsabschaetzung extends JPanel implements IAufwandsabschae
         		+ "bestehenden Einflussfaktor und das gewünschte Endergebnis\n"
         		+ "Der gewünschte Wert kann nicht garantiert werden, unter Umständen sind mehrere"
         		+ "Iterationen mit unterschiedlichen \n Einflussfaktoren notwendig");
+        ErklaerungOptimierung.setEditable(false);
         add(ErklaerungOptimierung);
-        JPanel optimierungsPanel = new JPanel();
         
-       
-       
+        JPanel optimierungsPanel = new JPanel();
         zielEinflussfaktor = new JTextArea("Einflussfaktor (Name ausgeschrieben)");
         optimierungsPanel.add(zielEinflussfaktor);
         zielFunctionPoints = new JTextArea("gewuenschtes Function-Point Ergebnis");
@@ -207,6 +203,11 @@ public class ViewAufwandsabschaetzung extends JPanel implements IAufwandsabschae
         optimieren.addActionListener(actionListener);
         add(optimieren);
         
+        JTextArea ErklaerungOptimierungProjekt = new JTextArea("Pro Projekt kann es nur eine optimierungsdatei geben, \n"
+        		+ "wollen Sie mehere Optimierungsdateien speichern,\n müssen Sie sich die Optimierungsdatei lokal kopieren");
+        ErklaerungOptimierungProjekt.setEditable(false);
+        add(ErklaerungOptimierungProjekt);
+        
         //Selbstoptimierte Nachkalkulation
         //laden
         ladeSelbstoptimierung = new JButton("Lade optimierte Einflussfaktoren einer letzten Aufwandsabschaetzung");
@@ -214,7 +215,7 @@ public class ViewAufwandsabschaetzung extends JPanel implements IAufwandsabschae
         add(ladeSelbstoptimierung);
         
         //speichern
-        speicherSelbstoptimierung = new JButton("Speicher Slebstoptimierung");
+        speicherSelbstoptimierung = new JButton(Resources.speicherOptimierung);
         speicherSelbstoptimierung.addActionListener(actionListener);
         add(speicherSelbstoptimierung);
         
@@ -514,7 +515,7 @@ public class ViewAufwandsabschaetzung extends JPanel implements IAufwandsabschae
 	 * @param tableEinflussfaktoren the tableEinflussfaktoren to set
 	 */
 	public static void setTableEinflussfaktoren(JTable tableEinflussfaktoren) {
-		ViewAufwandsabschaetzung.tableEinflussfaktoren = tableEinflussfaktoren;
+		ViewFunctionPoint.tableEinflussfaktoren = tableEinflussfaktoren;
 	}
 
 
@@ -524,7 +525,7 @@ public class ViewAufwandsabschaetzung extends JPanel implements IAufwandsabschae
 			if(i == 3) {
 				continue;
 			}
-			ViewAufwandsabschaetzung.tableEinflussfaktoren.setValueAt(faktor[i], i, 1);
+			ViewFunctionPoint.tableEinflussfaktoren.setValueAt(faktor[i], i, 1);
 		}
 			
 	}

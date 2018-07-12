@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import aufwandsabschaetzung.ViewAufwandsabschaetzung;
+import aufwandsabschaetzung.ViewFunctionPoint;
 import basis.Resources;
 import model.Model;
 import view.View;

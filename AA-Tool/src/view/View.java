@@ -13,9 +13,8 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 
-import aufwandsabschaetzung.ViewAufwandsabschaetzung;
+import aufwandsabschaetzung.AufwandsabschaetzungFactory;
 
 
 
@@ -58,8 +57,6 @@ public class View implements IView {
      * @return
      */
     public static View getInstanz(IControl _control) {
-        //   aufwandsabschaetzung = _aufwandsabschaetzung;
-    	
     	control = _control;
         if (view == null) {
             view = new View();
@@ -138,7 +135,7 @@ public class View implements IView {
         JTabbedPane tabs = new JTabbedPane(JTabbedPane.LEFT, JTabbedPane.SCROLL_TAB_LAYOUT);
 
         // Registerkarten diesem hinzugefuegen
-        tabs.addTab("                           ", titelblattJPanel);
+        tabs.addTab("Readme                ", titelblattJPanel);
 
 
         // JTabbedPane dem Frame hinzufuegen        
@@ -243,10 +240,10 @@ public class View implements IView {
         ergaenzungenJPanel.add(ergaenzungenTextField);
 
         //Inhalt der Aufwandsabschaetzung
-        ViewAufwandsabschaetzung aPanel = new ViewAufwandsabschaetzung(actionListener);
-        aufwandsabschaetzungJPanel.add(aPanel);
-        JScrollPane aufwandsabschaetzungScrollPane = new JScrollPane(aufwandsabschaetzungJPanel,   ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-
+        AufwandsabschaetzungFactory aF = new AufwandsabschaetzungFactory();
+        aufwandsabschaetzungJPanel.add( (Component) aF.createAufwandsabschaetzungView("FunctionPointView",actionListener));
+        JScrollPane aufwandsabschaetzungScrollPane = new JScrollPane(aufwandsabschaetzungJPanel,   
+        		ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         // Inhalt der Prduktfunktionen erstellen
         viewFunktion = new ViewProduktfunktion(actionListener, produktfunktionenJPanel);
@@ -268,11 +265,8 @@ public class View implements IView {
         tabs.addTab(Resources.kundenBeschreibung, kundenbeschreibungPanel);
         tabs.addTab(Resources.zielbestimmung, zielbestimmungJPanel);
         tabs.addTab(Resources.produkteinsatz, produkteinsatzJPanel);
-
         tabs.addTab(Resources.produktfunktionen, produktfunktionenJPanel);
-        tabs.addTab(Resources.produktdaten, produktdatenJPanel);
-
-     //   tabs.addTab(Resources.qualitaetsanforderungen, qualitaetsanforderungenJPanel);
+        tabs.addTab(Resources.produktdaten, produktdatenJPanel); 
         tabs.addTab(Resources.ergaenzungen, ergaenzungenJPanel);
         tabs.addTab(Resources.glossar, glossarJPanel);
         tabs.addTab(Resources.aufwandsabschaetzung, aufwandsabschaetzungScrollPane);
@@ -324,7 +318,7 @@ public class View implements IView {
     }
 
 
-    private File showExportierenDialog() {
+    public File showExportierenDialog() {
         // JFileChooser-Objekt erstellen
         JFileChooser selektor = new JFileChooser();
         // Dialog zum Oeffnen von Dateien anzeigen
