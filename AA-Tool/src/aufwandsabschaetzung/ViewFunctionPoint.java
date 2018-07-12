@@ -51,6 +51,9 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
         
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         
+        JTextArea ErklaerungLaden = new JTextArea("Um die Daten der Anforderungsanalyse in der Aufwandsabschaetzung zu repräsentieren "
+        		+ "muss zuerst,\n die Anforderungsanalyse exportiert werden, danach können die Daten geladen werden");
+        add(ErklaerungLaden);
         ladeDaten = new JButton(Resources.ladeDaten);
         ladeDaten.addActionListener(actionListener);
         add(ladeDaten);
