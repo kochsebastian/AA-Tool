@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import aufwandsabschaetzung.AOptimierung;
 import aufwandsabschaetzung.ViewFunctionPoint;
 import basis.Resources;
 import model.Model;
@@ -129,19 +130,19 @@ public class SimControl implements IControl {
             view.loescheFunktion();
 
         }else if (action.getActionCommand().equalsIgnoreCase(Resources.ladeDaten)) {
-        	File dir = new File("test");
-    		dir.mkdirs();
-    		File tmp = new File(dir, "testxml.xml");
-    		try {
-				tmp.createNewFile();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+        	
             IOConnector.resetLFBuffer();
             IOConnector.resetLDBuffer();
             importiere(openFile);
             ViewFunctionPoint.addProdukt();
+        } else if (action.getActionCommand().equalsIgnoreCase("Functionpoints berechnen")) {
+        	ViewFunctionPoint.countfunktionen();
+            ViewFunctionPoint.countdaten();
+        	ViewFunctionPoint.calculateFunctionPoint();
+        }
+        else if(action.getActionCommand().equalsIgnoreCase("Lade optimierte Einflussfaktoren einer letzten Aufwandsabschaetzung")) {
+        	int[] einflussfaktoren = AOptimierung.getOpimierungsDatei();
+        	ViewFunctionPoint.setTableEinflussfaktoren(einflussfaktoren);
         }
 
     }

@@ -377,12 +377,12 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
 	    tableUebersicht.setValueAt(EQ.getCountlow(), 6, 1);
 	    tableUebersicht.setValueAt(EQ.getCountaverage(), 7, 1);
 	    tableUebersicht.setValueAt(EQ.getCounthigh(), 8, 1);
-	    tableUebersicht.setValueAt(ILF.getCounthigh(), 9, 1);
-	    tableUebersicht.setValueAt(ILF.getCountlow(), 10, 1);
-	    tableUebersicht.setValueAt(ILF.getCountaverage(), 11, 1);
-	    tableUebersicht.setValueAt(ELF.getCounthigh(), 12, 1);
-	    tableUebersicht.setValueAt(ELF.getCountlow(), 13, 1);
-	    tableUebersicht.setValueAt(ELF.getCountaverage(), 14, 1);
+	    tableUebersicht.setValueAt(ILF.getCountlow(), 9, 1);
+	    tableUebersicht.setValueAt(ILF.getCountaverage(), 10, 1);
+	    tableUebersicht.setValueAt(ILF.getCounthigh(), 11, 1);
+	    tableUebersicht.setValueAt(ELF.getCountlow(), 12, 1);
+	    tableUebersicht.setValueAt(ELF.getCountaverage(), 13, 1);
+	    tableUebersicht.setValueAt(ELF.getCounthigh(), 14, 1);
 	    
 	    tableUebersicht.setValueAt(EI.getGewichtunglow(),0,3);
 	    tableUebersicht.setValueAt(EI.getGewichtungAverage(),1,3);

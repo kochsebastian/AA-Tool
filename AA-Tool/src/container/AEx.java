@@ -21,7 +21,7 @@ public abstract class AEx {
 		this.det = det;
 		if((ftr <= 1 && det <= 15) || (ftr <= 2 && det <= 4)) 
 			komplexitaet = "low";
-		else if((ftr <= 1 && det <= 15) || (ftr == 2 && det <= 4) 
+		else if((ftr <= 1 && det > 15) || (ftr == 2 && det <=15) 
 				|| (ftr <= 1 && det > 15))
 			komplexitaet = "average";
 		else
