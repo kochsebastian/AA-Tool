@@ -1,6 +1,7 @@
 package aufwandsabschaetzung;
 
-public class AufwandabschaetzungModel {
+@SuppressWarnings("serial")
+public class AufwandabschaetzungModel extends FunctionPointAnalyse{
 
 	public AufwandabschaetzungModel() {
 		// TODO Auto-generated constructor stub

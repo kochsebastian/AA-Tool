@@ -6,6 +6,7 @@ package aufwandsabschaetzung;
 
 import xmlFramework.IOConnector;
 
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,11 +21,11 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+@SuppressWarnings("serial")
 public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungView{
-
-    private static JTable tableProduktfunktionen;
-    private static JTable tableProduktdaten;
-    private static JTable tableKomplexitaetLF;
+	private static JTable tableProduktfunktionen;
+	private static JTable tableProduktdaten;
+	private static JTable tableKomplexitaetLF;
     private static JTable tableKomplexitaetLD;
     private static JTable tableEinflussfaktoren;
     private static JTable tableUebersicht;
@@ -37,7 +38,6 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
     private static DefaultTableModel dtmKomplexitaetLD;
     private static DefaultTableModel dtmEinflussfaktoren;
     private static JButton ladeDaten;
-    private static JButton uebernehmen;
     private static JButton weiter;
     private static JButton optimieren;
     private static JButton ladeSelbstoptimierung;
@@ -45,7 +45,10 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
     private static JButton resetSelbstoptimierung;
     private static JTextArea zielFunctionPoints;
     private static JTextArea zielEinflussfaktor;
-    
+    private static ArrayList<EI> ei = new ArrayList<EI>();
+    private static ArrayList<EQ> eq = new ArrayList<EQ>();
+    private static ArrayList<ILF> ilf = new ArrayList<ILF>();
+    private static ArrayList<ELF> elf = new ArrayList<ELF>();
     public ViewFunctionPoint(ActionListener actionListener) {
         super();
         
@@ -108,10 +111,6 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
         tableKomplexitaetLD.setPreferredScrollableViewportSize(new Dimension(600, 80));
         tableKomplexitaetLD.setFillsViewportHeight(true);      
         add(new JScrollPane(tableKomplexitaetLD));
-        
-        uebernehmen = new JButton("uebernehmen");
-        uebernehmen.addActionListener(actionListener);
-        add(uebernehmen);
         
         //Einflussfaktoren Tabelle
         tableEinflussfaktoren = new JTable();
@@ -231,37 +230,10 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
     
     
     static ArrayList<EO> eo = new ArrayList<EO>();
-    static ArrayList<EI> ei = new ArrayList<EI>();
-    static ArrayList<EQ> eq = new ArrayList<EQ>();
-    static ArrayList<ILF> ilf = new ArrayList<ILF>();
-    static ArrayList<ELF> elf = new ArrayList<ELF>();
     
     
-    class MyTableModel extends DefaultTableModel {   
-
-        public MyTableModel(Object[] strings, int i) {
-			super(strings, i);
-		}
-
-        /*
-         * dafür da, dass Checkboxen statt Text (True/False) da steht
-         */
-    	@Override
-        public Class getColumnClass(int c) {
-            return getValueAt(0, c).getClass();
-        }
-
-        /*
-         * Block the first column to edit
-         */
-        public boolean isCellEditable(int row, int col) {
-            if (col < 1) {
-                return false;
-            } else {
-                return true;
-            }
-        }
-    }
+    
+    
     
     /**
      * Fuegt Produktdaten, -funktionen in die entsprechenden Tabellen hinzu
@@ -276,6 +248,12 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
     	}
     	while (dtmLD.getRowCount() > 0){
     		dtmLD.removeRow(0);
+    	}
+    	while (dtmKomplexitaetLF.getRowCount() > 0){
+    		dtmKomplexitaetLF.removeRow(0);
+    	}
+    	while (dtmKomplexitaetLD.getRowCount() > 0){
+    		dtmKomplexitaetLD.removeRow(0);
     	}
     	
     	for(int i = 0; i < laengeLF; i++){
@@ -571,6 +549,160 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
 	
 	public static int getE1() {
 		return (int) tableUebersicht.getValueAt( 15, 4);
+	}
+
+	/**
+	 * @return the tableProduktfunktionen
+	 */
+	public static JTable getTableProduktfunktionen() {
+		return tableProduktfunktionen;
+	}
+
+	/**
+	 * @param tableProduktfunktionen the tableProduktfunktionen to set
+	 */
+	public static void setTableProduktfunktionen(JTable tableProduktfunktionen) {
+		ViewFunctionPoint.tableProduktfunktionen = tableProduktfunktionen;
+	}
+
+	/**
+	 * @return the tableProduktdaten
+	 */
+	public static JTable getTableProduktdaten() {
+		return tableProduktdaten;
+	}
+
+	/**
+	 * @param tableProduktdaten the tableProduktdaten to set
+	 */
+	public static void setTableProduktdaten(JTable tableProduktdaten) {
+		ViewFunctionPoint.tableProduktdaten = tableProduktdaten;
+	}
+
+	/**
+	 * @return the tableKomplexitaetLF
+	 */
+	public static JTable getTableKomplexitaetLF() {
+		return tableKomplexitaetLF;
+	}
+
+	/**
+	 * @param tableKomplexitaetLF the tableKomplexitaetLF to set
+	 */
+	public static void setTableKomplexitaetLF(JTable tableKomplexitaetLF) {
+		ViewFunctionPoint.tableKomplexitaetLF = tableKomplexitaetLF;
+	}
+
+	/**
+	 * @return the tableKomplexitaetLD
+	 */
+	public static JTable getTableKomplexitaetLD() {
+		return tableKomplexitaetLD;
+	}
+
+	/**
+	 * @param tableKomplexitaetLD the tableKomplexitaetLD to set
+	 */
+	public static void setTableKomplexitaetLD(JTable tableKomplexitaetLD) {
+		ViewFunctionPoint.tableKomplexitaetLD = tableKomplexitaetLD;
+	}
+
+	/**
+	 * @return the tableUebersicht
+	 */
+	public static JTable getTableUebersicht() {
+		return tableUebersicht;
+	}
+
+	/**
+	 * @param tableUebersicht the tableUebersicht to set
+	 */
+	public static void setTableUebersicht(JTable tableUebersicht) {
+		ViewFunctionPoint.tableUebersicht = tableUebersicht;
+	}
+
+	/**
+	 * @return the tableUebersichtFunctionpoints
+	 */
+	public static JTable getTableUebersichtFunctionpoints() {
+		return tableUebersichtFunctionpoints;
+	}
+
+	/**
+	 * @param tableUebersichtFunctionpoints the tableUebersichtFunctionpoints to set
+	 */
+	public static void setTableUebersichtFunctionpoints(JTable tableUebersichtFunctionpoints) {
+		ViewFunctionPoint.tableUebersichtFunctionpoints = tableUebersichtFunctionpoints;
+	}
+
+	/**
+	 * @return the ei
+	 */
+	public static ArrayList<EI> getEi() {
+		return ei;
+	}
+
+	/**
+	 * @param ei the ei to set
+	 */
+	public static void setEi(ArrayList<EI> ei) {
+		ViewFunctionPoint.ei = ei;
+	}
+
+	/**
+	 * @return the eq
+	 */
+	public static ArrayList<EQ> getEq() {
+		return eq;
+	}
+
+	/**
+	 * @param eq the eq to set
+	 */
+	public static void setEq(ArrayList<EQ> eq) {
+		ViewFunctionPoint.eq = eq;
+	}
+
+	/**
+	 * @return the ilf
+	 */
+	public static ArrayList<ILF> getIlf() {
+		return ilf;
+	}
+
+	/**
+	 * @param ilf the ilf to set
+	 */
+	public static void setIlf(ArrayList<ILF> ilf) {
+		ViewFunctionPoint.ilf = ilf;
+	}
+
+	/**
+	 * @return the elf
+	 */
+	public static ArrayList<ELF> getElf() {
+		return elf;
+	}
+
+	/**
+	 * @param elf the elf to set
+	 */
+	public static void setElf(ArrayList<ELF> elf) {
+		ViewFunctionPoint.elf = elf;
+	}
+
+	/**
+	 * @return the eo
+	 */
+	public static ArrayList<EO> getEo() {
+		return eo;
+	}
+
+	/**
+	 * @param eo the eo to set
+	 */
+	public static void setEo(ArrayList<EO> eo) {
+		ViewFunctionPoint.eo = eo;
 	}
 	
     

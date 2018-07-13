@@ -166,7 +166,7 @@ public class View implements IView {
                     File datei = showSpeichernUnterDialog();
                     if (datei != null) {
                         ((Control) control).exportiere(datei);
-                        System.out.println("Call: control.exportiere(datei);");
+                        
                     }
                     System.exit(0);
                 } else {

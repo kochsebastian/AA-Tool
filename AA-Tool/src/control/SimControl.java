@@ -122,6 +122,27 @@ public class SimControl implements IControl {
         else if(action.getActionCommand().equalsIgnoreCase(Resources.fuegeSimHinzu)) {
         	view.fuegeSimHinzu();
         }
+        else if (action.getActionCommand().equalsIgnoreCase(Resources.loescheProduktdatum)) {
+            view.loescheDatum();
+
+        }else if (action.getActionCommand().equalsIgnoreCase(Resources.loescheProduktfunktion)) {
+            view.loescheFunktion();
+
+        }else if (action.getActionCommand().equalsIgnoreCase(Resources.ladeDaten)) {
+        	File dir = new File("test");
+    		dir.mkdirs();
+    		File tmp = new File(dir, "testxml.xml");
+    		try {
+				tmp.createNewFile();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            IOConnector.resetLFBuffer();
+            IOConnector.resetLDBuffer();
+            importiere(openFile);
+            ViewFunctionPoint.addProdukt();
+        }
 
     }
 

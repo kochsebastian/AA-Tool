@@ -66,9 +66,7 @@ public class Control implements IControl {
             view.fuegeDatumHinzu();
             view.fuegeGlossarHinzu();
         }
-       /* for (int i = 0; i < 5; i++) {
-            view.fuegeQualitaetsanforderungHinzu();
-        }*/
+       
         alreadySaved = true;
         openFile = datei;
         Model model = Model.getInstanz();
@@ -137,7 +135,7 @@ public class Control implements IControl {
                 view.closeWindow();
                 view.displayEmpty(this);
             }
-        } else if (action.getActionCommand().equalsIgnoreCase("Lade Daten")) {
+        } else if (action.getActionCommand().equalsIgnoreCase(Resources.ladeDaten)) {
             if (!Control.getalreadySaved()) {
                 File datei = view.showSpeichernUnterDialog();
                 exportiere(datei);
@@ -149,15 +147,13 @@ public class Control implements IControl {
             importiere(openFile);
             ViewFunctionPoint.addProdukt();
         } else if (action.getActionCommand().equalsIgnoreCase("Functionpoints berechnen")) {
+        	ViewFunctionPoint.countfunktionen();
+            ViewFunctionPoint.countdaten();
         	ViewFunctionPoint.calculateFunctionPoint();
         }
         else if (action.getActionCommand().equalsIgnoreCase(Resources.fuegeProduktfunktionHinzu)) {
         		view.fuegeFunktionHinzu();
         }
-        else if (action.getActionCommand().equalsIgnoreCase("uebernehmen")) {
-            ViewFunctionPoint.countfunktionen();
-            ViewFunctionPoint.countdaten();
-        }  
         else if (action.getActionCommand().equalsIgnoreCase(Resources.loescheProduktfunktion)) {
             view.loescheFunktion();
 
