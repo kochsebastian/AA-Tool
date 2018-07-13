@@ -7,10 +7,13 @@ import static org.junit.Assert.*;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -109,11 +112,13 @@ public class TestAufwandsabschaetzung {
 		control.processViewAction(ae);
 		i ++;
 		
+		
+		
 	}
 
 	@Test
 	public final void checkE1() {
-		assertEquals(46, ViewFunctionPoint.getTableUebersicht().getValueAt(15, 4));
+		assertEquals(36, ViewFunctionPoint.getTableUebersicht().getValueAt(15, 4));
 	}
 	@Test
 	public final void checkE2() {
@@ -125,7 +130,19 @@ public class TestAufwandsabschaetzung {
 	}
 	@Test
 	public final void checkFunctionPoints() {
-		assertEquals(42.12, ViewFunctionPoint.getTableUebersichtFunctionpoints().getValueAt(1, 2));
+		assertEquals(42.12, ViewFunctionPoint.getTableUebersichtFunctionpoints().getValueAt(2, 2));
 	}
 
+	/**
+	 * Loescht die im Setup gebaute Datei
+	 */
+	@After
+	public void cleanUp() {
+		try {
+			Files.deleteIfExists(f.toPath());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

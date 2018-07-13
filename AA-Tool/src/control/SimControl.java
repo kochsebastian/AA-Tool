@@ -144,6 +144,11 @@ public class SimControl implements IControl {
         	int[] einflussfaktoren = AOptimierung.getOpimierungsDatei();
         	ViewFunctionPoint.setTableEinflussfaktoren(einflussfaktoren);
         }
+        else if(action.getActionCommand().equalsIgnoreCase("Optimieren")) {
+        	if(ViewFunctionPoint.getZielErgebnis() != 0) {
+        		ViewFunctionPoint.optimieren(ViewFunctionPoint.getZielErgebnis(), ViewFunctionPoint.getE1(), ViewFunctionPoint.getEinflussfaktor());
+        	}
+        }
 
     }
 

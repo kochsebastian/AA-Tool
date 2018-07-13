@@ -704,6 +704,36 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
 	public static void setEo(ArrayList<EO> eo) {
 		ViewFunctionPoint.eo = eo;
 	}
+
+	/**
+	 * @return the zielFunctionPoints
+	 */
+	public static JTextArea getZielFunctionPoints() {
+		return zielFunctionPoints;
+	}
+
+	/**
+	 * @param zielFunctionPoints the zielFunctionPoints to set
+	 */
+	public static void setZielFunctionPoints(String s) {
+		JTextArea zielFunctionPoints = new JTextArea(s);
+		ViewFunctionPoint.zielFunctionPoints = zielFunctionPoints;
+	}
+
+	/**
+	 * @return the zielEinflussfaktor
+	 */
+	public static JTextArea getZielEinflussfaktor() {
+		return zielEinflussfaktor;
+	}
+
+	/**
+	 * @param zielEinflussfaktor the zielEinflussfaktor to set
+	 */
+	public static void setZielEinflussfaktor(String s) {
+		JTextArea zielEinflussfaktor = new JTextArea(s);
+		ViewFunctionPoint.zielEinflussfaktor = zielEinflussfaktor;
+	}
 	
     
 }  
