@@ -4,6 +4,7 @@
 package container;
 
 /**
+ * Container für FTR/DET der Produktfunktionen
  * @author SebastianKoch
  *
  */
@@ -14,7 +15,9 @@ public abstract class AEx {
 	private String komplexitaet;
 	
 	/**
-	 * 
+	 * speichert ftr, det und berechnet gleich die komplexitaet
+	 * @param ftr
+	 * @param det
 	 */
 	public AEx(int ftr, int det) {
 		this.ftr = ftr;
@@ -26,7 +29,6 @@ public abstract class AEx {
 			komplexitaet = "average";
 		else
 			komplexitaet = "high";
-		
 		
 	}
 	

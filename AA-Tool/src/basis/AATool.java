@@ -5,7 +5,7 @@ import control.Control;
 import view.View;
 
 /**
- * @author SebastianKoch
+ * @author SebastianKoch, ChrisBoger, AnneBlomeier
  */
 public class AATool {
 

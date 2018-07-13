@@ -1,9 +1,5 @@
 package aufwandsabschaetzung;
 
-/*
- * TableSelectionDemo.java requires no other files.
- */
-
 import xmlFramework.IOConnector;
 
 
@@ -21,8 +17,14 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * Berechnungsfunktionen um Functionpoints zu bestimmen
+ * @author ChrisBoger, SebastianKoch, AnneBlomeier
+ *
+ */
+
 @SuppressWarnings("serial")
-public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungView{
+public class FunctionpointAnalyse extends JPanel implements IAufwandsabschaetzung{
 	private static JTable tableProduktfunktionen;
 	private static JTable tableProduktdaten;
 	private static JTable tableKomplexitaetLF;
@@ -49,14 +51,18 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
     private static ArrayList<EQ> eq = new ArrayList<EQ>();
     private static ArrayList<ILF> ilf = new ArrayList<ILF>();
     private static ArrayList<ELF> elf = new ArrayList<ELF>();
-    public ViewFunctionPoint(ActionListener actionListener) {
+    
+    
+    public FunctionpointAnalyse(ActionListener actionListener) {
         super();
         
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         
-        JTextArea ErklaerungLaden = new JTextArea("Um die Daten der Anforderungsanalyse in der Aufwandsabschaetzung zu repräsentieren "
-        		+ "muss zuerst,\n die Anforderungsanalyse exportiert werden, danach können die Daten geladen werden");
-        add(ErklaerungLaden);
+        
+        //Textfeld, der Laden der Produktfunktionen/-daten erklärt
+        JTextArea erklaerungLaden = new JTextArea(Resources.erklaerungLaden);
+        erklaerungLaden.setEditable(false);
+        add(erklaerungLaden);
         ladeDaten = new JButton(Resources.ladeDaten);
         ladeDaten.addActionListener(actionListener);
         add(ladeDaten);
@@ -66,7 +72,6 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
         dtmLF = new MyTableModel(Resources.zuordnungProduktfunktionen, 0);
         tableProduktfunktionen.setModel(dtmLF);
         
-
         //variable Fenstergröße
         int anzahlLF = 60;
         int dimensionLF = 160;
@@ -74,6 +79,7 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
         tableProduktfunktionen.setPreferredScrollableViewportSize(new Dimension(600, dimensionLF));
         tableProduktfunktionen.setFillsViewportHeight(true);
         add(new JScrollPane(tableProduktfunktionen));
+        
         
         //Tabelle für Komplexität 
         tableKomplexitaetLF = new JTable();
@@ -133,13 +139,12 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
        
         tableEinflussfaktoren.setModel(dtmEinflussfaktoren);
         tableEinflussfaktoren.setPreferredScrollableViewportSize(new Dimension(600, 128));
-        tableEinflussfaktoren.setFillsViewportHeight(true);
-        
-
+        tableEinflussfaktoren.setFillsViewportHeight(true);  
         add(new JScrollPane(tableEinflussfaktoren));
         
-        //Button
-        weiter = new JButton(Resources.berechneFunctionpoints);			//noch in Ressourcen        
+        
+        //Button zum Berechnen der Funktionpoints
+        weiter = new JButton(Resources.berechneFunctionpoints);			        
         weiter.addActionListener(actionListener);
         add(weiter);
         
@@ -184,35 +189,31 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
         add(new JScrollPane(tableUebersichtFunctionpoints));
         
         
-        JTextArea ErklaerungOptimierung = new JTextArea("Sie haben die Mögichkeit das "
-        		+ "Ergebnis der Aufwandsabschaetzung \n"
-        		+ "zu optimieren, dazu waehlen Sie bitte einen "
-        		+ "bestehenden Einflussfaktor und das gewünschte Endergebnis\n"
-        		+ "Der gewünschte Wert kann nicht garantiert werden, unter Umständen sind mehrere"
-        		+ "Iterationen mit unterschiedlichen \n Einflussfaktoren notwendig");
-        ErklaerungOptimierung.setEditable(false);
-        add(ErklaerungOptimierung);
+        //Textfeld, zum Erklären der Selbstoptimierung
+        JTextArea erklaerungOptimierung = new JTextArea(Resources.erklaerungOptimierung);
+        erklaerungOptimierung.setEditable(false);
+        add(erklaerungOptimierung);
         
+        //Optimierungspanel
         JPanel optimierungsPanel = new JPanel();
-        zielEinflussfaktor = new JTextArea("Einflussfaktor (Name ausgeschrieben)");
+        zielEinflussfaktor = new JTextArea(Resources.zielEinflussfaktor);
         optimierungsPanel.add(zielEinflussfaktor);
-        zielFunctionPoints = new JTextArea("gewuenschtes Function-Point Ergebnis");
+        zielFunctionPoints = new JTextArea(Resources.zielFunctionpoints);
         optimierungsPanel.add(zielFunctionPoints);
         add(optimierungsPanel);
         //Selbstoptimierte Nachkalkulation
-        //laden
-        optimieren = new JButton("Optimieren");
+        optimieren = new JButton(Resources.optimieren);
         optimieren.addActionListener(actionListener);
         add(optimieren);
         
-        JTextArea ErklaerungOptimierungProjekt = new JTextArea("Pro Projekt kann es nur eine optimierungsdatei geben, \n"
-        		+ "wollen Sie mehere Optimierungsdateien speichern,\n müssen Sie sich die Optimierungsdatei lokal kopieren");
-        ErklaerungOptimierungProjekt.setEditable(false);
-        add(ErklaerungOptimierungProjekt);
+        //Textfeld, für Speichern/Laden/Zurücksetzen der Nachkalkulation
+        JTextArea erklaerungOptimierungProjekt = new JTextArea(Resources.erklaerungOptimierungProjekt);
+        erklaerungOptimierungProjekt.setEditable(false);
+        add(erklaerungOptimierungProjekt);
         
         //Selbstoptimierte Nachkalkulation
         //laden
-        ladeSelbstoptimierung = new JButton("Lade optimierte Einflussfaktoren einer letzten Aufwandsabschaetzung");
+        ladeSelbstoptimierung = new JButton(Resources.ladeSelbstoptimierung);
         ladeSelbstoptimierung.addActionListener(actionListener);
         add(ladeSelbstoptimierung);
         
@@ -222,7 +223,7 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
         add(speicherSelbstoptimierung);
         
         //zurücksetzen
-        resetSelbstoptimierung = new JButton("Reset Selbstoptimierung");
+        resetSelbstoptimierung = new JButton(Resources.resetSelbstoptimierung);
         resetSelbstoptimierung.addActionListener(actionListener);
         add(resetSelbstoptimierung);
         
@@ -290,6 +291,10 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
     	}
     }
     
+    
+    /**
+     * Zählt die Anzahl an Eingaben/Ausgaben/Abfragen
+     */
     public static void countfunktionen() {
     	for(int i = 0; i < dtmLF.getRowCount(); i++) {
     		
@@ -306,9 +311,12 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
     			}
     		}
     	}
-    	
     }
     
+    
+    /**
+     * zählt die Anzahl an Produktdaten (ELF/ILF)
+     */
     public static void countdaten() {
     	for(int i = 0; i < dtmLD.getRowCount(); i++) {
     		
@@ -324,26 +332,48 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
     			}
     		}
     	}
-    	
-    	
     }
     
+    /**
+     * getter für FTR
+     * @param zeile, in Tabelle
+     * @return FTR-Wert
+     */
     public static int getLFftr(int zeile) {
     	return (int) tableKomplexitaetLF.getValueAt(zeile, 1);	
     }
     
+    /**
+     * getter für DET der Produktfunktionen
+     * @param zeile, in Tabelle
+     * @return DET-Wert
+     */
     public static int getLFdet(int zeile) {
     	return (int) tableKomplexitaetLF.getValueAt(zeile, 2);	
     }
     
+    /**
+     * getter für RET
+     * @param zeile, in Tabelle
+     * @return RET-Wert
+     */
     public static int getLDret(int zeile) {
     	return (int) tableKomplexitaetLD.getValueAt(zeile, 1);	
     }
     
+    /**
+     * getter für DET der Produktdaten
+     * @param zeile, in Tabelle
+     * @return DET-Wert
+     */
     public static int getLDdet(int zeile) {
     	return (int) tableKomplexitaetLD.getValueAt(zeile, 2);	
     }
     
+    /**
+     * Zählt die Werte der einzelnen Einflussfaktoren zusammen
+     * @return Summe Einflussfaktoren
+     */
     public static int getSumEinflussfak() {
     	int sum=0;
     	for(int i = 0; i < tableEinflussfaktoren.getRowCount(); i++) {
@@ -354,6 +384,9 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
     	return sum;
     }
     
+    /**
+     * Berechnung der FunctionPoints aus Einflussfaktoren, Produktfunktionen und Produktdaten
+     */
     public static void calculateFunctionPoint() {
     	tableUebersichtFunctionpoints.setValueAt(getSumEinflussfak(), 0, 2); 
     	anzahlEintragen();
@@ -366,6 +399,9 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
     	
     }
     
+    /**
+     * Eintragen der Anzhal gleichgewichteter Werte der Produktfunktionen und Produktdaten in die Uebersichtstabelle
+     */
     public static void anzahlEintragen() {
     	
 	    tableUebersicht.setValueAt(EI.getCountlow(), 0, 1);
@@ -377,12 +413,12 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
 	    tableUebersicht.setValueAt(EQ.getCountlow(), 6, 1);
 	    tableUebersicht.setValueAt(EQ.getCountaverage(), 7, 1);
 	    tableUebersicht.setValueAt(EQ.getCounthigh(), 8, 1);
-	    tableUebersicht.setValueAt(ILF.getCountlow(), 9, 1);
-	    tableUebersicht.setValueAt(ILF.getCountaverage(), 10, 1);
-	    tableUebersicht.setValueAt(ILF.getCounthigh(), 11, 1);
-	    tableUebersicht.setValueAt(ELF.getCountlow(), 12, 1);
-	    tableUebersicht.setValueAt(ELF.getCountaverage(), 13, 1);
-	    tableUebersicht.setValueAt(ELF.getCounthigh(), 14, 1);
+	    tableUebersicht.setValueAt(ILF.getCounthigh(), 9, 1);
+	    tableUebersicht.setValueAt(ILF.getCountlow(), 10, 1);
+	    tableUebersicht.setValueAt(ILF.getCountaverage(), 11, 1);
+	    tableUebersicht.setValueAt(ELF.getCounthigh(), 12, 1);
+	    tableUebersicht.setValueAt(ELF.getCountlow(), 13, 1);
+	    tableUebersicht.setValueAt(ELF.getCountaverage(), 14, 1);
 	    
 	    tableUebersicht.setValueAt(EI.getGewichtunglow(),0,3);
 	    tableUebersicht.setValueAt(EI.getGewichtungAverage(),1,3);
@@ -430,60 +466,7 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
 	    
     }
     
-    //funktioniert noch nicht!
-    /**
-     * prüft ob die Tabellen vollstaendig und richtig ausgefüllt sind
-     * @return true, wenn Tabellen vollstaendig
-     */
-    public static Boolean tabelleVollstaendig() {    	
-    	Object boolTrue = new Object[]{true};
-    	Object intNull = new Object[]{0};
-    	int kreuzCount = 0;
-    	
-    	
-    	//prüft ob Produktfunktionen passend zu Eingabe/Ausgabe/Abfrage zugeordnet ist
-    	for(int i = 0; i < tableProduktfunktionen.getRowCount() - 1; i++) {
-    		kreuzCount = 0;
-    		for(int k = 1; k < tableProduktfunktionen.getColumnCount() - 1; k++) {
-    			if ( tableProduktfunktionen.getValueAt(i, k) == boolTrue) {
-    				kreuzCount++;
-    			}    			
-    			if (kreuzCount > 1) return false;		
-    		}
-    		if (kreuzCount == 0) return false;
-    	}
-    	
-    	//prüft ob Produktdaten passend zu Datenbestände/Referenzdaten zugeordnet ist
-    	for (int i = 0; i < tableProduktdaten.getRowCount() - 1; i++) {
-    		kreuzCount = 0;
-    		for (int k = 1; k < tableProduktdaten.getColumnCount() - 1; k++) {
-    			if (tableProduktdaten.getValueAt(i,  k) == boolTrue) {
-    				kreuzCount++;
-    			}
-    			if (kreuzCount > 1) return false;
-    		}
-    		if (kreuzCount == 0) return false;
-    	}
-    	
-    	
-    	//prüft ob Anzahl an FTR/DET gesetzt ist
-    	for (int i = 0; i < tableKomplexitaetLF.getRowCount() - 1; i++) {
-    		for (int k = 1; i < tableKomplexitaetLF.getColumnCount() - 1; i++) {
-    			if (tableKomplexitaetLF.getValueAt(i,  k) == intNull) return false;
-    		}
-    	}
-    	
-    	//prüft ob Anzahl an RET/DET gesetzt ist
-    	for (int i = 0; i < tableKomplexitaetLD.getRowCount() - 1; i++) {
-    		for (int k = 1; i < tableKomplexitaetLD.getColumnCount() - 1; i++) {
-    			if (tableKomplexitaetLD.getValueAt(i,  k) == intNull) return false;
-    		}
-    	}
-    	
-    	//zum testen
-    	dtmUebersichtFunctionpoints.setValueAt("FUNKTIONIERT", 0, 0);
-    	return true;
-    }
+
 
 	/**
 	 * @return the tableEinflussfaktoren
@@ -496,21 +479,27 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
 	 * @param tableEinflussfaktoren the tableEinflussfaktoren to set
 	 */
 	public static void setTableEinflussfaktoren(JTable tableEinflussfaktoren) {
-		ViewFunctionPoint.tableEinflussfaktoren = tableEinflussfaktoren;
+		FunctionpointAnalyse.tableEinflussfaktoren = tableEinflussfaktoren;
 	}
 
 
+	/**
+	 * @param faktor
+	 */
 	public static void setTableEinflussfaktoren(int[] faktor) {
 		
 		for(int i = 0; i< tableEinflussfaktoren.getRowCount();i++) {
 			if(i == 3) {
 				continue;
 			}
-			ViewFunctionPoint.tableEinflussfaktoren.setValueAt(faktor[i], i, 1);
+			FunctionpointAnalyse.tableEinflussfaktoren.setValueAt(faktor[i], i, 1);
 		}
 			
 	}
 	
+	/**
+	 * getter für Ergebnis der Functionpoints-Berechnung
+	 */
 	public static double getZielErgebnis() {
 		double zielErgebnis;
 		String tmp = zielFunctionPoints.getText();
@@ -521,12 +510,23 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
 		}
 		return zielErgebnis;
 	}
+	
+	/**
+	 * getter für Einflussfaktor der in Textfeld zur Optimierung eingegeben wurde
+	 * @return
+	 */
 	public static String getEinflussfaktor() {
 		
 		return zielEinflussfaktor.getText();
 		
 	}
     
+	/**
+	 * Optimierungsmethode, die das Ergebnis an die gewünschten Functionpoints anpasst
+	 * @param zielErgebnis, welches als berechnete Functionpoints wünschenswert ist
+	 * @param E1, Teilergebnis der Functionpoint-Berechnung
+	 * @param einflussfaktor, welcher angepasst werden soll um zielErgebnis zu erreichen
+	 */
 	public static void optimieren(double zielErgebnis, int E1, String einflussfaktor) {
 		double newEinflusssumme = ((zielErgebnis / E1) -0.7 )* 100 ;
 		double oldEinflusssumme = getSumEinflussfak();
@@ -547,6 +547,10 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
 		calculateFunctionPoint();
 	}
 	
+	/**
+	 * getter für Teilergebnis aus Functionpoints-Berechnung
+	 * @return E1
+	 */
 	public static int getE1() {
 		return (int) tableUebersicht.getValueAt( 15, 4);
 	}
@@ -562,7 +566,7 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
 	 * @param tableProduktfunktionen the tableProduktfunktionen to set
 	 */
 	public static void setTableProduktfunktionen(JTable tableProduktfunktionen) {
-		ViewFunctionPoint.tableProduktfunktionen = tableProduktfunktionen;
+		FunctionpointAnalyse.tableProduktfunktionen = tableProduktfunktionen;
 	}
 
 	/**
@@ -576,7 +580,7 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
 	 * @param tableProduktdaten the tableProduktdaten to set
 	 */
 	public static void setTableProduktdaten(JTable tableProduktdaten) {
-		ViewFunctionPoint.tableProduktdaten = tableProduktdaten;
+		FunctionpointAnalyse.tableProduktdaten = tableProduktdaten;
 	}
 
 	/**
@@ -590,7 +594,7 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
 	 * @param tableKomplexitaetLF the tableKomplexitaetLF to set
 	 */
 	public static void setTableKomplexitaetLF(JTable tableKomplexitaetLF) {
-		ViewFunctionPoint.tableKomplexitaetLF = tableKomplexitaetLF;
+		FunctionpointAnalyse.tableKomplexitaetLF = tableKomplexitaetLF;
 	}
 
 	/**
@@ -604,7 +608,7 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
 	 * @param tableKomplexitaetLD the tableKomplexitaetLD to set
 	 */
 	public static void setTableKomplexitaetLD(JTable tableKomplexitaetLD) {
-		ViewFunctionPoint.tableKomplexitaetLD = tableKomplexitaetLD;
+		FunctionpointAnalyse.tableKomplexitaetLD = tableKomplexitaetLD;
 	}
 
 	/**
@@ -618,7 +622,7 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
 	 * @param tableUebersicht the tableUebersicht to set
 	 */
 	public static void setTableUebersicht(JTable tableUebersicht) {
-		ViewFunctionPoint.tableUebersicht = tableUebersicht;
+		FunctionpointAnalyse.tableUebersicht = tableUebersicht;
 	}
 
 	/**
@@ -632,79 +636,8 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
 	 * @param tableUebersichtFunctionpoints the tableUebersichtFunctionpoints to set
 	 */
 	public static void setTableUebersichtFunctionpoints(JTable tableUebersichtFunctionpoints) {
-		ViewFunctionPoint.tableUebersichtFunctionpoints = tableUebersichtFunctionpoints;
+		FunctionpointAnalyse.tableUebersichtFunctionpoints = tableUebersichtFunctionpoints;
 	}
-
-	/**
-	 * @return the ei
-	 */
-	public static ArrayList<EI> getEi() {
-		return ei;
-	}
-
-	/**
-	 * @param ei the ei to set
-	 */
-	public static void setEi(ArrayList<EI> ei) {
-		ViewFunctionPoint.ei = ei;
-	}
-
-	/**
-	 * @return the eq
-	 */
-	public static ArrayList<EQ> getEq() {
-		return eq;
-	}
-
-	/**
-	 * @param eq the eq to set
-	 */
-	public static void setEq(ArrayList<EQ> eq) {
-		ViewFunctionPoint.eq = eq;
-	}
-
-	/**
-	 * @return the ilf
-	 */
-	public static ArrayList<ILF> getIlf() {
-		return ilf;
-	}
-
-	/**
-	 * @param ilf the ilf to set
-	 */
-	public static void setIlf(ArrayList<ILF> ilf) {
-		ViewFunctionPoint.ilf = ilf;
-	}
-
-	/**
-	 * @return the elf
-	 */
-	public static ArrayList<ELF> getElf() {
-		return elf;
-	}
-
-	/**
-	 * @param elf the elf to set
-	 */
-	public static void setElf(ArrayList<ELF> elf) {
-		ViewFunctionPoint.elf = elf;
-	}
-
-	/**
-	 * @return the eo
-	 */
-	public static ArrayList<EO> getEo() {
-		return eo;
-	}
-
-	/**
-	 * @param eo the eo to set
-	 */
-	public static void setEo(ArrayList<EO> eo) {
-		ViewFunctionPoint.eo = eo;
-	}
-
 	/**
 	 * @return the zielFunctionPoints
 	 */
@@ -717,7 +650,7 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
 	 */
 	public static void setZielFunctionPoints(String s) {
 		JTextArea zielFunctionPoints = new JTextArea(s);
-		ViewFunctionPoint.zielFunctionPoints = zielFunctionPoints;
+		FunctionpointAnalyse.zielFunctionPoints = zielFunctionPoints;
 	}
 
 	/**
@@ -732,9 +665,8 @@ public class ViewFunctionPoint extends JPanel implements IAufwandsabschaetzungVi
 	 */
 	public static void setZielEinflussfaktor(String s) {
 		JTextArea zielEinflussfaktor = new JTextArea(s);
-		ViewFunctionPoint.zielEinflussfaktor = zielEinflussfaktor;
+		FunctionpointAnalyse.zielEinflussfaktor = zielEinflussfaktor;
 	}
-	
     
 }  
  

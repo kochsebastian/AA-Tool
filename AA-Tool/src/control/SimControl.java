@@ -11,7 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import aufwandsabschaetzung.AOptimierung;
-import aufwandsabschaetzung.ViewFunctionPoint;
+import aufwandsabschaetzung.FunctionpointAnalyse;
 import basis.Resources;
 import model.Model;
 import view.View;
@@ -41,6 +41,7 @@ public class SimControl implements IControl {
     }
 
     /**
+     * Exportieren einer XML-Datei
      * @param datei
      */
     public void exportiere(File datei) {
@@ -62,6 +63,7 @@ public class SimControl implements IControl {
 
 
     /**
+     * Importieren einer XML-Datei
      * @param datei
      */
     public void importiere(File datei) {
@@ -134,19 +136,19 @@ public class SimControl implements IControl {
             IOConnector.resetLFBuffer();
             IOConnector.resetLDBuffer();
             importiere(openFile);
-            ViewFunctionPoint.addProdukt();
+            FunctionpointAnalyse.addProdukt();
         } else if (action.getActionCommand().equalsIgnoreCase("Functionpoints berechnen")) {
-        	ViewFunctionPoint.countfunktionen();
-            ViewFunctionPoint.countdaten();
-        	ViewFunctionPoint.calculateFunctionPoint();
+        	FunctionpointAnalyse.countfunktionen();
+        	FunctionpointAnalyse.countdaten();
+        	FunctionpointAnalyse.calculateFunctionPoint();
         }
         else if(action.getActionCommand().equalsIgnoreCase("Lade optimierte Einflussfaktoren einer letzten Aufwandsabschaetzung")) {
         	int[] einflussfaktoren = AOptimierung.getOpimierungsDatei();
-        	ViewFunctionPoint.setTableEinflussfaktoren(einflussfaktoren);
+        	FunctionpointAnalyse.setTableEinflussfaktoren(einflussfaktoren);
         }
         else if(action.getActionCommand().equalsIgnoreCase("Optimieren")) {
-        	if(ViewFunctionPoint.getZielErgebnis() != 0) {
-        		ViewFunctionPoint.optimieren(ViewFunctionPoint.getZielErgebnis(), ViewFunctionPoint.getE1(), ViewFunctionPoint.getEinflussfaktor());
+        	if(FunctionpointAnalyse.getZielErgebnis() != 0) {
+        		FunctionpointAnalyse.optimieren(FunctionpointAnalyse.getZielErgebnis(), FunctionpointAnalyse.getE1(), FunctionpointAnalyse.getEinflussfaktor());
         	}
         }
 

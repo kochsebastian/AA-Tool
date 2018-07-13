@@ -4,7 +4,7 @@ package basis;
 
 /**
  * enthaelt alle Zeichenketten, die zur Anzeige der GUI noetig sind zentral an einem Ort
- * @author SebastianKoch
+ * @author ChrisBoger
  */
 public class Resources {
 
@@ -102,6 +102,23 @@ public class Resources {
 	public static final String[] summeEinflussfaktoren = new String[]{"Einflussfaktoren Summe", "= E2", ""};
 	public static final String[] faktorEinflussbewertung = new String[]{"Faktor Einflussbewertung", "E3 = E2 / 100 + 0,7", ""};
 	public static final String[] bewertungFunctionpoints = new String[]{"Bewertung Functionpoints", "E1 * E3", ""};
+	
+	public static final String erklaerungLaden = "Um die Daten der Anforderungsanalyse in der Aufwandsabschaetzung zu repräsentieren "
+    											+ "muss zuerst,\n die Anforderungsanalyse exportiert werden, danach können die Daten geladen werden.";
+	public static final String erklaerungOptimierung = "Sie haben die Mögichkeit das "
+    													+ "Ergebnis der Aufwandsabschaetzung \n"
+    													+ "zu optimieren, dazu waehlen Sie bitte einen "
+    													+ "bestehenden Einflussfaktor und das gewünschte Endergebnis\n"
+    													+ "Der gewünschte Wert kann nicht garantiert werden, unter Umständen sind mehrere"
+    													+ "Iterationen mit unterschiedlichen \n Einflussfaktoren notwendig";
+	public static final String zielEinflussfaktor = "Einflussfaktor (Name ausgeschrieben)";
+	public static final String zielFunctionpoints = "gewuenschtes Function-Point Ergebnis";
+	public static final String optimieren = "Optimieren";
+	public static final String erklaerungOptimierungProjekt = "Pro Projekt kann es nur eine optimierungsdatei geben, \n"
+    		+ "wollen Sie mehere Optimierungsdateien speichern,\n müssen Sie sich die Optimierungsdatei lokal kopieren";
+	public static final String ladeSelbstoptimierung = "Lade optimierte Einflussfaktoren einer letzten Aufwandsabschaetzung";
+	public static final String speicherOptimierung = "Speicher Selbstoptimierung";
+	public static final String resetSelbstoptimierung = "Reset Selbstoptimierung";
 
 	public static final String readme = "AA-Tool-Readme (Bei erstverwendung bitte Lesen)\n======================\n "
 			+ "Funktionserklärung:\n  Neues Projekt anlegen: öffnet ein neues Fenster, "
@@ -121,5 +138,5 @@ public class Resources {
 			+ "Der Nutzer soll ausserdem versucht sein die Hinweise des Interfaces zu folgen, wird diesen nicht gefolgt, "
 			+ "\nwird die fehlerfreie Verwendung nicht gewährleistet";
 
-	public static final String speicherOptimierung = "Speicher Selbstoptimierung";
+	
 }

@@ -4,6 +4,7 @@
 package container;
 
 /**
+ * Container für Ausgabe (EO)
  * @author SebastianKoch
  *
  */
@@ -16,7 +17,9 @@ public class EO extends AEx{
 	private static int gewichtunghigh=7;
 	
 	/**
-	 * 
+	 * ruft Superklasse auf und zaehlt die ausgaben nach komplexitaet
+	 * @param ftr
+	 * @param det
 	 */
 	public EO(int ftr, int det) {
 		super(ftr,det);if(getKomplexitaet().equals("low"))
@@ -28,12 +31,24 @@ public class EO extends AEx{
 		
 	}
 	
+	/**
+	 * 
+	 * @return gewichtunglow
+	 */
 	public static int getGewichtunglow() {
 		return gewichtunglow;
 	}
+	/**
+	 * 
+	 * @return gewichtungaverage
+	 */
 	public static int getGewichtungAverage() {
 		return gewichtungaverage;
 	}
+	/**
+	 * 
+	 * @return gewichtunghigh
+	 */
 	public static int getGewichtungHigh() {
 		return gewichtunghigh;
 	}
@@ -59,6 +74,9 @@ public class EO extends AEx{
 		return counthigh;
 	}
 	
+	/**
+	 * resetet alle zaehler
+	 */
 	public static void resetCount() {
 		EO.countlow = 0;
 		EO.countaverage = 0;

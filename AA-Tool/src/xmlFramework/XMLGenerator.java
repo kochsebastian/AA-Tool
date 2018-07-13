@@ -19,12 +19,13 @@ import java.io.File;
 import java.util.ArrayList;
 
 /**
+ * erstellt xml code und file
  * @author SebastianKoch
  */
 public class XMLGenerator {
 
     /**
-     * erstellt XML:
+     *  erstellt XML:
      *	erstellt Datei
      *	iteriert durch model und schreibt XML
      * @param zieldatei

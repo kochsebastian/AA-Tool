@@ -4,6 +4,7 @@
 package container;
 
 /**
+ * Container für Abfrage (EQ)
  * @author SebastianKoch
  *
  */
@@ -14,8 +15,11 @@ public class EQ extends AEx{
 	private static int gewichtunglow=3;
 	private static int gewichtungaverage=4;
 	private static int gewichtunghigh=6;
+	
 	/**
-	 * 
+	 * ruft Superklasse auf und zaehlt die abfragen nach komplexitaet
+	 * @param ftr
+	 * @param det
 	 */
 	public EQ(int ftr, int det) {
 		super(ftr,det);
@@ -27,13 +31,24 @@ public class EQ extends AEx{
 			counthigh ++;
 		
 	}
-	
+	/**
+	 * 
+	 * @return gewichtunglow
+	 */
 	public static int getGewichtunglow() {
 		return gewichtunglow;
 	}
+	/**
+	 * 
+	 * @return gewichtungaverage
+	 */
 	public static int getGewichtungAverage() {
 		return gewichtungaverage;
 	}
+	/**
+	 * 
+	 * @return gewichtunghigh
+	 */
 	public static int getGewichtungHigh() {
 		return gewichtunghigh;
 	}
@@ -58,6 +73,10 @@ public class EQ extends AEx{
 		return counthigh;
 	}
 	
+	/**
+	 * resetet alle zaehler
+	 *
+	 */
 	public static void resetCount() {
 		EQ.countlow = 0;
 		EQ.countaverage = 0;

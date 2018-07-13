@@ -2,7 +2,8 @@ package model;
 
 
 /**
- * @author SebastianKoch
+ * Inhalt eines  Tabs
+ * @author SebastianKoch, ChrisBoger, AnneBlomeier
  */
 public class Inhalt extends ATab {
     private String[][] inhalt;

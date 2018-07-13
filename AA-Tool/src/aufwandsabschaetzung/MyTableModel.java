@@ -2,6 +2,12 @@ package aufwandsabschaetzung;
 
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * TabellenModel für die Tabellen der Aufwandsabschaetzung
+ * @author ChrisBoger, SebastianKoch, AnneBlomeier
+ *
+ */
+
 @SuppressWarnings("serial")
 class MyTableModel extends DefaultTableModel {   
 

@@ -19,6 +19,10 @@ public class ModelViewConnector {
     static IViewModule viewGlossar;
     View view;
 
+    /**
+     * 
+     * @param _view
+     */
     public ModelViewConnector(View _view) {
         view = _view;
     }

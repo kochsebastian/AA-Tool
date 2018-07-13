@@ -7,20 +7,29 @@ import java.util.Scanner;
 
 import javax.swing.JTable;
 
+/**
+ * Zum abspeichern der Optimierungsparameter der Einflussfaktoren
+ * @author chrisboger, SebastianKoch, AnneBlomeier
+ *
+ */
+
 public abstract class AOptimierung {
 
 protected float i;
     
-    // Optimierungsparameter als Datei neben das Executable schreiben
+    /**
+     *  Optimierungsparameter als Datei neben das Executable schreiben
+     * @param tableEinflussfaktoren
+     */
     public static void setOpimierungsDatei(JTable tableEinflussfaktoren) {
-        File optimierungsDatei = new File("optimierung.txt");
+        File optimierungsDatei = new File("optimierung.txt"); //
 
         try{
             optimierungsDatei.createNewFile();
             FileWriter writer = new FileWriter(optimierungsDatei);
 
             for (int i = 0; i < tableEinflussfaktoren.getRowCount(); i++) {
-            	if(i == 3) {
+            	if(i == 3) { // die eine zeile die leer ist
             		writer.write("0 ");
             		continue;
             	}
@@ -35,7 +44,10 @@ protected float i;
         }
     }
     
-    // gibt die Parameter der Optimierungsdatei neben dem Executable zurück
+    /**
+     *  gibt die Parameter der Optimierungsdatei neben dem Executable zurück
+     * @return einflussfaktoren
+     */
     public static int[] getOpimierungsDatei() {
         int anzahlEInflussfaktoren = 0;
         int[] einflussfaktor;

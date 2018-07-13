@@ -4,6 +4,7 @@
 package container;
 
 /**
+ * Container für die ELF/ILF der Produktdaten
  * @author SebastianKoch
  *
  */
@@ -13,8 +14,11 @@ public abstract class AELFILF {
 	private int ret;
 	private int det;
 	private String komplexitaet;
+	
 	/**
-	 * 
+	 * setzt ret, det und berechnet daraus gleich die komplexitaet
+	 * @param ret
+	 * @param det
 	 */
 	public AELFILF(int ret, int det) {
 		this.ret = ret;
@@ -29,7 +33,7 @@ public abstract class AELFILF {
 	}
 	
 	/**
-	 * @return the komplexitaet
+	 * @return komplexitaet
 	 */
 	public String getKomplexitaet() {
 		return komplexitaet;

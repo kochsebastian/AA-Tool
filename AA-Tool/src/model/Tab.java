@@ -2,7 +2,7 @@ package model;
 
 
 /**
- * @author SebastianKoch
+ * @author SebastianKoch, ChrisBoger, AnneBlomeier
  */
 public class Tab extends ATab {
 

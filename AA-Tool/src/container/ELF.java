@@ -4,6 +4,7 @@
 package container;
 
 /**
+ * Container für ELF
  * @author SebastianKoch
  *
  */
@@ -15,6 +16,11 @@ public class ELF extends AELFILF{
 	private static int gewichtungaverage=7;
 	private static int gewichtunghigh=10;
 	
+	/**
+	 * ruft Superklasse auf und zaehlt die datenbestaende nach komplexitaet
+	 * @param ret
+	 * @param det
+	 */
 	public ELF(int ret, int det) {
 		super(ret, det);
 		if(getKomplexitaet().equals("low"))
@@ -24,13 +30,24 @@ public class ELF extends AELFILF{
 		else
 			counthigh ++;
 	}
-
+	/**
+	 * 
+	 * @return gewichtunglow
+	 */
 	public static int getGewichtunglow() {
 		return gewichtunglow;
 	}
+	/**
+	 * 
+	 * @return gewichtungaverage
+	 */
 	public static int getGewichtungAverage() {
 		return gewichtungaverage;
 	}
+	/**
+	 * 
+	 * @return gewichtunghigh
+	 */
 	public static int getGewichtungHigh() {
 		return gewichtunghigh;
 	}
@@ -56,7 +73,9 @@ public class ELF extends AELFILF{
 		return counthigh;
 	}
 	
-	
+	/**
+	 * resetet alle datenbestaendezaehler
+	 */
 	public static void resetCount() {
 		ELF.countlow = 0;
 		ELF.countaverage = 0;

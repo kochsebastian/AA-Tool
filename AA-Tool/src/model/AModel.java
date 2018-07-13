@@ -1,7 +1,8 @@
 package model;
 
 /**
- * @author SebastianKoch
+ * Alle Tabs des Tools, bildet grundlage fuer Modelstruktur
+ * @author SebastianKoch, ChrisBoger, AnneBlomeier
  */
 public abstract class AModel {
     ATab deckblatt;

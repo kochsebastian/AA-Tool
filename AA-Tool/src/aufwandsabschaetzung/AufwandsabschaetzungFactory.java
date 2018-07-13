@@ -6,14 +6,15 @@ package aufwandsabschaetzung;
 import java.awt.event.ActionListener;
 
 /**
- * @author SebastianKoch
+ * Factory, zum erstellen jeder neuen Aufwandsabschaetzung
+ * @author SebastianKoch, ChrisBoger, AnneBlomeier
  *
  */
 public class AufwandsabschaetzungFactory {
 
-	public IAufwandsabschaetzungView createAufwandsabschaetzungView(String aufwandsabschaetzungTyp, ActionListener aL) {
+	public IAufwandsabschaetzung createAufwandsabschaetzungView(String aufwandsabschaetzungTyp, ActionListener aL) {
 		if(aufwandsabschaetzungTyp.equalsIgnoreCase("FunctionPointView")) {
-			return new ViewFunctionPoint(aL);
+			return new FunctionpointAnalyse(aL);
 		}
 		else
 			return null;

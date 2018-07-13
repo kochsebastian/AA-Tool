@@ -4,7 +4,8 @@ package model;
 import java.util.ArrayList;
 
 /**
- * @author SebastianKoch
+ * Stellt Tabfunktionen zur verfuegung
+ * @author SebastianKoch, ChrisBoger, AnneBlomeier
  */
 public abstract class ATab {
 
@@ -19,8 +20,11 @@ public abstract class ATab {
     public ArrayList<ATab> getNext() {
         return next;
     }
-
-    public void addNext(ATab _next) {
+    /**
+     * Verkettung der Tabs
+     * @param _next
+     */
+    public void addNext(ATab _next) { 
         if (next == null) {
             next = new ArrayList<ATab>();
         }

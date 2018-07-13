@@ -19,7 +19,7 @@ import aufwandsabschaetzung.AufwandsabschaetzungFactory;
 
 
 /**
- * @author SebastianKoch
+ * @author SebastianKoch, Chris Boger, Anne Blomeier
  */
 public class View implements IView { 
 
@@ -88,7 +88,9 @@ public class View implements IView {
 
     }
 
-
+    /**
+     * 
+     */
     public void displayEmpty(ActionListener actionListener) {
         setWindow();
 
@@ -286,7 +288,12 @@ public class View implements IView {
 
     }
 
-
+    /**
+     * 
+     * @param viewFunktion2
+     * @param viewDatum2
+     * @param viewGlossar2
+     */
     private void updateModelView(IViewModule viewFunktion2, IViewModule viewDatum2,
     		IViewModule viewGlossar2) {
         ModelViewConnector.viewFunktion = (ViewProduktfunktion) viewFunktion2;
@@ -295,12 +302,18 @@ public class View implements IView {
 
     }
 
+    /**
+     * 
+     */
     public void closeWindow() {
         hauptfenster.setVisible(false);
         hauptfenster.dispose();
     }
 
-
+    /**
+     * 
+     * @return zu speichernde file
+     */
     public File showSpeichernUnterDialog() {
         // JFileChooser-Objekt erstellen
         JFileChooser selektor = new JFileChooser();
@@ -317,7 +330,10 @@ public class View implements IView {
         return null;
     }
 
-
+    /**
+     * 
+     * @return zu exportierende datei
+     */
     public File showExportierenDialog() {
         // JFileChooser-Objekt erstellen
         JFileChooser selektor = new JFileChooser();
@@ -334,6 +350,10 @@ public class View implements IView {
         return null;
     }
 
+    /**
+     * 
+     * @return zu speichernde datei
+     */
     public File showOeffnenDialog() {
         // JFileChooser-Objekt erstellen
         JFileChooser selektor = new JFileChooser();
@@ -350,7 +370,11 @@ public class View implements IView {
 
         return null;
     }
-
+    
+    /**
+     * 
+     * @return
+     */
     public Boolean showLoeschenDialog() {
         int auswahl = JOptionPane.showConfirmDialog(hauptfenster, "Sicher?", Resources.aaTool, JOptionPane.YES_NO_OPTION);
 
@@ -361,37 +385,57 @@ public class View implements IView {
 
     }
 
-
+    /**
+     * 
+     */
     public void fuegeFunktionHinzu() {
         // alle Zeilen zur Tabelle hinzufuegen, die fuer eine Funktion gebraucht werden
         viewFunktion.fuegeHinzu();
     }
 
+    /**
+     * 
+     */
     public void loescheFunktion() {
         // alle Zeilen entfernen, die zu einer Funktion gehoeren
         viewFunktion.loesche();
     }
 
+    /**
+     * 
+     */
     public void fuegeDatumHinzu() {
         // alle Zeilen zur Tabelle hinzufuegen, die fuer ein Produktdatum gebraucht werden
         viewDatum.fuegeHinzu();
     }
 
+    /**
+     * 
+     */
     public void loescheDatum() {
         // alle Zeilen entfernen, die zu einem Produktdatum gehoeren
         viewDatum.loesche();
     }
 
+    /**
+     * 
+     */
     public void fuegeGlossarHinzu() {
         // alle Zeilen zur Tabelle hinzufuegen, die fuer ein Produktdatum gebraucht werden
         viewGlossar.fuegeHinzu();
     }
 
+    /**
+     * 
+     */
     public void loescheGlossar() {
         // alle Zeilen entfernen, die zu einem Produktdatum gehoeren
         viewGlossar.loesche();
     }
     
+    /**
+     * fuegt fuer die simulation tabellen hinzu
+     */
     public void fuegeSimHinzu() {
         // fuegt in jedem Tab eine Simulierte tabelle hinzu
         viewFunktion.fuegeSimHinzu();
@@ -402,58 +446,114 @@ public class View implements IView {
         viewGlossar.fuegeSimHinzu();
     }
 
+    /**
+     * 
+     * @return viewConnector
+     */
     public ModelViewConnector getViewConnector() {
         return viewConnector;
     }
 
+    /**
+     * 
+     * @param _viewConnector
+     */
     public void setViewConnector(ModelViewConnector _viewConnector) {
         viewConnector = _viewConnector;
     }
 
+    /**
+     * 
+     * @return deckblattTextField
+     */
     public JTextArea getDeckblattTextField() {
         return deckblattTextField;
     }
 
+    /**
+     * 
+     * @param textArea
+     */
     public void setDeckblattTextField(JTextArea textArea) {
         deckblattTextField = textArea;
     }
 
+    /**
+     * 
+     * @return
+     */
     public JTextArea getKundenbeschreibung() {
         return kundenbeschreibung;
     }
 
+    /**
+     * 
+     * @param textArea
+     */
     public void setKundenbeschreibung(JTextArea textArea) {
         kundenbeschreibung = textArea;
     }
 
+    /**
+     * 
+     * @return
+     */
     public JTextArea getZielbestimmungTextField() {
         return zielbestimmungTextField;
     }
 
+    /**
+     * 
+     * @param textArea
+     */
     public void setZielbestimmungTextField(JTextArea textArea) {
         zielbestimmungTextField = textArea;
     }
 
+    /**
+     * 
+     * @return
+     */
     public JTextArea getProdukteinsatzTextField() {
         return produkteinsatzTextField;
     }
 
+    /**
+     * 
+     * @param textArea
+     */
     public void setProdukteinsatzTextField(JTextArea textArea) {
         produkteinsatzTextField = textArea;
     }
 
+    /**
+     * 
+     * @return
+     */
     public JTextArea getErgaenzungenTextField() {
         return ergaenzungenTextField;
     }
 
+    /**
+     * 
+     * @param textArea
+     */
     public void setErgaenzungenTextField(JTextArea textArea) {
         ergaenzungenTextField = textArea;
     }
 
+    /**
+     * 
+     * @return
+     */
     public JTextArea getAufwandTextField() {
         return aufwandTextField;
     }
 
+    /**
+     * 
+     * @param textArea
+     */
     public void setAufwandTextField(JTextArea textArea) {
         aufwandTextField = textArea;
     }

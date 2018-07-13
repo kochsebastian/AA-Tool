@@ -6,7 +6,11 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 import view.View;
-
+/**
+ * 
+ * @author SebastianKoch
+ *
+ */
 public interface IControl extends ActionListener {
 	public void setView(View view);
 	public void exportiere(File datei);

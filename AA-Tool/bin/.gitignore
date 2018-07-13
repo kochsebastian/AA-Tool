@@ -1,11 +1,10 @@
-/importexporttests/
-/xmlFramework/
-/view/
+/.DS_Store
+/.idea/
+/aufwandsabschaetzung/
 /basis/
+/container/
 /control/
 /model/
-/aufwandsabschaetzung/
-/platzhalter/
 /tests/
-/Container/
-/container/
+/view/
+/xmlFramework/

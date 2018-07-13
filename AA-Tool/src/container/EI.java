@@ -4,6 +4,7 @@
 package container;
 
 /**
+ * Container für Eingabe (EI)
  * @author SebastianKoch
  *
  */
@@ -16,7 +17,9 @@ public class EI extends AEx{
 	private static int gewichtunghigh=6;
 	
 	/**
-	 * 
+	 * ruft Superklasse auf und zaehlt die eingaben nach komplexitaet
+	 * @param ftr
+	 * @param det
 	 */
 	public EI(int ftr, int det) {
 		super(ftr,det);
@@ -28,12 +31,24 @@ public class EI extends AEx{
 			counthigh ++;
 		
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public static int getGewichtunglow() {
 		return gewichtunglow;
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public static int getGewichtungAverage() {
 		return gewichtungaverage;
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public static int getGewichtungHigh() {
 		return gewichtunghigh;
 	}
@@ -59,7 +74,9 @@ public class EI extends AEx{
 		return counthigh;
 	}
 	
-	
+	/**
+	 * resetet alle zaehler
+	 */
 	public static void resetCount() {
 		EI.countlow = 0;
 		EI.countaverage = 0;

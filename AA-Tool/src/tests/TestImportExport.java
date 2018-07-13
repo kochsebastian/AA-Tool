@@ -87,13 +87,13 @@ public class TestImportExport {
 	/**
 	 * Testet, den import einer nicht kompatiblen Datei
 	 */
-	@Ignore //@Test(expected = SAXException.class)
+	@Test //@Test(expected = SAXException.class)
 	public final void testWrongFileTypeException() {
 		File dir = new File("test");
 		dir.mkdirs();
 		File pdf = new File(dir, "foo.pdf");
 		control.importiere(pdf);
-		
+		// no exception thrown test will pass
 	}
 	
 	/**

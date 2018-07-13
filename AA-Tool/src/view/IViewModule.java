@@ -2,6 +2,11 @@ package view;
 
 import javax.swing.*;
 
+/**
+ * 
+ * @author SebastianKoch
+ *
+ */
 public interface IViewModule extends UserSimulation {
     public void fuegeHinzu();
 

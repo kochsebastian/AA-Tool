@@ -26,8 +26,11 @@ public class ViewGlossar extends AViewTableModule implements IViewModule {
     private JButton fuegeGlossarReiheHinzu;
     private JButton loescheGlossarReihe;
     private int i = 1;
+    
     /**
-     *
+     * 
+     * @param actionListener
+     * @param glossarJPanel
      */
     public ViewGlossar(ActionListener actionListener, JPanel glossarJPanel) {
         // Inhalt des Glossars erstellen

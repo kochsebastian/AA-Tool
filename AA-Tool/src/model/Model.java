@@ -7,6 +7,7 @@ import view.View;
 import java.util.ArrayList;
 
 /**
+ * Model
  * @author SebastianKoch
  */
 public class Model extends AModel {
@@ -73,7 +74,10 @@ public class Model extends AModel {
         //  glossar.addNext(aufwandsschaetzung);
     }
 
-
+    /**
+     * 
+     * @return 
+     */
     public static Model getInstanz() {
         if (model == null) {
             model = new Model();

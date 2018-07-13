@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
+ * liest XML datei in View
  * @author SebastianKoch
  */
 public class XMLParser {
@@ -30,8 +31,7 @@ public class XMLParser {
      */
     protected static void parseXML(File zieldatei) {
         try {
-            Boolean LFAuslesen = false, LDAuslesen = false; //////////////////////////////////////////////////
-
+            Boolean LFAuslesen = false, LDAuslesen = false;
             int i = 0;
             DocumentBuilderFactory xmlFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder xmlBuilder = xmlFactory.newDocumentBuilder();
@@ -69,24 +69,24 @@ public class XMLParser {
                                                 if (ebeneDreiNode.hasAttributes()) {
                                                     NamedNodeMap nodeMap = ebeneDreiNode.getAttributes(); //immer 3 elemente enthalten (inhalt, spalte, zeile)
                                                     Node inhalt = nodeMap.item(0);
-                                                    if (LFAuslesen == true) {//////////////////////////////////////////////////
-                                                        LFAuslesen = false;//////////////////////////////////////////////////
-                                                        IOConnector.addLFBuffer(inhalt.getNodeValue());//////////////////////////////////////////////////
-                                                    }//////////////////////////////////////////////////
+                                                    if (LFAuslesen == true) {
+                                                        LFAuslesen = false;
+                                                        IOConnector.addLFBuffer(inhalt.getNodeValue());
+                                                    }
 
-                                                    if (inhalt.getNodeValue().equals("/LF/")) {//////////////////////////////////////////////////
-                                                        // hier fuer aufwandsabschaetzung//////////////////////////////////////////////////
-                                                        LFAuslesen = true;//////////////////////////////////////////////////
-                                                    }//////////////////////////////////////////////////
-                                                    if (LDAuslesen == true) {//////////////////////////////////////////////////
-                                                        LDAuslesen = false;//////////////////////////////////////////////////
-                                                        IOConnector.addLDBuffer(inhalt.getNodeValue());//////////////////////////////////////////////////
-                                                    }//////////////////////////////////////////////////
+                                                    if (inhalt.getNodeValue().equals("/LF/")) {
+                                                        // hier fuer aufwandsabschaetzung
+                                                        LFAuslesen = true;
+                                                    }
+                                                    if (LDAuslesen == true) {
+                                                        LDAuslesen = false;
+                                                        IOConnector.addLDBuffer(inhalt.getNodeValue());
+                                                    }
 
-                                                    if (inhalt.getNodeValue().equals("/LD/")) {//////////////////////////////////////////////////
-                                                        // hier fuer aufwandsabschaetzung//////////////////////////////////////////////////
-                                                        LDAuslesen = true;//////////////////////////////////////////////////
-                                                    }//////////////////////////////////////////////////
+                                                    if (inhalt.getNodeValue().equals("/LD/")) {
+                                                        // hier fuer aufwandsabschaetzung
+                                                        LDAuslesen = true;
+                                                    }
 
                                                     Node spalte = nodeMap.item(1);
                                                     Node zeile = nodeMap.item(2);
